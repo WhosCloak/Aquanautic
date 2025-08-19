@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="top-down-game"
-run/main_scene="uid://d0rtb8jof2xkt"
+run/main_scene="uid://dteruq8yhjet2"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
 
 [input]
 

@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://dteruq8yhjet2"]
+
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_5mbse"]
+[ext_resource type="Texture2D" uid="uid://bkhqbgrv1vj8j" path="res://sprites/mainmenu.png" id="1_natt5"]
+[ext_resource type="Script" uid="uid://nq23uh7e7byf" path="res://scripts/mainmenu.gd" id="1_r3g3c"]
+
+[node name="mainmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r3g3c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_natt5")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -419.0
+offset_top = 64.0
+offset_right = 419.0
+offset_bottom = 162.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0.972549, 0.00392157, 0, 1)
+theme_override_fonts/font = ExtResource("1_5mbse")
+theme_override_font_sizes/font_size = 75
+text = "GAME NAME GOES HERE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -183.0
+offset_top = 230.0
+offset_right = 185.0
+offset_bottom = 314.0
+text = "Start"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.501
+offset_left = -183.0
+offset_top = 362.0
+offset_right = 183.848
+offset_bottom = 446.0
+text = "Options"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.501
+offset_left = -183.0
+offset_top = 489.0
+offset_right = 183.848
+offset_bottom = 573.0
+text = "Exit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]

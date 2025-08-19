@@ -1,25 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0rtb8jof2xkt"]
+[gd_scene load_steps=5 format=3 uid="uid://cp3kf82ssstnc"]
 
-[ext_resource type="Script" uid="uid://t4ki5swdv72" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://gep1ou3ejbsa" path="res://sprites/Spaceship1.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bh11pa8di203y" path="res://sprites/player.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0juu"]
-size = Vector2(15, 15)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(16, 16)
 
-[node name="player" type="Node2D"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 4
 script = ExtResource("1_g2els")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_k0juu")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g2els")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 rotation = 1.5708
-texture = ExtResource("2_qhqgy")
+texture = ExtResource("1_3vyb7")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-zoom = Vector2(1.5, 1.5)
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(13.29, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+z_index = -180
+layout_mode = 0
+offset_right = 245.0
+offset_bottom = 71.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+z_index = 165
+texture_filter = 1
+layout_mode = 1
+offset_right = 245.0
+offset_bottom = 71.0
+theme_override_fonts/font = ExtResource("4_dqkch")
+theme_override_font_sizes/font_size = 50
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
