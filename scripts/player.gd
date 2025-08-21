@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speed = 500
-var laserspeed = 2000
+var speed = 250
+var laserspeed = 500
 var laser = load("res://scenes/laser.tscn")
 var score = 0
 
@@ -9,7 +9,7 @@ var score = 0
 @onready var muzzle = $Muzzle
 
 func _ready():
-	cam.zoom = Vector2(2, 2)
+	cam.zoom = Vector2(3.5, 3.5)
 	cam.set_process(true)
 
 func _physics_process(_delta):

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c016ybgxar4qe"]
+
+[ext_resource type="Script" uid="uid://djasbchama0i6" path="res://scripts/enemy3.gd" id="1_qupug"]
+[ext_resource type="Texture2D" uid="uid://bm16t07bpykb5" path="res://sprites/enemy.png" id="2_o2iik"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
+size = Vector2(16, 16)
+
+[node name="enemy3" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_qupug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_o2iik")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_4ra3w")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

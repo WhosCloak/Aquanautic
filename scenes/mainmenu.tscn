@@ -15,8 +15,8 @@ script = ExtResource("1_r3g3c")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = ExtResource("1_natt5")
 
 [node name="Label" type="Label" parent="."]
