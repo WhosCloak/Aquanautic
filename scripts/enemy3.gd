@@ -8,6 +8,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if player:
+		look_at(player.global_position)
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * speed
 		move_and_slide()

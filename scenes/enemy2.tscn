@@ -1,15 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpjk5qnyiey42"]
+[gd_scene load_steps=10 format=3 uid="uid://bpjk5qnyiey42"]
 
 [ext_resource type="Script" uid="uid://n6ef7fcsqdpe" path="res://scripts/enemy2.gd" id="1_3neu4"]
-[ext_resource type="Texture2D" uid="uid://bm16t07bpykb5" path="res://sprites/enemy.png" id="2_mhmjl"]
+[ext_resource type="Texture2D" uid="uid://vhawfygqay17" path="res://sprites/Eel_Sprite.png" id="2_3neu4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhmjl"]
+atlas = ExtResource("2_3neu4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23kvp"]
+atlas = ExtResource("2_3neu4")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e2ig"]
+atlas = ExtResource("2_3neu4")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsk8u"]
+atlas = ExtResource("2_3neu4")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_thqno"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhmjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23kvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4e2ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsk8u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
 size = Vector2(16, 16)
 
 [node name="enemy2" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_3neu4")
@@ -17,9 +54,13 @@ script = ExtResource("1_3neu4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_md0e3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_mhmjl")
+position = Vector2(0, 1.19209e-06)
+scale = Vector2(0.125, 0.125)
+sprite_frames = SubResource("SpriteFrames_thqno")
+autoplay = "default"
+flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

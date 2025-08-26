@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 200
+var speed = 150
 var player = Node2D
 
 func _ready():
@@ -8,6 +8,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if player:
+		look_at(player.global_position)
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * speed
 		move_and_slide()

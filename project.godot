@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="top-down-game"
+config/name="Aquanautic"
 run/main_scene="uid://dteruq8yhjet2"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bm16t07bpykb5"
 
 [autoload]
 
@@ -23,7 +23,6 @@ Global="*res://scripts/global.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=4
 
 [input]
 

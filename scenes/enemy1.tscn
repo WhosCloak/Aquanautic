@@ -1,15 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://bibggbp3wrrll"]
+[gd_scene load_steps=8 format=3 uid="uid://bibggbp3wrrll"]
 
 [ext_resource type="Script" uid="uid://d166an3k21du8" path="res://scripts/enemy1.gd" id="1_nb0t0"]
-[ext_resource type="Texture2D" uid="uid://bm16t07bpykb5" path="res://sprites/enemy.png" id="2_n665k"]
+[ext_resource type="Texture2D" uid="uid://c2s6gvmly86en" path="res://sprites/pixilart-sprite.png" id="2_nb0t0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n665k"]
+atlas = ExtResource("2_nb0t0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lowyn"]
+atlas = ExtResource("2_nb0t0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iolyx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n665k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lowyn")
+}],
+"loop": true,
+"name": &"fish1",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
 size = Vector2(16, 16)
 
 [node name="enemy1" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(1.5, 1.5)
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_nb0t0")
@@ -17,9 +40,14 @@ script = ExtResource("1_nb0t0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_md0e3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_n665k")
+position = Vector2(-4.17233e-07, 0)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_iolyx")
+animation = &"fish1"
+autoplay = "fish1"
+flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

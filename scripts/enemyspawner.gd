@@ -27,9 +27,9 @@ func spawn_enemy():
 
 	# Choose enemy type based on player score
 	var enemy_scene = enemy_scene_basic
-	if player.score >= 20 and player.score < 50:
+	if player.score >= 5 and player.score < 10:
 		enemy_scene = enemy_scene_fast
-	elif player.score >= 50:
+	elif player.score >= 10:
 		enemy_scene = enemy_scene_tank
 
 	var enemy = enemy_scene.instantiate()
