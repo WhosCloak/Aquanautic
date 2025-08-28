@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkp5b1ja8segl"]
+[gd_scene load_steps=4 format=3 uid="uid://dkp5b1ja8segl"]
 
+[ext_resource type="Script" uid="uid://bta1o444pt4dy" path="res://scripts/shop.gd" id="1_1l46r"]
 [ext_resource type="Texture2D" uid="uid://dhgja1tojgd76" path="res://sprites/shopbgTEMP.png" id="1_lx5au"]
 [ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="2_xfvoa"]
 
@@ -10,8 +11,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1l46r")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("1_lx5au")
@@ -19,7 +22,7 @@ texture = ExtResource("1_lx5au")
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_right = 1920.0
-offset_bottom = 151.0
+offset_bottom = 225.0
 theme_override_colors/font_color = Color(0.235294, 0, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 1, 1, 1)
 theme_override_font_sizes/font_size = 115
@@ -42,7 +45,7 @@ layout_mode = 0
 offset_left = 159.0
 offset_top = 850.0
 offset_right = 665.0
-offset_bottom = 1007.0
+offset_bottom = 934.195
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -62,7 +65,7 @@ layout_mode = 0
 offset_left = 703.0
 offset_top = 850.0
 offset_right = 1209.0
-offset_bottom = 1007.0
+offset_bottom = 934.195
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -82,10 +85,23 @@ layout_mode = 0
 offset_left = 1258.0
 offset_top = 850.0
 offset_right = 1764.0
-offset_bottom = 1007.0
+offset_bottom = 934.195
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Item Name : Price"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1509.0
+offset_top = 953.0
+offset_right = 1883.0
+offset_bottom = 1068.0
+text = "Continue"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
