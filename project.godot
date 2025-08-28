@@ -13,7 +13,7 @@ config_version=5
 config/name="Aquanautic"
 run/main_scene="uid://dteruq8yhjet2"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="uid://bm16t07bpykb5"
+config/icon="uid://cthpvmc63dewv"
 
 [autoload]
 

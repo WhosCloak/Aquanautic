@@ -1,24 +1,27 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmvqix4hmvbvs"]
 
-[ext_resource type="Script" uid="uid://bv333nlqrnrml" path="res://scripts/laser.gd" id="1_a7dhc"]
-[ext_resource type="Texture2D" uid="uid://dk17v86x4cr10" path="res://sprites/Laser.png" id="1_xmihv"]
+[ext_resource type="Script" uid="uid://bv333nlqrnrml" path="res://scripts/harpoon.gd" id="1_wbtou"]
+[ext_resource type="Texture2D" uid="uid://cthpvmc63dewv" path="res://sprites/Harpoon_Projectile.png" id="2_bq6s4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7dhc"]
-size = Vector2(16, 16)
+size = Vector2(16, 6)
 
-[node name="laser" type="RigidBody2D"]
+[node name="harpoon" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 2
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
-script = ExtResource("1_a7dhc")
+script = ExtResource("1_wbtou")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_a7dhc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_xmihv")
+rotation = 0.785398
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("2_bq6s4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

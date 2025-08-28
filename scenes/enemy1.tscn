@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bibggbp3wrrll"]
 
 [ext_resource type="Script" uid="uid://d166an3k21du8" path="res://scripts/enemy1.gd" id="1_nb0t0"]
-[ext_resource type="Texture2D" uid="uid://c2s6gvmly86en" path="res://sprites/pixilart-sprite.png" id="2_nb0t0"]
+[ext_resource type="Texture2D" uid="uid://c2s6gvmly86en" path="res://sprites/enemy1.png" id="2_nb0t0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(16, 16)

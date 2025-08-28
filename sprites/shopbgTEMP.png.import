@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk17v86x4cr10"
-path="res://.godot/imported/Laser.png-4b3730189cd77d3a331888eec21b7d44.ctex"
+uid="uid://dhgja1tojgd76"
+path="res://.godot/imported/shopbgTEMP.png-07f16951db1b4cfb0146a58cf8feac8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Laser.png"
-dest_files=["res://.godot/imported/Laser.png-4b3730189cd77d3a331888eec21b7d44.ctex"]
+source_file="res://sprites/shopbgTEMP.png"
+dest_files=["res://.godot/imported/shopbgTEMP.png-07f16951db1b4cfb0146a58cf8feac8b.ctex"]
 
 [params]
 

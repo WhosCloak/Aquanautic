@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkp5b1ja8segl"]
+
+[ext_resource type="Texture2D" uid="uid://dhgja1tojgd76" path="res://sprites/shopbgTEMP.png" id="1_lx5au"]
+[ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="2_xfvoa"]
+
+[node name="shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_lx5au")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 151.0
+theme_override_colors/font_color = Color(0.235294, 0, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 115
+text = "Welcome  to the Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 300.0
+offset_right = 660.0
+offset_bottom = 800.0
+icon = ExtResource("2_xfvoa")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 850.0
+offset_right = 665.0
+offset_bottom = 1007.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Item Name : Price"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 300.0
+offset_right = 1200.0
+offset_bottom = 800.0
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 703.0
+offset_top = 850.0
+offset_right = 1209.0
+offset_bottom = 1007.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Item Name : Price"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1260.0
+offset_top = 300.0
+offset_right = 1760.0
+offset_bottom = 800.0
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1258.0
+offset_top = 850.0
+offset_right = 1764.0
+offset_bottom = 1007.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Item Name : Price"
+horizontal_alignment = 1
+vertical_alignment = 1

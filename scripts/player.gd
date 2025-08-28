@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 var speed = 250
-var laserspeed = 500
-var laser = load("res://scenes/laser.tscn")
+var projectilespeed = 500
+var projectile = load("res://scenes/harpoon.tscn")
 var score = 0
 
 @onready var cam := $Camera2D
@@ -23,16 +23,16 @@ func _physics_process(_delta):
 		fire()
 
 func fire():
-	var laser_instance = laser.instantiate()
+	var projectile_instance = projectile.instantiate()
 
 	var fire_pos = muzzle.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
 
-	laser_instance.global_position = fire_pos
-	laser_instance.rotation = direction.angle()
-	laser_instance.linear_velocity = direction * laserspeed
+	projectile_instance.global_position = fire_pos
+	projectile_instance.rotation = direction.angle()
+	projectile_instance.linear_velocity = direction * projectilespeed
 
-	get_tree().current_scene.add_child(laser_instance)
+	get_tree().current_scene.add_child(projectile_instance)
 	
 
 func add_score(amount: int = 1) -> void:

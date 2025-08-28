@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vhawfygqay17"
-path="res://.godot/imported/Eel_Sprite.png-88a81e7962cf957fc78ef7275bd76c70.ctex"
+uid="uid://ceaewweu3se1f"
+path="res://.godot/imported/Heart.png-b0a38b6a0173ac474c95f7be7ce5bb14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Eel_Sprite.png"
-dest_files=["res://.godot/imported/Eel_Sprite.png-88a81e7962cf957fc78ef7275bd76c70.ctex"]
+source_file="res://sprites/Heart.png"
+dest_files=["res://.godot/imported/Heart.png-b0a38b6a0173ac474c95f7be7ce5bb14.ctex"]
 
 [params]
 
