@@ -25,7 +25,6 @@ func spawn_enemy():
 	var direction = Vector2(randf() * 2 - 1, randf() * 2 - 1).normalized()
 	var spawn_pos = player.global_position + direction * spawn_distance
 
-	# Choose enemy type based on player score
 	var enemy_scene = enemy_scene_basic
 	if player.score >= 5 and player.score < 10:
 		enemy_scene = enemy_scene_fast
