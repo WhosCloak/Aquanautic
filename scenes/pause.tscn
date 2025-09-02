@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bya814s12oehq"]
 
-[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_f1d2v"]
 [ext_resource type="Script" uid="uid://dwbmnyoxgqocq" path="res://scripts/pause.gd" id="1_m0klm"]
 [ext_resource type="Shader" uid="uid://cusohk5u0rcg3" path="res://shaders/pause.gdshader" id="1_r8yp4"]
+[ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="3_m0klm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m0klm"]
 shader = ExtResource("1_r8yp4")
@@ -30,7 +30,7 @@ offset_left = 440.0
 offset_top = 157.0
 offset_right = 1440.0
 offset_bottom = 357.0
-theme_override_fonts/font = ExtResource("1_f1d2v")
+theme_override_fonts/font = ExtResource("3_m0klm")
 theme_override_font_sizes/font_size = 115
 text = "Resume"
 
@@ -40,7 +40,7 @@ offset_left = 440.0
 offset_top = 409.0
 offset_right = 1440.0
 offset_bottom = 609.0
-theme_override_fonts/font = ExtResource("1_f1d2v")
+theme_override_fonts/font = ExtResource("3_m0klm")
 theme_override_font_sizes/font_size = 115
 text = "Options"
 
@@ -50,9 +50,11 @@ offset_left = 440.0
 offset_top = 660.0
 offset_right = 1440.0
 offset_bottom = 860.0
-theme_override_fonts/font = ExtResource("1_f1d2v")
+theme_override_fonts/font = ExtResource("3_m0klm")
 theme_override_font_sizes/font_size = 115
 text = "Quit Game"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dteruq8yhjet2"]
+[gd_scene load_steps=5 format=3 uid="uid://dteruq8yhjet2"]
 
-[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_5mbse"]
-[ext_resource type="Texture2D" uid="uid://bkhqbgrv1vj8j" path="res://sprites/mainmenu.png" id="1_natt5"]
 [ext_resource type="Script" uid="uid://nq23uh7e7byf" path="res://scripts/mainmenu.gd" id="1_r3g3c"]
+[ext_resource type="Texture2D" uid="uid://c0gbswtt84cd3" path="res://sprites/level1.png" id="2_3vvtq"]
+[ext_resource type="FontFile" uid="uid://c1eso82bi36so" path="res://font/Splashextrabold-5y4v.ttf" id="3_s5g8n"]
+[ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_7yvfd"]
 
 [node name="mainmenu" type="Control"]
 layout_mode = 3
@@ -17,22 +18,23 @@ script = ExtResource("1_r3g3c")
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("1_natt5")
+texture = ExtResource("2_3vvtq")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -419.0
-offset_top = 64.0
-offset_right = 419.0
-offset_bottom = 162.0
+offset_left = -951.0
+offset_top = 2.0
+offset_right = 961.0
+offset_bottom = 205.0
 grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0.972549, 0.00392157, 0, 1)
-theme_override_fonts/font = ExtResource("1_5mbse")
-theme_override_font_sizes/font_size = 75
-text = "GAME NAME GOES HERE"
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_s5g8n")
+theme_override_font_sizes/font_size = 175
+text = "AQUANAUTIC"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -45,6 +47,8 @@ offset_left = -183.0
 offset_top = 230.0
 offset_right = 185.0
 offset_bottom = 314.0
+theme_override_fonts/font = ExtResource("4_7yvfd")
+theme_override_font_sizes/font_size = 50
 text = "Start"
 
 [node name="Button2" type="Button" parent="."]
@@ -56,6 +60,8 @@ offset_left = -183.0
 offset_top = 362.0
 offset_right = 183.848
 offset_bottom = 446.0
+theme_override_fonts/font = ExtResource("4_7yvfd")
+theme_override_font_sizes/font_size = 50
 text = "Options"
 
 [node name="Button3" type="Button" parent="."]
@@ -67,6 +73,8 @@ offset_left = -183.0
 offset_top = 489.0
 offset_right = 183.848
 offset_bottom = 573.0
+theme_override_fonts/font = ExtResource("4_7yvfd")
+theme_override_font_sizes/font_size = 50
 text = "Exit"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
