@@ -60,7 +60,10 @@ func take_damage(amount: int):
 
 func die() -> void:
 	if health <= 0:
-		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+		call_deferred("_gameover")
+		
+func _gameover():
+	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 
 func heal(amount: int = 1):
 	health = min(health + amount, max_health)

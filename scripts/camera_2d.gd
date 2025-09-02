@@ -3,7 +3,7 @@ extends Camera2D
 @export var floor_y: float = 830.0
 @export var padding: float = 0.0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var half_h := get_viewport_rect().size.y * 0.5 / zoom.y
 	var  max_cam_y := floor_y - half_h + padding
 	global_position.y = min(global_position.y, max_cam_y)
