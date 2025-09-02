@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=6 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Texture2D" uid="uid://bh11pa8di203y" path="res://sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="4_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(16, 16)
@@ -55,3 +56,33 @@ theme_override_font_sizes/font_size = 50
 text = "Score: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Hearts" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Heart1" type="TextureRect" parent="CanvasLayer/Hearts"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 900.0
+offset_right = 158.0
+offset_bottom = 1028.0
+texture = ExtResource("4_qlg0r")
+
+[node name="Heart2" type="TextureRect" parent="CanvasLayer/Hearts"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 900.0
+offset_right = 298.0
+offset_bottom = 1028.0
+texture = ExtResource("4_qlg0r")
+
+[node name="Heart3" type="TextureRect" parent="CanvasLayer/Hearts"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 900.0
+offset_right = 440.0
+offset_bottom = 1028.0
+texture = ExtResource("4_qlg0r")

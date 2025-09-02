@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 50
+var speed = 40
 var player = Node2D
 
 func _ready():
@@ -15,15 +15,13 @@ func _physics_process(_delta):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		if body.has_method("take_damage"):
+			body.take_damage(1)
+			queue_free()
 		if body.has_method("get_score"):
 			var current_score = body.get_score()
 			if current_score > Global.high_score:
 				Global.high_score = current_score
-		body.call_deferred("queue_free")
-		call_deferred("_gameover")
-		
-func _gameover() -> void:
-	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 
 func die():
 	if player and player.has_method("add_score"):
