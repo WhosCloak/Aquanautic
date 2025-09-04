@@ -19,8 +19,8 @@ var health := max_health
 
 func _ready():
 	cam.zoom = Vector2(3.5, 3.5)
-	cam.set_process(true)
 	update_hearts()
+	cam.set_process(true)
 
 func _physics_process(_delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")

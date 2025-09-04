@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cp3kf82ssstnc" path="res://scenes/player.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://cpy4624ry8da6" path="res://scenes/enemyspawner.tscn" id="2_sugp2"]
-[ext_resource type="Texture2D" uid="uid://dp377bxi83hlj" path="res://sprites/level1extendedcopy.png" id="3_jyhfs"]
-[ext_resource type="Texture2D" uid="uid://xci04i7ffmsp" path="res://sprites/level1copy.png" id="4_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://dp377bxi83hlj" path="res://sprites/level1extended.png" id="3_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://c0gbswtt84cd3" path="res://sprites/level1.png" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bya814s12oehq" path="res://scenes/pause.tscn" id="5_tbgi4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
