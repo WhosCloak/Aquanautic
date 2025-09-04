@@ -1,8 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkp5b1ja8segl"]
+[gd_scene load_steps=8 format=3 uid="uid://dkp5b1ja8segl"]
 
 [ext_resource type="Script" uid="uid://bta1o444pt4dy" path="res://scripts/shop.gd" id="1_1l46r"]
-[ext_resource type="Texture2D" uid="uid://dhgja1tojgd76" path="res://sprites/shopbgTEMP.png" id="1_lx5au"]
+[ext_resource type="Texture2D" uid="uid://c0gbswtt84cd3" path="res://sprites/level1.png" id="2_032fp"]
 [ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="2_xfvoa"]
+[ext_resource type="Texture2D" uid="uid://cx88dl27wdr2x" path="res://sprites/shopkeeper.png" id="4_032fp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fc2m"]
+atlas = ExtResource("4_032fp")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r1wq"]
+atlas = ExtResource("4_032fp")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ajxib"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fc2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r1wq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="shop" type="Control"]
 layout_mode = 3
@@ -17,7 +40,7 @@ script = ExtResource("1_1l46r")
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("1_lx5au")
+texture = ExtResource("2_032fp")
 
 [node name="welcome" type="Label" parent="."]
 layout_mode = 0
@@ -50,6 +73,7 @@ offset_top = 300.0
 offset_right = 660.0
 offset_bottom = 800.0
 icon = ExtResource("2_xfvoa")
+flat = true
 icon_alignment = 1
 expand_icon = true
 
@@ -113,6 +137,12 @@ offset_top = 953.0
 offset_right = 1883.0
 offset_bottom = 1068.0
 text = "Continue"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1476, 200)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_ajxib")
+autoplay = "default"
 
 [connection signal="pressed" from="upgrade1" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="upgrade2" to="." method="_on_button_2_pressed"]

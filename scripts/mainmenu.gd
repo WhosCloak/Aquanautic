@@ -1,5 +1,8 @@
 extends Control
 
+func _ready() -> void:
+	$AudioStreamPlayer2D.play()
+	
 func _on_button_pressed() -> void: #START
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 

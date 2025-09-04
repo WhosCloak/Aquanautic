@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dteruq8yhjet2"]
+[gd_scene load_steps=6 format=3 uid="uid://dteruq8yhjet2"]
 
 [ext_resource type="Script" uid="uid://nq23uh7e7byf" path="res://scripts/mainmenu.gd" id="1_r3g3c"]
-[ext_resource type="Texture2D" uid="uid://c0gbswtt84cd3" path="res://sprites/level1.png" id="2_3vvtq"]
+[ext_resource type="Texture2D" uid="uid://ccbyfigxbpvu7" path="res://sprites/mainmenu.png" id="2_s5g8n"]
 [ext_resource type="FontFile" uid="uid://c1eso82bi36so" path="res://font/Splashextrabold-5y4v.ttf" id="3_s5g8n"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_7yvfd"]
+[ext_resource type="AudioStream" uid="uid://ci8lf7c2kq370" path="res://audios/mainmenu.mp3" id="5_s5g8n"]
 
 [node name="mainmenu" type="Control"]
 layout_mode = 3
@@ -16,9 +17,9 @@ script = ExtResource("1_r3g3c")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1920.0
+offset_right = 2074.0
 offset_bottom = 1080.0
-texture = ExtResource("2_3vvtq")
+texture = ExtResource("2_s5g8n")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -76,6 +77,9 @@ offset_bottom = 573.0
 theme_override_fonts/font = ExtResource("4_7yvfd")
 theme_override_font_sizes/font_size = 50
 text = "Exit"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_s5g8n")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

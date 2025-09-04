@@ -40,6 +40,7 @@ func fire():
 	projectile_instance.linear_velocity = direction * projectilespeed
 
 	get_tree().current_scene.add_child(projectile_instance)
+	$Harpoon.play()
 
 func add_score(amount: int = 1) -> void:
 	score += amount

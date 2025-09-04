@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://buk43vvonn5u6"]
 
 [ext_resource type="Script" uid="uid://bqjgs7hyfgmoh" path="res://scripts/gameover.gd" id="1_ncp31"]
-[ext_resource type="Texture2D" uid="uid://cofv46mijmkhl" path="res://sprites/level2copy.png" id="2_2mkfd"]
+[ext_resource type="Texture2D" uid="uid://b4ds0bq107oo2" path="res://sprites/gameover.png" id="2_2mkfd"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="3_h8i2o"]
 
 [node name="gameover" type="Control"]
