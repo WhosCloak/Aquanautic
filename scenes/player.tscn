@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=7 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Script" uid="uid://dt7iuh2rfgohi" path="res://scripts/camera_2d.gd" id="3_dqkch"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="4_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://b1r7ml42cv3tt" path="res://audios/harpoon_shot.wav" id="4_tuyoq"]
@@ -26,7 +25,6 @@ sprite_frames = SubResource("SpriteFrames_qlg0r")
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
-script = ExtResource("3_dqkch")
 
 [node name="Muzzle" type="Node2D" parent="."]
 position = Vector2(13.29, 0)

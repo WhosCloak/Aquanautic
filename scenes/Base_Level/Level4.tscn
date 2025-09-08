@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://brpdud3psvg1m"]
+
+[ext_resource type="PackedScene" uid="uid://b3grfsvfta7fk" path="res://scenes/Base_Level/BaseLevel.tscn" id="1_jfjt6"]
+
+[node name="BaseLevel" instance=ExtResource("1_jfjt6")]
