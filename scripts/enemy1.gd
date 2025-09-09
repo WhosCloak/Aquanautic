@@ -13,13 +13,13 @@ func _physics_process(_delta):
 		velocity = direction * speed
 		move_and_slide()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		if body.has_method("take_damage"):
-			body.take_damage(1)
+func _on_area_2d_body_entered(player: Node2D) -> void:
+	if player.is_in_group("player"):
+		if player.has_method("take_damage"):
+			player.take_damage(1)
 			queue_free()
-		if body.has_method("get_score"):
-			var current_score = body.get_score()
+		if player.has_method("get_score"):
+			var current_score = player.get_score()
 			if current_score > Global.high_score:
 				Global.high_score = current_score
 

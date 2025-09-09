@@ -74,6 +74,3 @@ func update_hearts():
 	for i in range(max_health):
 		hearts[i].visible = (i < health)
 		
-func shop() -> void:
-	if score >= 2:
-		get_tree().change_scene_to_file("res://scenes/shop.tscn")

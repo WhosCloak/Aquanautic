@@ -1,14 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://bh11pa8di203y" path="res://sprites/player.png" id="2_qlg0r"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="4_qlg0r"]
-[ext_resource type="AudioStream" uid="uid://b1r7ml42cv3tt" path="res://audios/harpoon_shot.wav" id="4_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://c8hsd21uibxsb" path="res://audios/harpoon_shot.wav" id="4_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 4
@@ -17,10 +16,10 @@ script = ExtResource("1_g2els")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g2els")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 rotation = 1.5708
-sprite_frames = SubResource("SpriteFrames_qlg0r")
+texture = ExtResource("2_qlg0r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -31,6 +30,7 @@ position = Vector2(13.29, 0)
 
 [node name="Harpoon" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_tuyoq")
+volume_db = -5.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
