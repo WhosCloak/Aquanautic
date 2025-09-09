@@ -1,6 +1,7 @@
 extends Control
 
 var player = Node2D
+signal request_level_change(level_path: String)
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
@@ -32,5 +33,5 @@ func _on_button_3_pressed() -> void:  #3rd item
 
 
 func _on_button_4_pressed() -> void:
+	emit_signal("request_level_change", "res://scenes/level_2.tscn")
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/Base_Level/Level2.tscn")

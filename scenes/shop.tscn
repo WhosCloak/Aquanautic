@@ -38,11 +38,13 @@ grow_vertical = 2
 script = ExtResource("1_1l46r")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_032fp")
 
 [node name="welcome" type="Label" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 157.0
 theme_override_colors/font_color = Color(0.235294, 0, 1, 1)
@@ -53,6 +55,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="points" type="Label" parent="."]
+layout_mode = 0
 offset_left = 7.0
 offset_top = 161.0
 offset_right = 862.0
@@ -65,6 +68,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="upgrade1" type="Button" parent="."]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 300.0
 offset_right = 660.0
@@ -75,6 +79,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="upgrade_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 159.0
 offset_top = 850.0
 offset_right = 665.0
@@ -87,12 +92,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="upgrade2" type="Button" parent="."]
+layout_mode = 0
 offset_left = 700.0
 offset_top = 300.0
 offset_right = 1200.0
 offset_bottom = 800.0
 
 [node name="upgrade_label2" type="Label" parent="."]
+layout_mode = 0
 offset_left = 703.0
 offset_top = 850.0
 offset_right = 1209.0
@@ -105,12 +112,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="upgrade3" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1260.0
 offset_top = 300.0
 offset_right = 1760.0
 offset_bottom = 800.0
 
 [node name="upgrade_label3" type="Label" parent="."]
+layout_mode = 0
 offset_left = 1258.0
 offset_top = 850.0
 offset_right = 1764.0
@@ -123,6 +132,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="end" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1509.0
 offset_top = 953.0
 offset_right = 1883.0

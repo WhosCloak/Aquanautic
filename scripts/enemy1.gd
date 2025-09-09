@@ -13,7 +13,7 @@ func _physics_process(_delta):
 		velocity = direction * speed
 		move_and_slide()
 
-func _on_area_2d_body_entered(player: Node2D) -> void:
+func _on_area_2d_body_entered() -> void:
 	if player.is_in_group("player"):
 		if player.has_method("take_damage"):
 			player.take_damage(1)

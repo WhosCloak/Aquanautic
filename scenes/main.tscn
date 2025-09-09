@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3grfsvfta7fk"]
+
+[ext_resource type="Script" uid="uid://bbw1alwdjx3cj" path="res://scripts/main.gd" id="1_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cp3kf82ssstnc" path="res://scenes/player.tscn" id="2_tefeu"]
+[ext_resource type="PackedScene" uid="uid://cpy4624ry8da6" path="res://scenes/enemyspawner.tscn" id="3_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bya814s12oehq" path="res://scenes/pause.tscn" id="4_tipki"]
+[ext_resource type="PackedScene" uid="uid://dkp5b1ja8segl" path="res://scenes/shop.tscn" id="5_85g3d"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_tbgi4")
+
+[node name="player" parent="." instance=ExtResource("2_tefeu")]
+
+[node name="enemyspawner" parent="." instance=ExtResource("3_o6xl0")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="pause" parent="CanvasLayer" instance=ExtResource("4_tipki")]
+
+[node name="shop" parent="CanvasLayer" instance=ExtResource("5_85g3d")]
+
+[node name="LevelRoot" type="Node2D" parent="."]
