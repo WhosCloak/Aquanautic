@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5eqqq5oxvi0f"]
+[gd_scene load_steps=5 format=3 uid="uid://b3ci5m2ebr62h"]
 
-[ext_resource type="Texture2D" uid="uid://dvam5npmtv7jg" path="res://sprites/level2extended.png" id="1_pbc48"]
-[ext_resource type="Texture2D" uid="uid://cofv46mijmkhl" path="res://sprites/level2.png" id="2_eqxsl"]
-[ext_resource type="Texture2D" uid="uid://dvwaean46cgpi" path="res://sprites/RockFloor2.png" id="3_b4j7a"]
+[ext_resource type="Texture2D" uid="uid://dp377bxi83hlj" path="res://sprites/level1extended.png" id="1_nsrm0"]
+[ext_resource type="Texture2D" uid="uid://c0gbswtt84cd3" path="res://sprites/level1.png" id="2_x42e6"]
+[ext_resource type="Texture2D" uid="uid://bdr1mocncbgtg" path="res://sprites/RockFloor.png" id="3_6761a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ts7"]
 size = Vector2(20, 1.13)
 
-[node name="level1" type="Node2D"]
+[node name="level_1" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -16,7 +16,7 @@ motion_mirroring = Vector2(576, 324)
 
 [node name="OpenOcean" type="Sprite2D" parent="ParallaxBackground/WaterLayer"]
 texture_repeat = 2
-texture = ExtResource("1_pbc48")
+texture = ExtResource("1_nsrm0")
 centered = false
 
 [node name="FloorLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -24,7 +24,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="OceanFloor" type="Sprite2D" parent="ParallaxBackground/FloorLayer"]
 position = Vector2(0, 500)
-texture = ExtResource("2_eqxsl")
+texture = ExtResource("2_x42e6")
 centered = false
 
 [node name="RockLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -33,7 +33,7 @@ motion_mirroring = Vector2(576, 0)
 [node name="Rockfloor" type="Sprite2D" parent="ParallaxBackground/RockLayer"]
 position = Vector2(0, 822)
 scale = Vector2(2.00174, 0.820988)
-texture = ExtResource("3_b4j7a")
+texture = ExtResource("3_6761a")
 centered = false
 
 [node name="OceanFloorCollider" type="StaticBody2D" parent="."]

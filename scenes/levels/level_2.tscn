@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5eqqq5oxvi0f"]
+
+[ext_resource type="Texture2D" uid="uid://dvam5npmtv7jg" path="res://sprites/level2extended.png" id="1_ra442"]
+[ext_resource type="Texture2D" uid="uid://cofv46mijmkhl" path="res://sprites/level2.png" id="2_fiq81"]
+[ext_resource type="Texture2D" uid="uid://dvwaean46cgpi" path="res://sprites/RockFloor2.png" id="3_l37oo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ts7"]
+size = Vector2(20, 1.13)
+
+[node name="level_2" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="WaterLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 324)
+
+[node name="OpenOcean" type="Sprite2D" parent="ParallaxBackground/WaterLayer"]
+texture_repeat = 2
+texture = ExtResource("1_ra442")
+centered = false
+
+[node name="FloorLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 0)
+
+[node name="OceanFloor" type="Sprite2D" parent="ParallaxBackground/FloorLayer"]
+position = Vector2(0, 500)
+texture = ExtResource("2_fiq81")
+centered = false
+
+[node name="RockLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 0)
+
+[node name="Rockfloor" type="Sprite2D" parent="ParallaxBackground/RockLayer"]
+position = Vector2(0, 822)
+scale = Vector2(2.00174, 0.820988)
+texture = ExtResource("3_l37oo")
+centered = false
+
+[node name="OceanFloorCollider" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OceanFloorCollider"]
+position = Vector2(23, 794)
+scale = Vector2(10000, 50)
+shape = SubResource("RectangleShape2D_u0ts7")

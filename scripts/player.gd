@@ -54,15 +54,14 @@ func take_damage(amount: int):
 	update_hearts()
 
 	if health <= 0:
-		Global.high_score = score
 		if score > Global.high_score:
 			Global.high_score = score
-	die()
+		die()
+
 
 func die() -> void:
-	if health <= 0:
-		call_deferred("_gameover")
-		
+	call_deferred("_gameover")
+
 func _gameover():
 	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 
