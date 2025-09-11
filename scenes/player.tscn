@@ -1,32 +1,90 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=16 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://bh11pa8di203y" path="res://sprites/player.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://desvr2v3k785w" path="res://sprites/player_swimming.png" id="2_tuyoq"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="4_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://c8hsd21uibxsb" path="res://audios/harpoon_shot.wav" id="4_tuyoq"]
+[ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="6_tuyoq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
+radius = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("2_tuyoq")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("2_tuyoq")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_tuyoq")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("2_tuyoq")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("2_tuyoq")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("2_tuyoq")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("2_tuyoq")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f1ej7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jej6c")
+}],
+"loop": true,
+"name": &"playerswim",
+"speed": 10.0
+}]
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 4
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_g2els")
+shape = SubResource("CircleShape2D_tuyoq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-rotation = 1.5708
-texture = ExtResource("2_qlg0r")
+sprite_frames = SubResource("SpriteFrames_f1ej7")
+animation = &"playerswim"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
 [node name="Muzzle" type="Node2D" parent="."]
-position = Vector2(13.29, 0)
+position = Vector2(16, 0)
 
 [node name="Harpoon" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_tuyoq")
@@ -48,7 +106,7 @@ layout_mode = 0
 offset_right = 245.0
 offset_bottom = 71.0
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 1, 1, 0.392157)
 
 [node name="Label" type="Label" parent="CanvasLayer/Score"]
 z_index = 165
@@ -56,6 +114,8 @@ texture_filter = 1
 layout_mode = 1
 offset_right = 245.0
 offset_bottom = 71.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_dqkch")
 theme_override_font_sizes/font_size = 50
 text = "Score: 0"
@@ -64,9 +124,11 @@ vertical_alignment = 1
 
 [node name="Hearts" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Heart1" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
@@ -91,3 +153,22 @@ offset_top = 900.0
 offset_right = 440.0
 offset_bottom = 1028.0
 texture = ExtResource("4_qlg0r")
+
+[node name="Label" type="Label" parent="CanvasLayer/Hearts"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -449.5
+offset_right = 449.5
+offset_bottom = 157.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.180392, 0.572549, 0.572549, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_tuyoq")
+theme_override_font_sizes/font_size = 115
+text = "Health Restored"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -3,8 +3,7 @@ extends CharacterBody2D
 var speed = 250
 var projectilespeed = 500
 var projectile = load("res://scenes/harpoon.tscn")
-var score = 0
-
+var score = Global.player_score
 var max_health := 3
 var health := max_health
 
@@ -26,6 +25,7 @@ func _physics_process(_delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	velocity = input_vector.normalized() * speed
 	move_and_slide()
+	$AnimatedSprite2D.play("playerswim")
 	look_at(get_global_mouse_position())
 	if Input.is_action_just_pressed("fire"):
 		fire()
@@ -44,10 +44,13 @@ func fire():
 
 func add_score(amount: int = 1) -> void:
 	score += amount
+	Global.player_score = score
 	score_label.text = "Score: %d" % score
-
-func get_score() -> int:
-	return score
+	if score % 20 == 0:
+		heal(max_health)
+		$CanvasLayer/Hearts/Label.visible = true
+		await get_tree().create_timer(2).timeout
+		$CanvasLayer/Hearts/Label.visible = false
 
 func take_damage(amount: int):
 	health -= amount
@@ -57,17 +60,20 @@ func take_damage(amount: int):
 		if score > Global.high_score:
 			Global.high_score = score
 		die()
+		
+func heal(amount: int):
+	health = min(health + amount, max_health)
+	update_hearts()
 
 
 func die() -> void:
 	call_deferred("_gameover")
 
 func _gameover():
+	Fade.transition()
+	await Fade.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
-
-func heal(amount: int = 1):
-	health = min(health + amount, max_health)
-	update_hearts()
+	
 
 func update_hearts():
 	for i in range(max_health):
