@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=17 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://desvr2v3k785w" path="res://sprites/player_swimming.png" id="2_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://brsvr27fldspt" path="res://audios/harpoon_shot.mp3" id="3_fjrip"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
+[ext_resource type="AudioStream" uid="uid://d1vksb0j38bdm" path="res://audios/high-score blip.mp3" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="4_qlg0r"]
-[ext_resource type="AudioStream" uid="uid://c8hsd21uibxsb" path="res://audios/harpoon_shot.wav" id="4_tuyoq"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="6_tuyoq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
@@ -87,8 +88,11 @@ position_smoothing_speed = 2.0
 position = Vector2(16, 0)
 
 [node name="Harpoon" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_tuyoq")
-volume_db = -5.0
+stream = ExtResource("3_fjrip")
+volume_db = -7.0
+
+[node name="HighScore" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fjrip")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -6,6 +6,8 @@ var projectile = load("res://scenes/harpoon.tscn")
 var score = Global.player_score
 var max_health := 3
 var health := max_health
+var harpoonsound = preload("res://audios/harpoon_shot.mp3")
+var highscore = preload("res://audios/high-score blip.mp3")
 
 @onready var cam := $Camera2D
 @onready var muzzle = $Muzzle
@@ -31,6 +33,7 @@ func _physics_process(_delta):
 		fire()
 
 func fire():
+	$Harpoon.play()
 	var projectile_instance = projectile.instantiate()
 	var fire_pos = muzzle.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
@@ -40,7 +43,7 @@ func fire():
 	projectile_instance.linear_velocity = direction * projectilespeed
 
 	get_tree().current_scene.add_child(projectile_instance)
-	$Harpoon.play()
+	
 
 func add_score(amount: int = 1) -> void:
 	score += amount
@@ -51,6 +54,7 @@ func add_score(amount: int = 1) -> void:
 		$CanvasLayer/Hearts/Label.visible = true
 		await get_tree().create_timer(2).timeout
 		$CanvasLayer/Hearts/Label.visible = false
+		$HighScore.play()
 
 func take_damage(amount: int):
 	health -= amount

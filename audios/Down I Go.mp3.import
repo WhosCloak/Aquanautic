@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cmmkv1y4poe26"
+path="res://.godot/imported/Down I Go.mp3-0a4b3d6076130eebd17e6c4c9c2e1890.mp3str"
+
+[deps]
+
+source_file="res://audios/Down I Go.mp3"
+dest_files=["res://.godot/imported/Down I Go.mp3-0a4b3d6076130eebd17e6c4c9c2e1890.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

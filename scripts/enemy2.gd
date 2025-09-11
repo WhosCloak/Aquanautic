@@ -19,6 +19,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			body.take_damage(1)
 		die()
 
+
 func die():
 	if player and player.has_method("add_score"):
 		player.add_score()

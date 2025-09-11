@@ -3,6 +3,7 @@ extends CharacterBody2D
 var speed = 40
 var player = Node2D
 
+
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 
@@ -18,6 +19,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(1)
 		die()
+
 
 func die():
 	if player and player.has_method("add_score"):

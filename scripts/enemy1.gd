@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var speed = 150
 var player = Node2D
+var deathsound = preload("res://audios/enemydeath.wav")
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
@@ -24,3 +25,4 @@ func die():
 	if player and player.has_method("add_score"):
 		player.add_score()
 	call_deferred("queue_free")
+	$Death.play()

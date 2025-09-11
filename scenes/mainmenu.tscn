@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dteruq8yhjet2"]
+[gd_scene load_steps=7 format=3 uid="uid://dteruq8yhjet2"]
 
 [ext_resource type="Script" uid="uid://nq23uh7e7byf" path="res://scripts/mainmenu.gd" id="1_r3g3c"]
 [ext_resource type="Texture2D" uid="uid://ccbyfigxbpvu7" path="res://sprites/mainmenu.png" id="2_s5g8n"]
 [ext_resource type="FontFile" uid="uid://c1eso82bi36so" path="res://font/Splashextrabold-5y4v.ttf" id="3_s5g8n"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_7yvfd"]
-[ext_resource type="AudioStream" uid="uid://ci8lf7c2kq370" path="res://audios/mainmenu.mp3" id="5_s5g8n"]
+[ext_resource type="AudioStream" uid="uid://bgebwnr6tqcrb" path="res://audios/Into the Abyss.mp3" id="5_7yvfd"]
+[ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu select.wav" id="6_7yvfd"]
 
 [node name="mainmenu" type="Control"]
 layout_mode = 3
@@ -78,8 +79,12 @@ theme_override_fonts/font = ExtResource("4_7yvfd")
 theme_override_font_sizes/font_size = 50
 text = "Exit"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_s5g8n")
+[node name="Mainmenutheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_7yvfd")
+
+[node name="buttonpress" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7yvfd")
+volume_db = 10.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

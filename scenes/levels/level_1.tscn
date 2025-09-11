@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3ci5m2ebr62h"]
+[gd_scene load_steps=6 format=3 uid="uid://b3ci5m2ebr62h"]
 
 [ext_resource type="Texture2D" uid="uid://dp377bxi83hlj" path="res://sprites/level1extended.png" id="1_nsrm0"]
 [ext_resource type="Texture2D" uid="uid://c0gbswtt84cd3" path="res://sprites/level1.png" id="2_x42e6"]
 [ext_resource type="Texture2D" uid="uid://bdr1mocncbgtg" path="res://sprites/RockFloor.png" id="3_6761a"]
+[ext_resource type="AudioStream" uid="uid://cmmkv1y4poe26" path="res://audios/Down I Go.mp3" id="4_x42e6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ts7"]
 size = Vector2(20, 1.13)
@@ -44,3 +45,8 @@ collision_mask = 0
 position = Vector2(23, 794)
 scale = Vector2(10000, 50)
 shape = SubResource("RectangleShape2D_u0ts7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_x42e6")
+volume_db = -5.0
+autoplay = true
