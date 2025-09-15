@@ -83,3 +83,44 @@ func update_hearts():
 	for i in range(max_health):
 		hearts[i].visible = (i < health)
 		
+# following code is for bubble trails
+@onready var bubbles: GPUParticles2D = $BubbleTrail
+var bubble_mat: ParticleProcessMaterial
+
+const EMIT_SPEED := 10.0
+const BASE_AMOUNT := 80 
+const MAX_AMOUNT := 180
+
+func _enter_tree() -> void:
+	if bubbles == null:
+		return 
+	if bubbles.process_material and bubbles.process_material is ParticleProcessMaterial:
+		bubble_mat = bubbles.process_material
+	else:
+		bubble_mat = ParticleProcessMaterial.new()
+		bubbles.process_material = bubble_mat
+	bubbles.emitting = false
+	bubbles.local_coords = false
+
+func _process(_delta: float) -> void:
+	if bubbles == null or bubble_mat == null:
+		return 
+	var input_len := Input.get_vector("left","right","up","down").length()
+	var spd := velocity.length()
+	var moving := spd > EMIT_SPEED and input_len > 0.0
+	
+	if not moving:
+		bubbles.emitting = false
+		bubbles.amount = 0
+		return
+	
+	bubbles.emitting = moving
+	if moving:
+		var dir := Vector2.ZERO
+		if spd > 0.0:
+			dir = -velocity.normalized()
+		bubbles.preprocess = 0.0
+
+		bubble_mat.initial_velocity_min = 20.0 + spd * 0.02
+		bubble_mat.initial_velocity_max = 40.0 + spd * 0.05
+		bubbles.amount = int(clamp(BASE_AMOUNT + spd * 0.6, BASE_AMOUNT, MAX_AMOUNT))

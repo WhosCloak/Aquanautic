@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=23 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://desvr2v3k785w" path="res://sprites/player_swimming.png" id="2_tuyoq"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://d1vksb0j38bdm" path="res://audios/high-score blip.mp3" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="4_qlg0r"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="6_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="8_smehm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 18.0
@@ -68,6 +69,33 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_ur7pv"]
+offsets = PackedFloat32Array(0.109091, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.784314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y4r1p"]
+gradient = SubResource("Gradient_ur7pv")
+
+[sub_resource type="Curve" id="Curve_d2wvv"]
+_data = [Vector2(0, 0.337079), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3v2ag"]
+curve = SubResource("Curve_d2wvv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jej6c"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+initial_velocity_min = 25.0
+initial_velocity_max = 55.0
+gravity = Vector3(0, 98, 0)
+damping_min = 2.0
+damping_max = 4.0
+scale_min = 0.8
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_3v2ag")
+color_ramp = SubResource("GradientTexture1D_y4r1p")
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 4
 script = ExtResource("1_g2els")
@@ -92,6 +120,7 @@ stream = ExtResource("3_fjrip")
 volume_db = -7.0
 
 [node name="HighScore" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, 3)
 stream = ExtResource("4_fjrip")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -176,3 +205,12 @@ theme_override_font_sizes/font_size = 115
 text = "Health Restored"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BubbleTrail" type="GPUParticles2D" parent="."]
+position = Vector2(-18, 3)
+amount = 80
+texture = ExtResource("8_smehm")
+lifetime = 1.6
+speed_scale = 0.7
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_jej6c")
