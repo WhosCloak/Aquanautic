@@ -1,8 +1,10 @@
 extends Node2D
 
-var enemy_scene_basic = preload("res://scenes/enemy1.tscn")
-var enemy_scene_fast = preload("res://scenes/enemy2.tscn")
-var enemy_scene_tank = preload("res://scenes/enemy3.tscn")
+var enemy_scene_1 = preload("res://scenes/enemy1.tscn")
+var enemy_scene_2 = preload("res://scenes/enemy2.tscn")
+var enemy_scene_3 = preload("res://scenes/enemy3.tscn")
+var enemy_scene_4 = preload("res://scenes/enemy4.tscn")
+var enemy_scene_5 = preload("res://scenes/enemy5.tscn")
 
 var spawn_distance = 500
 var spawn_interval = 2.0
@@ -25,11 +27,15 @@ func spawn_enemy():
 	var direction = Vector2(randf() * 2 - 1, randf() * 2 - 1).normalized()
 	var spawn_pos = player.global_position + direction * spawn_distance
 
-	var enemy_scene = enemy_scene_basic
+	var enemy_scene = enemy_scene_1
 	if player.score >= 5 and player.score < 10:
-		enemy_scene = enemy_scene_fast
-	elif player.score >= 10:
-		enemy_scene = enemy_scene_tank
+		enemy_scene = enemy_scene_2
+	elif player.score >= 20:
+		enemy_scene = enemy_scene_3
+	elif player.score >= 25:
+		enemy_scene = enemy_scene_4
+	elif player.score >= 30:
+		enemy_scene = enemy_scene_5
 
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = spawn_pos
