@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 150
+var speed = 100
 var player = Node2D
 var deathsound = preload("res://audios/enemydeath.wav")
 

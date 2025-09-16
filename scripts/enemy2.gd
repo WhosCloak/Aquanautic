@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 140
+var speed = 120
 var player = Node2D
 
 func _ready():

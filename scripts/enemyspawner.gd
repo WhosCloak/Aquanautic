@@ -28,13 +28,13 @@ func spawn_enemy():
 	var spawn_pos = player.global_position + direction * spawn_distance
 
 	var enemy_scene = enemy_scene_1
-	if player.score >= 5 and player.score < 10:
+	if player.score >= 10:
 		enemy_scene = enemy_scene_2
-	elif player.score >= 20:
+	if player.score >= 20:
 		enemy_scene = enemy_scene_3
-	elif player.score >= 25:
+	if player.score >= 25:
 		enemy_scene = enemy_scene_4
-	elif player.score >= 30:
+	if player.score >= 30:
 		enemy_scene = enemy_scene_5
 
 	var enemy = enemy_scene.instantiate()

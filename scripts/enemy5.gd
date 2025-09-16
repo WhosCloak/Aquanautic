@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 175
+var speed = 200
 var player = Node2D
 
 

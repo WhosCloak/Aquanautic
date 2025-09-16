@@ -8,15 +8,21 @@ var max_health := 3
 var health := max_health
 var harpoonsound = preload("res://audios/harpoon_shot.mp3")
 var highscore = preload("res://audios/high-score blip.mp3")
+var bubble_mat: ParticleProcessMaterial
+var emit_speed := 10.0
+var base_amount := 80 
+var max_amount := 180
 
 @onready var cam := $Camera2D
 @onready var muzzle = $Muzzle
 @onready var score_label = $CanvasLayer/Score/Label
+@onready var bubbles: GPUParticles2D = $BubbleTrail
 @onready var hearts := [
 	$CanvasLayer/Hearts/Heart1,
 	$CanvasLayer/Hearts/Heart2,
 	$CanvasLayer/Hearts/Heart3
 ]
+
 
 func _ready():
 	cam.zoom = Vector2(3.5, 3.5)
@@ -83,14 +89,8 @@ func update_hearts():
 	for i in range(max_health):
 		hearts[i].visible = (i < health)
 		
+
 # following code is for bubble trails
-@onready var bubbles: GPUParticles2D = $BubbleTrail
-var bubble_mat: ParticleProcessMaterial
-
-const EMIT_SPEED := 10.0
-const BASE_AMOUNT := 80 
-const MAX_AMOUNT := 180
-
 func _enter_tree() -> void:
 	if bubbles == null:
 		return 
@@ -107,7 +107,7 @@ func _process(_delta: float) -> void:
 		return 
 	var input_len := Input.get_vector("left","right","up","down").length()
 	var spd := velocity.length()
-	var moving := spd > EMIT_SPEED and input_len > 0.0
+	var moving := spd > emit_speed and input_len > 0.0
 	
 	if not moving:
 		bubbles.emitting = false
@@ -123,4 +123,4 @@ func _process(_delta: float) -> void:
 
 		bubble_mat.initial_velocity_min = 20.0 + spd * 0.02
 		bubble_mat.initial_velocity_max = 40.0 + spd * 0.05
-		bubbles.amount = int(clamp(BASE_AMOUNT + spd * 0.6, BASE_AMOUNT, MAX_AMOUNT))
+		bubbles.amount = int(clamp(base_amount + spd * 0.6, base_amount, max_amount))

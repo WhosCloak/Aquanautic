@@ -16,3 +16,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.158472, 0.158472, 0.158472, 1)
+
+[node name="CheckButton" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 353.0
+offset_right = 487.0
+offset_bottom = 496.0
+theme_override_font_sizes/font_size = 50
+text = "Subtitles"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 150.0
+offset_right = 821.0
+offset_bottom = 207.0
+scale = Vector2(1.75806, 2.52359)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 182.0
+offset_right = 341.0
+offset_bottom = 254.0
+theme_override_font_sizes/font_size = 50
+text = "Main Audio"
+vertical_alignment = 1

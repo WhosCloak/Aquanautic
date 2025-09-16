@@ -23,6 +23,11 @@ func check_next_level() -> void:
 		await Fade.on_transition_finished
 		go_to_level_3()
 		level_reached = 3
+	elif level_reached == 3 and Global.player_score >= 60:
+		Fade.transition()
+		await Fade.on_transition_finished
+		go_to_level_4()
+		level_reached = 4
 
 func load_level(path: String) -> void:
 	if current_level and current_level.is_inside_tree():
@@ -38,3 +43,6 @@ func go_to_level_2() -> void:
 
 func go_to_level_3() -> void:
 	load_level("res://scenes/levels/Level_3.tscn")
+	
+func go_to_level_4() -> void:
+	load_level("res://scenes/levels/level_4.tscn")
