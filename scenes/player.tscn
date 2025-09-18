@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://brsvr27fldspt" path="res://audios/harpoon_shot.mp3" id="3_fjrip"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 [ext_resource type="AudioStream" uid="uid://d1vksb0j38bdm" path="res://audios/high-score blip.mp3" id="4_fjrip"]
-[ext_resource type="Texture2D" uid="uid://ceaewweu3se1f" path="res://sprites/Heart.png" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://5yvtfbt0kq4a" path="res://sprites/oxygen_tank.png" id="6_smehm"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="8_smehm"]
 
@@ -165,27 +165,27 @@ grow_vertical = 2
 
 [node name="Heart1" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 900.0
-offset_right = 158.0
-offset_bottom = 1028.0
-texture = ExtResource("4_qlg0r")
+offset_left = 2.0
+offset_top = 871.0
+offset_right = 161.0
+offset_bottom = 1030.0
+texture = ExtResource("6_smehm")
 
 [node name="Heart2" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 170.0
-offset_top = 900.0
-offset_right = 298.0
-offset_bottom = 1028.0
-texture = ExtResource("4_qlg0r")
+offset_left = 151.0
+offset_top = 870.0
+offset_right = 310.0
+offset_bottom = 1029.0
+texture = ExtResource("6_smehm")
 
 [node name="Heart3" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 312.0
-offset_top = 900.0
-offset_right = 440.0
-offset_bottom = 1028.0
-texture = ExtResource("4_qlg0r")
+offset_left = 293.0
+offset_top = 872.0
+offset_right = 452.0
+offset_bottom = 1031.0
+texture = ExtResource("6_smehm")
 
 [node name="Label" type="Label" parent="CanvasLayer/Hearts"]
 visible = false
@@ -205,6 +205,17 @@ theme_override_font_sizes/font_size = 115
 text = "Health Restored"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Hearts"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -209.0
+offset_right = 454.0
+grow_vertical = 0
+color = Color(0.803922, 0.67451, 0.196078, 1)
 
 [node name="BubbleTrail" type="GPUParticles2D" parent="."]
 position = Vector2(-18, 3)

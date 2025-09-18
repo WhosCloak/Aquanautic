@@ -33,11 +33,50 @@ func _physics_process(_delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	velocity = input_vector.normalized() * speed
 	move_and_slide()
-	$AnimatedSprite2D.play("playerswim")
 	look_at(get_global_mouse_position())
 	if Input.is_action_just_pressed("fire"):
 		fire()
+	if input_vector:
+		$AnimatedSprite2D.play("playerswim")
+	else:
+		$AnimatedSprite2D.pause()
+	#BUBBLES
+	if bubbles == null or bubble_mat == null:
+		return 
+	var input_len := Input.get_vector("left","right","up","down").length()
+	var spd := velocity.length()
+	var moving := spd > emit_speed and input_len > 0.0
+	
+	if not moving:
+		bubbles.emitting = false
+		bubbles.amount = 0
+		return
+	
+	bubbles.emitting = moving
+	if moving:
+		var dir := Vector2.ZERO
+		if spd > 0.0:
+			dir = -velocity.normalized()
+		bubbles.preprocess = 0.0
 
+		bubble_mat.initial_velocity_min = 20.0 + spd * 0.02
+		bubble_mat.initial_velocity_max = 40.0 + spd * 0.05
+		bubbles.amount = int(clamp(base_amount + spd * 0.6, base_amount, max_amount))
+
+
+# following code is for bubble trails
+func _enter_tree() -> void:
+	if bubbles == null:
+		return 
+	if bubbles.process_material and bubbles.process_material is ParticleProcessMaterial:
+		bubble_mat = bubbles.process_material
+	else:
+		bubble_mat = ParticleProcessMaterial.new()
+		bubbles.process_material = bubble_mat
+	bubbles.emitting = false
+	bubbles.local_coords = false
+	
+	
 func fire():
 	$Harpoon.play()
 	var projectile_instance = projectile.instantiate()
@@ -62,6 +101,7 @@ func add_score(amount: int = 1) -> void:
 		$CanvasLayer/Hearts/Label.visible = false
 		$HighScore.play()
 
+
 func take_damage(amount: int):
 	health -= amount
 	update_hearts()
@@ -71,6 +111,7 @@ func take_damage(amount: int):
 			Global.high_score = score
 		die()
 		
+		
 func heal(amount: int):
 	health = min(health + amount, max_health)
 	update_hearts()
@@ -78,6 +119,7 @@ func heal(amount: int):
 
 func die() -> void:
 	call_deferred("_gameover")
+
 
 func _gameover():
 	Fade.transition()
@@ -89,38 +131,3 @@ func update_hearts():
 	for i in range(max_health):
 		hearts[i].visible = (i < health)
 		
-
-# following code is for bubble trails
-func _enter_tree() -> void:
-	if bubbles == null:
-		return 
-	if bubbles.process_material and bubbles.process_material is ParticleProcessMaterial:
-		bubble_mat = bubbles.process_material
-	else:
-		bubble_mat = ParticleProcessMaterial.new()
-		bubbles.process_material = bubble_mat
-	bubbles.emitting = false
-	bubbles.local_coords = false
-
-func _process(_delta: float) -> void:
-	if bubbles == null or bubble_mat == null:
-		return 
-	var input_len := Input.get_vector("left","right","up","down").length()
-	var spd := velocity.length()
-	var moving := spd > emit_speed and input_len > 0.0
-	
-	if not moving:
-		bubbles.emitting = false
-		bubbles.amount = 0
-		return
-	
-	bubbles.emitting = moving
-	if moving:
-		var dir := Vector2.ZERO
-		if spd > 0.0:
-			dir = -velocity.normalized()
-		bubbles.preprocess = 0.0
-
-		bubble_mat.initial_velocity_min = 20.0 + spd * 0.02
-		bubble_mat.initial_velocity_max = 40.0 + spd * 0.05
-		bubbles.amount = int(clamp(base_amount + spd * 0.6, base_amount, max_amount))

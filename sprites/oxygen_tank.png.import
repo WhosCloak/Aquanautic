@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh11pa8di203y"
-path="res://.godot/imported/player.png-f534b8a02ffb80eefc72936296201445.ctex"
+uid="uid://5yvtfbt0kq4a"
+path="res://.godot/imported/oxygen_tank.png-30d298d6a417b22db666482023536afe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player.png"
-dest_files=["res://.godot/imported/player.png-f534b8a02ffb80eefc72936296201445.ctex"]
+source_file="res://sprites/oxygen_tank.png"
+dest_files=["res://.godot/imported/oxygen_tank.png-30d298d6a417b22db666482023536afe.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

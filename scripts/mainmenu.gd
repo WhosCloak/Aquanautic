@@ -15,6 +15,7 @@ func _on_button_pressed() -> void: #START
 
 func _on_button_2_pressed() -> void: #OPTIONS
 	$buttonpress.play() # add with settings
+	get_tree().change_scene_to_file("res://scenes/options.tscn")
 
 func _on_button_3_pressed() -> void: #QUIT
 	$buttonpress.play()
