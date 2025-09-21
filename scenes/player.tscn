@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=25 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://desvr2v3k785w" path="res://sprites/player_swimming.png" id="2_tuyoq"]
@@ -69,6 +69,20 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smehm"]
+bg_color = Color(0, 1, 1, 0.39215687)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur7pv"]
+bg_color = Color(0.8039216, 0.49803922, 0.19607843, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
 [sub_resource type="Gradient" id="Gradient_ur7pv"]
 offsets = PackedFloat32Array(0.109091, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.784314)
@@ -133,13 +147,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Score"]
+[node name="ColorRect" type="Panel" parent="CanvasLayer/Score"]
 z_index = -180
 layout_mode = 0
 offset_right = 245.0
 offset_bottom = 71.0
 mouse_filter = 2
-color = Color(0, 1, 1, 0.392157)
+theme_override_styles/panel = SubResource("StyleBoxFlat_smehm")
 
 [node name="Label" type="Label" parent="CanvasLayer/Score"]
 z_index = 165
@@ -160,31 +174,38 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -56.0
+offset_right = -3.0
+offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Heart1" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 871.0
-offset_right = 161.0
-offset_bottom = 1030.0
+offset_left = 40.0
+offset_top = 1007.0
+offset_right = 199.0
+offset_bottom = 1166.0001
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_smehm")
 
 [node name="Heart2" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 151.0
-offset_top = 870.0
-offset_right = 310.0
-offset_bottom = 1029.0
+offset_left = 140.94223
+offset_top = 1007.701
+offset_right = 299.94226
+offset_bottom = 1166.701
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_smehm")
 
 [node name="Heart3" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 293.0
-offset_top = 872.0
-offset_right = 452.0
-offset_bottom = 1031.0
+offset_left = 222.98724
+offset_top = 1008.2059
+offset_right = 381.9872
+offset_bottom = 1167.2057
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_smehm")
 
 [node name="Label" type="Label" parent="CanvasLayer/Hearts"]
@@ -206,16 +227,18 @@ text = "Health Restored"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Hearts"]
+[node name="ColorRect" type="Panel" parent="CanvasLayer/Hearts"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -209.0
-offset_right = 454.0
+offset_left = 2.0
+offset_top = -85.0
+offset_right = 355.0
+offset_bottom = 13.0
 grow_vertical = 0
-color = Color(0.803922, 0.67451, 0.196078, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ur7pv")
 
 [node name="BubbleTrail" type="GPUParticles2D" parent="."]
 position = Vector2(-18, 3)
