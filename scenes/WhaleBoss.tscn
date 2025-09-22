@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://droi5otfpdguu"]
+
+[ext_resource type="Script" uid="uid://bmbm6t8rmbfii" path="res://scenes/WhaleBoss.gd" id="1_51lx6"]
+[ext_resource type="Texture2D" uid="uid://dohsyisohc036" path="res://sprites/pixilart-sprite.png" id="1_ok4ks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51lx6"]
+atlas = ExtResource("1_ok4ks")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_632wf"]
+atlas = ExtResource("1_ok4ks")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3gwo"]
+atlas = ExtResource("1_ok4ks")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gea0a"]
+atlas = ExtResource("1_ok4ks")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5y4i"]
+atlas = ExtResource("1_ok4ks")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4rt2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51lx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_632wf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3gwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gea0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5y4i")
+}],
+"loop": true,
+"name": &"Whale",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_51lx6"]
+radius = 12.0
+height = 66.0
+
+[node name="WhaleBoss" type="Node2D" groups=["enemy"]]
+scale = Vector2(3, 3)
+script = ExtResource("1_51lx6")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g4rt2")
+animation = &"Whale"
+frame_progress = 0.6850127
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(2, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_51lx6")

@@ -9,3 +9,7 @@ func _on_body_entered(body: Node) -> void:
 		if body.has_method("die"):
 			body.die()
 		queue_free()
+	elif body.is_in_group("boss"):
+		if body.has_method("apply_damage"):
+			body.apply_damage(1)
+		queue_free()

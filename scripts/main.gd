@@ -1,5 +1,12 @@
 extends Node2D
 
+const BOSS_1_SCENE := "res://scenes/boss/Level_1_Boss.tscn" #cahnge for furter
+const GATE_SCENE := preload("res://scenes/WhirlpoolGate.tscn")
+
+var in_boss := false
+var gate_spawned := false
+var gate_instance: Area2D
+
 @onready var level_root = $LevelRoot
 var current_level: Node = null
 var level_reached := 1
@@ -8,12 +15,13 @@ func _ready() -> void:
 	load_level("res://scenes/levels/Level_1.tscn")
 
 func _process(_delta: float) -> void:
-	check_next_level()
-
-
+	if not in_boss:
+		check_next_level()
 
 func check_next_level() -> void:
-	if level_reached == 1 and Global.player_score >= 20:
+	if level_reached == 1 and Global.player_score >= 20 and not gate_spawned:
+		_spawn_boss_gate_near_player()
+		gate_spawned = true
 		Fade.transition()
 		await Fade.on_transition_finished
 		go_to_level_2()
@@ -28,7 +36,49 @@ func check_next_level() -> void:
 		await Fade.on_transition_finished
 		go_to_level_4()
 		level_reached = 4
+		
+func _spawn_boss_gate_near_player() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+	if player == null:
+		return
+	gate_instance = GATE_SCENE.instantiate()
+	gate_instance.global_position = player.global_position + Vector2(120 , 0)
+	gate_instance.entered.connect(_on_gate_entered)
+	if current_level:
+		current_level.add_child(gate_instance)
+	else:
+		add_child(gate_instance)
+		
+func _on_gate_entered() -> void: 
+	in_boss = true
+	var spawner := current_level.find_child("enemyspawner", true, false)
+	if spawner:
+		spawner.set_process(false)
+	if is_instance_valid(gate_instance):
+		gate_instance.queue_free()
+		
+	Fade.transition()
+	await Fade.on_transition_finished
+	_go_to_boss_for_level(1)
+	
+func _go_to_boss_for_level(_idx: int) -> void:
+	load_level(BOSS_1_SCENE)
+	var player := get_tree().get_first_node_in_group("player")
+	var spawn := current_level.find_child("PlayerSpawn", true, false)
+	if player and spawn:
+		player.global_position = spawn.global_position
+		var boss := current_level.find_child("WhaleBoss", true, false)
+		if boss:
+			boss.connect("died", Callable(self, "_on_boss_died"))
 
+func _on_boss_died() -> void:
+	Fade.transition()
+	await Fade.on_transition_finished
+	level_reached = 2
+	in_boss = false
+	gate_spawned = false
+	go_to_level_2()
+	
 func load_level(path: String) -> void:
 	if current_level and current_level.is_inside_tree():
 		current_level.queue_free()

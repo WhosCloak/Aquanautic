@@ -57,7 +57,7 @@ func _physics_process(_delta):
 		var dir := Vector2.ZERO
 		if spd > 0.0:
 			dir = -velocity.normalized()
-		bubbles.preprocess = 0.0
+		bubble_mat.direction = Vector3(dir.x, dir.y, 0.0)
 
 		bubble_mat.initial_velocity_min = 20.0 + spd * 0.02
 		bubble_mat.initial_velocity_max = 40.0 + spd * 0.05
@@ -75,6 +75,9 @@ func _enter_tree() -> void:
 		bubbles.process_material = bubble_mat
 	bubbles.emitting = false
 	bubbles.local_coords = false
+	bubbles.preprocess = 0.0
+	bubble_mat.gravity = Vector3(0, -40, 0)
+	bubble_mat.direction = Vector3(0, -1, 0)
 	
 	
 func fire():
@@ -86,6 +89,8 @@ func fire():
 	projectile_instance.global_position = fire_pos
 	projectile_instance.rotation = direction.angle()
 	projectile_instance.linear_velocity = direction * projectilespeed
+	
+	projectile_instance.add_to_group("projectile")
 
 	get_tree().current_scene.add_child(projectile_instance)
 	
