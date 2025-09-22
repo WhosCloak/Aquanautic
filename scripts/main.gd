@@ -1,6 +1,6 @@
 extends Node2D
 
-const BOSS_1_SCENE := "res://scenes/boss/Level_1_Boss.tscn" #cahnge for furter
+const BOSS_1_SCENE := "res://scenes/Level_1_Boss.tscn" #cahnge for furter
 const GATE_SCENE := preload("res://scenes/WhirlpoolGate.tscn")
 
 var in_boss := false
@@ -22,10 +22,7 @@ func check_next_level() -> void:
 	if level_reached == 1 and Global.player_score >= 20 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
-		Fade.transition()
-		await Fade.on_transition_finished
-		go_to_level_2()
-		level_reached = 2
+	
 	elif level_reached == 2 and Global.player_score >= 40:
 		Fade.transition()
 		await Fade.on_transition_finished
@@ -51,9 +48,7 @@ func _spawn_boss_gate_near_player() -> void:
 		
 func _on_gate_entered() -> void: 
 	in_boss = true
-	var spawner := current_level.find_child("enemyspawner", true, false)
-	if spawner:
-		spawner.set_process(false)
+	_stop_all_spawners_in_tree()
 	if is_instance_valid(gate_instance):
 		gate_instance.queue_free()
 		
@@ -63,13 +58,15 @@ func _on_gate_entered() -> void:
 	
 func _go_to_boss_for_level(_idx: int) -> void:
 	load_level(BOSS_1_SCENE)
+	_stop_all_spawners_in_tree()
 	var player := get_tree().get_first_node_in_group("player")
 	var spawn := current_level.find_child("PlayerSpawn", true, false)
 	if player and spawn:
 		player.global_position = spawn.global_position
-		var boss := current_level.find_child("WhaleBoss", true, false)
-		if boss:
-			boss.connect("died", Callable(self, "_on_boss_died"))
+		
+	var boss := current_level.find_child("WhaleBoss", true, false)
+	if boss:
+		boss.died.connect(_on_boss_died)
 
 func _on_boss_died() -> void:
 	Fade.transition()
@@ -87,6 +84,12 @@ func load_level(path: String) -> void:
 		return
 	current_level = level_scene.instantiate()
 	level_root.add_child(current_level)
+	
+func _stop_all_spawners_in_tree() -> void:
+	var list := get_tree().get_nodes_in_group("enemy_spawner")
+	for s in list:
+		s.set_process(false)
+		#print("[Main] Stopped spawner:", s.name) debug
 
 func go_to_level_2() -> void:
 	load_level("res://scenes/levels/Level_2.tscn")

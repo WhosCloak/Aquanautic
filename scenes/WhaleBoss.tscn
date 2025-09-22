@@ -57,7 +57,7 @@ script = ExtResource("1_51lx6")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g4rt2")
 animation = &"Whale"
-frame_progress = 0.6850127
+frame_progress = 0.7761319
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 255

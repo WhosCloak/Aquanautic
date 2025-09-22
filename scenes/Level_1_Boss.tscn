@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5trt3i877woh" path="res://sprites/WhaleLevel.png" id="1_gn26o"]
 [ext_resource type="Script" uid="uid://br78hmutlmdb0" path="res://scenes/Level_1_Boss.gd" id="1_obacn"]
 [ext_resource type="PackedScene" uid="uid://droi5otfpdguu" path="res://scenes/WhaleBoss.tscn" id="2_rppgv"]
+[ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_rb64a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
 size = Vector2(628, 20)
@@ -16,13 +17,6 @@ size = Vector2(20, 383)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_41ab6"]
 size = Vector2(20, 390)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rb64a"]
-bg_color = Color(0.8873464, 0, 0.15228236, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [node name="Level_1_Boss" type="Node2D"]
 script = ExtResource("1_obacn")
 
@@ -30,6 +24,8 @@ script = ExtResource("1_obacn")
 texture = ExtResource("1_gn26o")
 
 [node name="ArenaWalls" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Top" type="CollisionShape2D" parent="ArenaWalls"]
 position = Vector2(-3, -171)
@@ -56,18 +52,27 @@ position = Vector2(0, -80)
 [node name="WhaleBoss" parent="BossSpawn" instance=ExtResource("2_rppgv")]
 
 [node name="BossUI" type="CanvasLayer" parent="."]
+layer = 10
 
-[node name="BossBar" type="TextureProgressBar" parent="BossUI"]
-offset_left = -55.0
-offset_top = -162.0
-offset_right = -15.0
-offset_bottom = -122.0
-scale = Vector2(2.3620892, 0.37979478)
+[node name="UIFrame" type="CenterContainer" parent="BossUI"]
+custom_minimum_size = Vector2(576, 324)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1248.0
+offset_top = -702.0
+offset_right = -672.0
+offset_bottom = -378.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BossBar" type="ProgressBar" parent="BossUI/UIFrame"]
+light_mask = 0
+visibility_layer = 512
+layout_mode = 2
+theme_override_constants/outline_size = -3
+theme_override_fonts/font = ExtResource("4_rb64a")
+theme_override_font_sizes/font_size = 23
 fill_mode = 1
-
-[node name="Panel" type="Panel" parent="BossUI/BossBar"]
-layout_mode = 0
-offset_top = 15.798006
-offset_right = 40.0
-offset_bottom = 55.798004
-theme_override_styles/panel = SubResource("StyleBoxFlat_rb64a")

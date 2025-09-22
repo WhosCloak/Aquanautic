@@ -127,10 +127,13 @@ func die() -> void:
 
 
 func _gameover():
+	var tree:= get_tree()
+	if tree == null:
+		return
 	Fade.transition()
 	await Fade.on_transition_finished
-	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
+	tree.change_scene_to_file("res://scenes/gameover.tscn")
 
 func update_hearts():
 	for i in range(max_health):

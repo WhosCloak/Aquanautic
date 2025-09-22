@@ -12,6 +12,7 @@ var timer := 0.0
 var player: Node2D
 
 func _ready():
+	add_to_group("enemy_spawner") #to disable alll spawns
 	player = get_tree().get_first_node_in_group("player")
 
 func _process(delta):

@@ -1,17 +1,18 @@
 extends Control
 
+const MENU_SCENE := "res://scenes/main.tscn"
 
-var gameover = preload("res://audios/game-over.mp3")
-var buttonpress = preload("res://audios/menu select.wav")
+@onready var label_high : Label = $Label2
+@onready var theme_player: AudioStreamPlayer2D = $Gameovertheme
+@onready var click_player: AudioStreamPlayer2D = $buttonpress
 
 func _ready() -> void:
-	$Label2.text = "High Score: %d" % Global.high_score
-	$Gameovertheme.play()
-
+	if label_high:
+		label_high.text = "High Score: %d" % Global.high_score
+	if theme_player:
+		theme_player.play()
+		
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
-	$buttonpress.play()
-
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	click_player.play()
+	await click_player.finished
+	get_tree().change_scene_to_file(MENU_SCENE)
