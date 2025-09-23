@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var bossbar: ProgressBar = $BossUI/BossBar
+@onready var bossbar: ProgressBar = $BossUI/UIFrame/BossBar
 var boss: Node = null
 
 func _ready() -> void:
