@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ccbyfigxbpvu7" path="res://sprites/mainmenu.png" id="2_s5g8n"]
 [ext_resource type="FontFile" uid="uid://c1eso82bi36so" path="res://font/Splashextrabold-5y4v.ttf" id="3_s5g8n"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_7yvfd"]
-[ext_resource type="AudioStream" uid="uid://bgebwnr6tqcrb" path="res://audios/Into the Abyss.mp3" id="5_7yvfd"]
-[ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu select.wav" id="6_7yvfd"]
+[ext_resource type="AudioStream" uid="uid://d1ikbolma4dm7" path="res://audios/Into the Abyss(Main Menu).mp3" id="5_7yvfd"]
+[ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu_select.wav" id="6_7yvfd"]
 
 [node name="mainmenu" type="Control"]
 layout_mode = 3

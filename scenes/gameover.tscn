@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bqjgs7hyfgmoh" path="res://scripts/gameover.gd" id="1_ncp31"]
 [ext_resource type="Texture2D" uid="uid://b4ds0bq107oo2" path="res://sprites/gameover.png" id="2_2mkfd"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="3_h8i2o"]
-[ext_resource type="AudioStream" uid="uid://dg5gldpvr1ct1" path="res://audios/game-over.mp3" id="4_h8i2o"]
-[ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu select.wav" id="5_mt7yr"]
+[ext_resource type="AudioStream" uid="uid://dg5gldpvr1ct1" path="res://audios/gameover.mp3" id="4_h8i2o"]
+[ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu_select.wav" id="5_mt7yr"]
 
 [node name="gameover" type="Control"]
 layout_mode = 3

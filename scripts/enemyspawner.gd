@@ -1,5 +1,6 @@
 extends Node2D
 
+#Enemy Scene Loader
 var enemy_scene_1 = preload("res://scenes/enemy1.tscn")
 var enemy_scene_2 = preload("res://scenes/enemy2.tscn")
 var enemy_scene_3 = preload("res://scenes/enemy3.tscn")
@@ -12,7 +13,7 @@ var timer := 0.0
 var player: Node2D
 
 func _ready():
-	add_to_group("enemy_spawner") #to disable alll spawns
+	add_to_group("enemy_spawner") #to disable all spawns
 	player = get_tree().get_first_node_in_group("player")
 
 func _process(delta):
@@ -28,6 +29,7 @@ func spawn_enemy():
 	var direction = Vector2(randf() * 2 - 1, randf() * 2 - 1).normalized()
 	var spawn_pos = player.global_position + direction * spawn_distance
 
+# Pick enemy based on player score
 	var enemy_scene = enemy_scene_1
 	if player.score >= 10:
 		enemy_scene = enemy_scene_2

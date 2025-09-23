@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnoqmjgby1h15"]
 
 [ext_resource type="Texture2D" uid="uid://dwltpnyraxevc" path="res://sprites/whirlpool.png" id="1_8nkpi"]
-[ext_resource type="Script" uid="uid://b0k8wklg6r308" path="res://scenes/WhirlpoolGate.gd" id="1_swckb"]
+[ext_resource type="Script" uid="uid://b0k8wklg6r308" path="res://scripts/WhirlpoolGate.gd" id="1_swckb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_swckb"]
 radius = 24.0

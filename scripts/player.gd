@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+#Variables
 var speed = 250
 var projectilespeed = 500
 var projectile = load("res://scenes/harpoon.tscn")
@@ -7,12 +8,14 @@ var score = Global.player_score
 var max_health := 3
 var health := max_health
 var harpoonsound = preload("res://audios/harpoon_shot.mp3")
-var highscore = preload("res://audios/high-score blip.mp3")
+var highscore = preload("res://audios/high-score.mp3")
+var hittaken = preload("res://audios/player_damage_taken.wav")
 var bubble_mat: ParticleProcessMaterial
 var emit_speed := 10.0
 var base_amount := 80 
 var max_amount := 180
 
+#Reading assests
 @onready var cam := $Camera2D
 @onready var muzzle = $Muzzle
 @onready var score_label = $CanvasLayer/Score/Label
@@ -23,12 +26,13 @@ var max_amount := 180
 	$CanvasLayer/Hearts/Heart3
 ]
 
-
+#Camera Zoom
 func _ready():
 	cam.zoom = Vector2(3.5, 3.5)
 	update_hearts()
 	cam.set_process(true)
 
+#Basic Movement and animation
 func _physics_process(_delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	velocity = input_vector.normalized() * speed
@@ -40,7 +44,8 @@ func _physics_process(_delta):
 		$AnimatedSprite2D.play("playerswim")
 	else:
 		$AnimatedSprite2D.pause()
-	#BUBBLES
+	
+	#Bubble trail
 	if bubbles == null or bubble_mat == null:
 		return 
 	var input_len := Input.get_vector("left","right","up","down").length()
@@ -64,7 +69,6 @@ func _physics_process(_delta):
 		bubbles.amount = int(clamp(base_amount + spd * 0.6, base_amount, max_amount))
 
 
-# following code is for bubble trails
 func _enter_tree() -> void:
 	if bubbles == null:
 		return 
@@ -79,7 +83,7 @@ func _enter_tree() -> void:
 	bubble_mat.gravity = Vector3(0, -40, 0)
 	bubble_mat.direction = Vector3(0, -1, 0)
 	
-	
+# Firing Harpoon
 func fire():
 	$Harpoon.play()
 	var projectile_instance = projectile.instantiate()
@@ -93,8 +97,9 @@ func fire():
 	projectile_instance.add_to_group("projectile")
 
 	get_tree().current_scene.add_child(projectile_instance)
-	
 
+
+#Enumerate Score
 func add_score(amount: int = 1) -> void:
 	score += amount
 	Global.player_score = score
@@ -106,25 +111,30 @@ func add_score(amount: int = 1) -> void:
 		$CanvasLayer/Hearts/Label.visible = false
 		$HighScore.play()
 
-
+# Take damage
 func take_damage(amount: int):
 	health -= amount
 	update_hearts()
+	$DamageTaken.play()
 
 	if health <= 0:
 		if score > Global.high_score:
 			Global.high_score = score
 		die()
 		
-		
+
+#Heal HP
 func heal(amount: int):
 	health = min(health + amount, max_health)
 	update_hearts()
 
+func update_hearts():
+	for i in range(max_health):
+		hearts[i].visible = (i < health)
 
+#Player death
 func die() -> void:
 	call_deferred("_gameover")
-
 
 func _gameover():
 	var tree:= get_tree()
@@ -134,8 +144,3 @@ func _gameover():
 	await Fade.on_transition_finished
 	
 	tree.change_scene_to_file("res://scenes/gameover.tscn")
-
-func update_hearts():
-	for i in range(max_health):
-		hearts[i].visible = (i < health)
-		

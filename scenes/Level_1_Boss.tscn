@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dwqlcg2c06x7"]
 
 [ext_resource type="Texture2D" uid="uid://b5trt3i877woh" path="res://sprites/WhaleLevel.png" id="1_gn26o"]
-[ext_resource type="Script" uid="uid://br78hmutlmdb0" path="res://scenes/Level_1_Boss.gd" id="1_obacn"]
+[ext_resource type="Script" uid="uid://br78hmutlmdb0" path="res://scripts/Level_1_Boss.gd" id="1_obacn"]
 [ext_resource type="PackedScene" uid="uid://droi5otfpdguu" path="res://scenes/WhaleBoss.tscn" id="2_rppgv"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_rb64a"]
 

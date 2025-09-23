@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dvrxjwujokmgx"
+path="res://.godot/imported/Whale Boss.mp3-058af024e75460ac0ea418fd74372049.mp3str"
+
+[deps]
+
+source_file="res://audios/Whale Boss.mp3"
+dest_files=["res://.godot/imported/Whale Boss.mp3-058af024e75460ac0ea418fd74372049.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
