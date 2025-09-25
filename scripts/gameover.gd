@@ -1,10 +1,12 @@
 extends Control
 
+# Path to the main menu or first gameplay scene
 var menu_scene := "res://scenes/main.tscn"
 
-@onready var label_high : Label = $Label2
-@onready var theme_player: AudioStreamPlayer2D = $Gameovertheme
-@onready var click_player: AudioStreamPlayer2D = $buttonpress
+# Cached UI and audio nodes
+@onready var label_high : Label = $Label2   # Shows the saved high score
+@onready var theme_player: AudioStreamPlayer2D = $Gameovertheme # background music on the game over screen
+@onready var click_player: AudioStreamPlayer2D = $buttonpress  # click sound for the restart button
 
 #Dynamic Score card
 func _ready() -> void:
