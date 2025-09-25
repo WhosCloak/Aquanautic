@@ -17,6 +17,7 @@ func _update_art_facing() -> void:
 
 #Find Player
 func _ready():
+	add_to_group("enemy")
 	player = get_tree().get_first_node_in_group("player")
 
 func _physics_process(_delta):

@@ -49,6 +49,8 @@ func _spawn_boss_gate_near_player() -> void:
 func _on_gate_entered() -> void: 
 	in_boss = true
 	_stop_all_spawners_in_tree()
+	_purge_enemies()
+	
 	if is_instance_valid(gate_instance):
 		gate_instance.queue_free()
 		
@@ -59,6 +61,8 @@ func _on_gate_entered() -> void:
 func _go_to_boss_for_level(_idx: int) -> void:
 	load_level(boss_1_scene)
 	_stop_all_spawners_in_tree()
+	_purge_enemies()
+	
 	var player := get_tree().get_first_node_in_group("player")
 	var spawn := current_level.find_child("PlayerSpawn", true, false)
 	if player and spawn:
@@ -89,6 +93,13 @@ func _stop_all_spawners_in_tree() -> void:
 	var list := get_tree().get_nodes_in_group("enemy_spawner")
 	for s in list:
 		s.set_process(false)
+		
+func _purge_enemies() -> void:
+	var list := get_tree().get_nodes_in_group("enemy")
+	for e in list:
+		if is_instance_valid(e):
+			e.queue_free()
+		print("[Main] Purged enemies:", list.size())
 
 func go_to_level_2() -> void:
 	load_level("res://scenes/levels/Level_2.tscn")

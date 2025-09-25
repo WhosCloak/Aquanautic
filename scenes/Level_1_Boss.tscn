@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwqlcg2c06x7"]
+[gd_scene load_steps=11 format=3 uid="uid://dwqlcg2c06x7"]
 
 [ext_resource type="Texture2D" uid="uid://b5trt3i877woh" path="res://sprites/WhaleLevel.png" id="1_gn26o"]
 [ext_resource type="Script" uid="uid://br78hmutlmdb0" path="res://scripts/Level_1_Boss.gd" id="1_obacn"]
@@ -16,6 +16,16 @@ size = Vector2(20, 383)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_41ab6"]
 size = Vector2(20, 390)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rb64a"]
+bg_color = Color(0.92941177, 0.8627451, 0.36862746, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41ab6"]
+bg_color = Color(0.92941177, 0.1254902, 0.18039216, 1)
 
 [node name="Level_1_Boss" type="Node2D"]
 script = ExtResource("1_obacn")
@@ -47,32 +57,46 @@ shape = SubResource("RectangleShape2D_41ab6")
 position = Vector2(0, 105)
 
 [node name="BossSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -80)
+position = Vector2(0, -42)
 
-[node name="WhaleBoss" parent="BossSpawn" instance=ExtResource("2_rppgv")]
+[node name="WhaleBoss" parent="BossSpawn" groups=["boss_bar"] instance=ExtResource("2_rppgv")]
+path_a_path = NodePath("../../PathA")
+path_b_path = NodePath("../../PathB")
 
 [node name="BossUI" type="CanvasLayer" parent="."]
 layer = 10
+follow_viewport_enabled = true
 
-[node name="UIFrame" type="CenterContainer" parent="BossUI"]
-custom_minimum_size = Vector2(576, 324)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1248.0
-offset_top = -702.0
-offset_right = -672.0
-offset_bottom = -378.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BossBar" type="ProgressBar" parent="BossUI/UIFrame"]
+[node name="BossBar" type="ProgressBar" parent="BossUI" groups=["boss_bar"]]
 light_mask = 0
 visibility_layer = 512
-layout_mode = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1030.0
+offset_top = -160.0
+offset_right = -889.0
+offset_bottom = -134.0
+grow_horizontal = 2
 theme_override_constants/outline_size = -3
 theme_override_fonts/font = ExtResource("4_rb64a")
 theme_override_font_sizes/font_size = 23
-fill_mode = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_rb64a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_41ab6")
+
+[node name="UIFrame" type="Control" parent="BossUI"]
+custom_minimum_size = Vector2(576, 324)
+layout_mode = 3
+anchor_left = -0.15
+anchor_top = -0.15
+anchor_right = 0.15
+anchor_bottom = 0.15
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PathA" type="Marker2D" parent="."]
+position = Vector2(-278, -42)
+
+[node name="PathB" type="Marker2D" parent="."]
+position = Vector2(272, -42)

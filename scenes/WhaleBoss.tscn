@@ -42,22 +42,22 @@ animations = [{
 "texture": SubResource("AtlasTexture_n5y4i")
 }],
 "loop": true,
-"name": &"Whale",
-"speed": 5.0
+"name": &"Whaleswim",
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_51lx6"]
 radius = 12.0
 height = 66.0
 
-[node name="WhaleBoss" type="Node2D" groups=["enemy"]]
+[node name="WhaleBoss" type="Node2D" groups=["boss"]]
 scale = Vector2(3, 3)
 script = ExtResource("1_51lx6")
+max_hp = 100
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g4rt2")
-animation = &"Whale"
-frame_progress = 0.7761319
+animation = &"Whaleswim"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 255
