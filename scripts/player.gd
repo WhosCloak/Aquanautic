@@ -45,7 +45,7 @@ func _physics_process(_delta):
 	velocity = input_vector.normalized() * speed
 	move_and_slide()
 	# Face the mouse when aiming 
-	look_at(get_global_mouse_position())
+	muzzle.look_at(get_global_mouse_position())
 	# Fire on click mapped to "fire"
 	if Input.is_action_just_pressed("fire"):
 		fire()

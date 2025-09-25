@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=27 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://desvr2v3k785w" path="res://sprites/player_swimming.png" id="2_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://brsvr27fldspt" path="res://audios/harpoon_shot.mp3" id="3_fjrip"]
+[ext_resource type="Texture2D" uid="uid://spae466slxs6" path="res://sprites/harpoongun.png" id="3_y4r1p"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 [ext_resource type="AudioStream" uid="uid://d1vksb0j38bdm" path="res://audios/high-score.mp3" id="4_fjrip"]
 [ext_resource type="AudioStream" uid="uid://siwj4cyrbeap" path="res://audios/player_damage_taken.wav" id="4_ur7pv"]
@@ -120,6 +121,7 @@ shape = SubResource("CircleShape2D_tuyoq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+rotation = -1.5707964
 sprite_frames = SubResource("SpriteFrames_f1ej7")
 animation = &"playerswim"
 
@@ -127,8 +129,11 @@ animation = &"playerswim"
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
-[node name="Muzzle" type="Node2D" parent="."]
-position = Vector2(16, 0)
+[node name="Muzzle" type="Sprite2D" parent="."]
+position = Vector2(9, 1)
+scale = Vector2(1.03125, 1)
+texture = ExtResource("3_y4r1p")
+offset = Vector2(15.515152, 4)
 
 [node name="Harpoon" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_fjrip")
@@ -179,10 +184,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -3.0
-offset_top = -56.0
-offset_right = -3.0
-offset_bottom = -56.0
+offset_left = -1.0
+offset_top = -64.0
+offset_right = -1.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 

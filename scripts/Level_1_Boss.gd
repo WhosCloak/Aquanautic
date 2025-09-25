@@ -5,7 +5,10 @@ var bossbar: ProgressBar = null
 # Refrence to the boss instance in the scene, found at runtime
 var boss: Node = null
 
+var bosstheme = preload("res://audios/Whale Boss's Decent.mp3")
+
 func _ready() -> void:
+	bosstheme.play()
 	# Find all nodes that are tagged with group "boss_bar"
 	# Only the actual bar node should be in this group 
 	var bars := get_tree().get_nodes_in_group("boss_bar")
