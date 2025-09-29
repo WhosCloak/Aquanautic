@@ -20,7 +20,12 @@ var emit_speed := 10.0 # minimum movement speed before emitting
 var base_amount := 80  # baseline particle amount 
 var max_amount := 180 # clamp to avoid spikes
 
+var  _current_boss: Node = null
+
 #Reading assests
+@onready var boss_hud: Control = $CanvasLayer/BossHUD
+@onready var boss_name: Label = $CanvasLayer/BossHUD/HBoxContainer/BossName
+@onready var boss_bar: Range = $CanvasLayer/BossHUD/HBoxContainer/BossBar
 @onready var cam := $Camera2D # gameplay camera
 @onready var muzzle = $Muzzle # spawn point for harpoons
 @onready var score_label = $CanvasLayer/Score/Label
@@ -172,3 +177,43 @@ func _gameover():
 	Fade.transition()
 	await Fade.on_transition_finished
 	tree.change_scene_to_file("res://scenes/gameover.tscn")
+	
+func boss_ui_show(boss: Node, display_name: String) -> void:
+	# disconnect old boss, if any
+	if _current_boss and is_instance_valid(_current_boss):
+		if _current_boss.has_signal("hp_changed"):
+			_current_boss.hp_changed.disconnect(_on_boss_hp_changed)
+		if _current_boss.has_signal("died"):
+			_current_boss.died.disconnect(_on_boss_died_hide)
+			
+		_current_boss = boss_bar
+		
+		#set name and make the HUD visisbl
+		boss_name.text = display_name
+		boss_hud.visible = true
+		
+		#connect signlas to drive the bar
+		if boss and boss.has_signal("hp_changed"):
+			boss.hp_changed.connect(_on_boss_hp_changed)
+		if boss and boss.has_signal("died"):
+			boss.died.connect(_on_boss_died_hide)
+	
+	# initialize the bar if the boss exposes max_hp
+	if "max_hp" in boss:
+		_on_boss_hp_changed(boss.max_hp, boss.max_hp)
+		
+	func boss_ui_hide() -> void:
+		boss_hud.visible = false
+		if _current_boss and is_instance_valid(_current_boss):
+			if _current_boss.has_signal("hp_changed"):
+				_current_boss.hp_changed.disconnect(_on_boss_hp_changed)
+			if _current_boss.has_signal("died"):
+				_current_boss.died.disconnect(_on_boss_died_hide)
+			_current_boss = null
+	func _on_boss_hp_changed(cur: int, mx: int) -> void:
+		if boss_bar:
+			boss_bar.max_value = mx
+			boss_bar.value = cur
+			
+	func _on_boss_died_hide() -> void:
+		boss_ui_hide()

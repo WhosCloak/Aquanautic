@@ -19,6 +19,11 @@ var current_level: Node = null
 # Simple progresssion flag to know which level we have reahced
 var level_reached := 1
 
+func _start_all_spawners_in_tree() -> void:
+	var list := get_tree().get_nodes_in_group("enemy_spawner")
+	for s in list:
+		s.set_process(true)
+
 func _ready() -> void:
 	# Start the game on Level 1
 	load_level("res://scenes/levels/Level_1.tscn")
@@ -127,9 +132,12 @@ func _purge_enemies() -> void:
 
 func go_to_level_2() -> void:
 	load_level("res://scenes/levels/Level_2.tscn")
+	_start_all_spawners_in_tree()
 
 func go_to_level_3() -> void:
 	load_level("res://scenes/levels/Level_3.tscn")
+	_start_all_spawners_in_tree()
 	
 func go_to_level_4() -> void:
 	load_level("res://scenes/levels/level_4.tscn")
+	_start_all_spawners_in_tree()

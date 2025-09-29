@@ -4,11 +4,10 @@ extends Node2D
 var bossbar: ProgressBar = null
 # Refrence to the boss instance in the scene, found at runtime
 var boss: Node = null
-
-var bosstheme = preload("res://audios/Whale Boss's Decent.mp3")
+#boss thme music loader
+@onready var boss_theme: AudioStreamPlayer2D = $BossTheme
 
 func _ready() -> void:
-	bosstheme.play()
 	# Find all nodes that are tagged with group "boss_bar"
 	# Only the actual bar node should be in this group 
 	var bars := get_tree().get_nodes_in_group("boss_bar")
@@ -55,6 +54,9 @@ func _ready() -> void:
 			# Initialize the bar to the boss current max if available 
 			if "max_hp" in boss:
 				_on_boss_hp_changed(boss.max_hp, boss.max_hp)
+	#Plays the Boss theme 
+	if boss_theme:
+		boss_theme.play()
 				
 # Update the bar whenever the boss reports a health change 
 func _on_boss_hp_changed(cur: int, mx: int) -> void:
