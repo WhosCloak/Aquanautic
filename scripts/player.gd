@@ -5,10 +5,10 @@ extends CharacterBody2D
 var speed = 250   # Move speed in pixles per second
 var projectilespeed = 500  #harpoon speed
 var projectile = load("res://scenes/harpoon.tscn") # packed scene for the harpoon
-
 var score = Global.player_score  # Score is mirrored to a global for persistance
 var max_health := 3
 var health := max_health
+var multi_shot = false
 
 
 # Audio assets
@@ -221,3 +221,9 @@ func _on_boss_hp_changed(cur: int, mx: int) -> void:
 
 func _on_boss_died_hide() -> void:
 	boss_ui_hide()
+	
+
+
+func _on_power_up() -> void:
+	if multi_shot == true:
+		pass

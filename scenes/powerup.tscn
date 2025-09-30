@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpwtq0ghm5lkf"]
+[gd_scene load_steps=12 format=3 uid="uid://cpwtq0ghm5lkf"]
 
 [ext_resource type="Texture2D" uid="uid://cm4x152fwagvh" path="res://sprites/triple_shot.png" id="1_8vsy1"]
+[ext_resource type="Script" uid="uid://bb40i4tm3kwtu" path="res://scripts/powerup.gd" id="1_ih772"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ih772"]
 
@@ -62,6 +63,7 @@ animations = [{
 }]
 
 [node name="Area2D" type="Area2D"]
+script = ExtResource("1_ih772")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2.925, 2.925)
