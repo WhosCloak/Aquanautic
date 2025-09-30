@@ -11,6 +11,7 @@ signal hp_changed(current: int, maximum: int) # Emitted on init and every time H
 @export var path_a_path: NodePath #Drag PAthA Marker2D here in the Inspector
 @export var path_b_path: NodePath # Drag PathB Marker2D here in the Inspector
 @export var faces_right_default := false # True if the base sprite faces right by default
+@export var display_name := "Wrath of the Deep" #here ur able to change the name of the boss
 
 # Internal state
 var hp := 0       # Current health, initialized in _ready

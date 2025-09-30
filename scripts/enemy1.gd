@@ -8,6 +8,9 @@ var deathsound = preload("res://audios/enemydeath.wav") #not used directly here,
 @onready var art:AnimatedSprite2D = $Sprite2D #animated art node, name "Sprite2D" in the scene
 var flip_threshold := 1.0  #minimum horizontal speed before flipping the sprite
 
+var _is_dying := false
+@onready var _hurtbox: Area2D = $Area2D 
+
 #Model Flip
 func _update_art_facing() -> void:
 	if art == null:
@@ -34,6 +37,8 @@ func _physics_process(_delta):
 #Player Damage/contact with player
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	# If we touch the player, deal 1 damage and then die
+	if _is_dying:
+		return
 	if body.is_in_group("player"):
 		if body.has_method("take_damage"):
 			body.take_damage(1)
@@ -42,10 +47,34 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 #Enemy Death
 func die():
+	if _is_dying:
+		return
+	_is_dying = true
+	
+	if is_instance_valid(_hurtbox):
+		_hurtbox.set_deferred("monitoring", false)
+	
 	# Award score to the player that exists in the scene
 	if player and player.has_method("add_score"):
 		player.add_score()
-	# Remove this enemy safely after current frame
-	call_deferred("queue_free")
-	# Play death SFX via a child AudioStreamPlayer2D node named "Death"
-	$Death.play()
+		
+	var one_shot := AudioStreamPlayer2D.new()
+	var src_stream: AudioStream = null
+	if has_node("Death"):
+		var d: AudioStreamPlayer2D = $Death
+		src_stream = d.stream # reuse the same clip assinged in the scene 
+		one_shot.bus = d.bus #keep routing, for example to SFX bus
+	if src_stream == null:
+		src_stream = deathsound # fallback if the child node had no stream 
+	
+	#SOUND: if we have a valid clip, position it at the enemy location
+	#add it to the active scene so it outlives this node, then play and auto free
+	if src_stream:
+		one_shot.stream = src_stream
+		one_shot.global_position = global_position
+		get_tree().current_scene.add_child(one_shot) # do not parent under this enemy 
+		one_shot.play()
+		one_shot.finished.connect(func(): one_shot.queue_free()) # clean up after playback
+		
+	queue_free()
+		

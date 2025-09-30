@@ -95,9 +95,21 @@ func _go_to_boss_for_level(_idx: int) -> void:
 	# Hook the boss death signal so we can advance after the fight 
 	var boss := current_level.find_child("WhaleBoss", true, false)
 	if boss:
+		# show the HUD on the player
+		var pname := "Boss"
+		if  "display_name" in boss:
+			pname = boss.display_name
+		if player and player.has_method("boss_ui_show"):
+			player.boss_ui_show(boss, pname)
+			print("[Main] calling boss_ui_show with:", pname)
 		boss.died.connect(_on_boss_died)
 
 func _on_boss_died() -> void:
+	# hide HUD
+	var player := get_tree().get_first_node_in_group("player")
+	if player and player.has_method("boss_ui_hide"):
+		player.boss_ui_hide()
+	
 	# After the boss is defeated, fade and advance to Level 2
 	Fade.transition()
 	await Fade.on_transition_finished

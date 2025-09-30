@@ -50,7 +50,7 @@ position = Vector2(0, 105)
 [node name="BossSpawn" type="Marker2D" parent="."]
 position = Vector2(0, -42)
 
-[node name="WhaleBoss" parent="BossSpawn" groups=["boss_bar"] instance=ExtResource("2_rppgv")]
+[node name="WhaleBoss" parent="BossSpawn" instance=ExtResource("2_rppgv")]
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 

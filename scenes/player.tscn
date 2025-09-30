@@ -263,27 +263,37 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ur7pv")
 [node name="BossHUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 2.0
+offset_right = 2.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BossHUD"]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 424.0
-offset_top = 1.0
-offset_right = 460.0
-offset_bottom = 27.0
+offset_left = 665.00006
+offset_right = 1106.0
+offset_bottom = 70.0
 grow_horizontal = 2
+scale = Vector2(1.0113049, 1.021304)
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="BossName" type="Label" parent="CanvasLayer/BossHUD/HBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("6_tuyoq")
+theme_override_font_sizes/font_size = 40
 
 [node name="BossBar" type="ProgressBar" parent="CanvasLayer/BossHUD/HBoxContainer" groups=["boss_bar"]]
 light_mask = 0
 visibility_layer = 512
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_constants/outline_size = -3
 theme_override_fonts/font = ExtResource("6_tuyoq")

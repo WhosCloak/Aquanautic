@@ -42,6 +42,8 @@ func _ready():
 	cam.zoom = Vector2(3.5, 3.5)
 	update_hearts()
 	cam.set_process(true)
+	if boss_hud:
+		boss_hud.visible = false
 
 #Basic Movement and animation
 func _physics_process(_delta):
@@ -106,23 +108,22 @@ func _enter_tree() -> void:
 	
 # Firing Harpoon
 func fire():
-	$Harpoon.play() # uses the AudioStreamPlayer node in the scene
+	$Harpoon.play()
 	var projectile_instance = projectile.instantiate()
 	var fire_pos = muzzle.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
 	
-	# Position and launch the harpoon
+	#position and launch the harpoon
 	projectile_instance.global_position = fire_pos
 	projectile_instance.rotation = direction.angle()
 	projectile_instance.linear_velocity = direction * projectilespeed
 	
-	# Tag so enemies and bosses can identify hits
+	#tag so enemies and bosses can identify hits
 	projectile_instance.add_to_group("projectile")
-
-# Add to the activate scene
+	
+	#add to the active scene
 	get_tree().current_scene.add_child(projectile_instance)
-
-
+	
 #Enumerate Score
 func add_score(amount: int = 1) -> void:
 	# Increment local and global, update label
@@ -144,14 +145,12 @@ func take_damage(amount: int):
 	health -= amount
 	update_hearts()
 	$DamageTaken.play()
-
 # Death check, record high score, then die
 	if health <= 0:
 		if score > Global.high_score:
 			Global.high_score = score
 		die()
 		
-
 #Heal HP
 func heal(amount: int):
 	# Clamp heal to max and refresh hearts
@@ -179,41 +178,45 @@ func _gameover():
 	tree.change_scene_to_file("res://scenes/gameover.tscn")
 	
 func boss_ui_show(boss: Node, display_name: String) -> void:
+	print("[Player] boss_ui_show, name:", display_name)
 	# disconnect old boss, if any
 	if _current_boss and is_instance_valid(_current_boss):
 		if _current_boss.has_signal("hp_changed"):
 			_current_boss.hp_changed.disconnect(_on_boss_hp_changed)
 		if _current_boss.has_signal("died"):
 			_current_boss.died.disconnect(_on_boss_died_hide)
-			
-		_current_boss = boss_bar
-		
-		#set name and make the HUD visisbl
-		boss_name.text = display_name
-		boss_hud.visible = true
-		
-		#connect signlas to drive the bar
-		if boss and boss.has_signal("hp_changed"):
-			boss.hp_changed.connect(_on_boss_hp_changed)
-		if boss and boss.has_signal("died"):
-			boss.died.connect(_on_boss_died_hide)
-	
-	# initialize the bar if the boss exposes max_hp
+
+	_current_boss = boss
+
+	# set name and show HUD
+	boss_name.text = display_name
+	boss_hud.visible = true
+
+	# connect signals to drive the bar
+	if boss and boss.has_signal("hp_changed"):
+		boss.hp_changed.connect(_on_boss_hp_changed)
+	if boss and boss.has_signal("died"):
+		boss.died.connect(_on_boss_died_hide)
+
+	# initialize the bar
 	if "max_hp" in boss:
 		_on_boss_hp_changed(boss.max_hp, boss.max_hp)
-		
-	func boss_ui_hide() -> void:
-		boss_hud.visible = false
-		if _current_boss and is_instance_valid(_current_boss):
-			if _current_boss.has_signal("hp_changed"):
-				_current_boss.hp_changed.disconnect(_on_boss_hp_changed)
-			if _current_boss.has_signal("died"):
-				_current_boss.died.disconnect(_on_boss_died_hide)
-			_current_boss = null
-	func _on_boss_hp_changed(cur: int, mx: int) -> void:
-		if boss_bar:
-			boss_bar.max_value = mx
-			boss_bar.value = cur
-			
-	func _on_boss_died_hide() -> void:
-		boss_ui_hide()
+
+func boss_ui_hide() -> void:
+	boss_hud.visible = false
+	if _current_boss and is_instance_valid(_current_boss):
+		if _current_boss.has_signal("hp_changed"):
+			_current_boss.hp_changed.disconnect(_on_boss_hp_changed)
+		if _current_boss.has_signal("died"):
+			_current_boss.died.disconnect(_on_boss_died_hide)
+	_current_boss = null
+
+
+func _on_boss_hp_changed(cur: int, mx: int) -> void:
+	if boss_bar:
+		boss_bar.max_value = mx
+		boss_bar.value = cur
+
+
+func _on_boss_died_hide() -> void:
+	boss_ui_hide()
