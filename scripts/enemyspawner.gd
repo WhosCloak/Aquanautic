@@ -9,7 +9,7 @@ var enemy_scene_5 = preload("res://scenes/enemy5.tscn")
 
 # Spawn tuning 
 var spawn_distance = 500 # how far from the player to spawn
-var spawn_interval = 2.0 # seconds between spawns
+var spawn_interval = 0.8 # seconds between spawns
 var timer := 0.0 # counts up to spawn_interval
 var player: Node2D # cached player refrence
 

@@ -10,6 +10,7 @@ var score = Global.player_score  # Score is mirrored to a global for persistance
 var max_health := 3
 var health := max_health
 
+
 # Audio assets
 var harpoonsound = preload("res://audios/harpoon_shot.mp3")
 var highscore = preload("res://audios/high-score.mp3")

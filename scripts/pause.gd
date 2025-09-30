@@ -35,7 +35,7 @@ func _on_button_pressed() -> void:
 #Button to reset
 func _on_button_2_pressed() -> void:
 	resume()
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().reload_current_scene()
 	
 
 #Button to Quit

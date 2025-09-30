@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dohsyisohc036"
-path="res://.godot/imported/pixilart-sprite.png-52b5c5a26679cd39fd199b2bc8f051f6.ctex"
+uid="uid://byierjxv6llim"
+path="res://.godot/imported/Bloody_Rusty_Harpoon.png-43f7db187feed433327f11b53328c839.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pixilart-sprite.png"
-dest_files=["res://.godot/imported/pixilart-sprite.png-52b5c5a26679cd39fd199b2bc8f051f6.ctex"]
+source_file="res://sprites/Bloody_Rusty_Harpoon.png"
+dest_files=["res://.godot/imported/Bloody_Rusty_Harpoon.png-43f7db187feed433327f11b53328c839.ctex"]
 
 [params]
 

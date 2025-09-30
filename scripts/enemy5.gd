@@ -12,7 +12,7 @@ func _update_art_facing() -> void:
 	if art == null:
 		return 
 	if abs(velocity.x) > flip_threshold:
-		art.flip_h = velocity.x > 0.0
+		art.flip_h = velocity.x < 0.0
 	art.rotation = 0.0
 
 #Find Player
