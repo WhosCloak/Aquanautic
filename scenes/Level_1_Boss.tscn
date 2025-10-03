@@ -9,7 +9,7 @@
 size = Vector2(628, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_obacn"]
-size = Vector2(662, 20)
+size = Vector2(662, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rb64a"]
 size = Vector2(20, 447)
@@ -24,16 +24,15 @@ script = ExtResource("1_obacn")
 scale = Vector2(2, 2)
 texture = ExtResource("1_gn26o")
 
-[node name="ArenaWalls" type="StaticBody2D" parent="."]
+[node name="ArenaWalls" type="StaticBody2D" parent="." groups=["ground"]]
 collision_layer = 4
-collision_mask = 0
 
 [node name="Top" type="CollisionShape2D" parent="ArenaWalls"]
 position = Vector2(-3, -171)
 shape = SubResource("RectangleShape2D_rppgv")
 
-[node name="Bottom" type="CollisionShape2D" parent="ArenaWalls"]
-position = Vector2(8, 248)
+[node name="Bottom" type="CollisionShape2D" parent="ArenaWalls" groups=["ground"]]
+position = Vector2(8, 250)
 shape = SubResource("RectangleShape2D_obacn")
 
 [node name="Left" type="CollisionShape2D" parent="ArenaWalls"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dggqbsw3wvl3u"]
+[gd_scene load_steps=10 format=3 uid="uid://dggqbsw3wvl3u"]
 
 [ext_resource type="Texture2D" uid="uid://bghackk5717ui" path="res://sprites/barnacle.png" id="1_kxuct"]
 [ext_resource type="Texture2D" uid="uid://dl8wvkqmigxvr" path="res://sprites/barnacle_explosion.png" id="1_wjhr6"]
-[ext_resource type="Script" uid="uid://mbs6djey3fud" path="res://scenes/barnacle.gd" id="1_ws4va"]
+[ext_resource type="Script" uid="uid://mbs6djey3fud" path="res://scripts/barnacle.gd" id="1_ws4va"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ws4va"]
 atlas = ExtResource("1_wjhr6")
@@ -28,7 +28,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ydmc1")
 }],
-"loop": true,
+"loop": false,
 "name": &"explode",
 "speed": 3.0
 }, {
@@ -42,18 +42,35 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cjkio"]
-radius = 16.0
+radius = 38.013157
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ws4va"]
+radius = 10.049875
 
 [node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 4
+gravity_scale = 0.3
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp = 2.0
 script = ExtResource("1_ws4va")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_c3gww")
 animation = &"explode"
 autoplay = "normal"
-frame_progress = 0.24576722
+frame = 2
+frame_progress = 1.0
+flip_v = true
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_cjkio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_ws4va")

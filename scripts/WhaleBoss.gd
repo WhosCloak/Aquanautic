@@ -16,6 +16,9 @@ signal hp_changed(current: int, maximum: int) # Emitted on init and every time H
 # Internal state
 var hp := 0       # Current health, initialized in _ready
 var _hit_lock := false # Short lockout to avoid double hits in one frame
+#barnacle preload scene 
+var barnacle_scene = preload("res://scenes/barnacle.tscn")
+@onready var barnacle_drop = $BarnacleDrop
 
 
 var boss_harpoon_scene = preload("res://scenes/boss_harpoon.tscn")
@@ -107,7 +110,7 @@ func shoot_harpoon(target_pos: Vector2):
 	harpoon.global_position = harpoon_muzzle.global_position
 	var direction = (target_pos - harpoon.global_position).normalized()
 	harpoon.rotation = direction.angle() 
-	harpoon.linear_velocity = direction * 400 #adjust speed 
+	harpoon.linear_velocity = direction * 250 #adjust speed 
 	get_tree().current_scene.add_child(harpoon)
 
 func _on_attack_timer_timeout():
@@ -115,6 +118,13 @@ func _on_attack_timer_timeout():
 	if player:
 		shoot_harpoon(player.global_position)
 
+func drop_barnacle():
+	var barnacle = barnacle_scene.instantiate()
+	barnacle.global_position = barnacle_drop.global_position
+	get_tree().current_scene.add_child(barnacle)
+
+func _on_barnacle_timer_timeout() -> void:
+	drop_barnacle()
 
 func _die() -> void:
 	# Tell listeners the boss is dead, then remove this node
