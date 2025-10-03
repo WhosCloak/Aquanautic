@@ -17,11 +17,16 @@ signal hp_changed(current: int, maximum: int) # Emitted on init and every time H
 var hp := 0       # Current health, initialized in _ready
 var _hit_lock := false # Short lockout to avoid double hits in one frame
 
+
+var boss_harpoon_scene = preload("res://scenes/boss_harpoon.tscn")
+@onready var harpoon_muzzle = $HarpoonMuzzle
+
 # Cached node refrences 
 @onready var hurtbox: Area2D = $Hurtbox      # Area2D that receives projectile overlaps
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D  # Aniomated art for the whale
 @onready var path_a: Marker2D = get_node_or_null(path_a_path) # Resolved PathA marker 
 @onready var path_b: Marker2D = get_node_or_null(path_b_path) # Resolved PathB marker
+@onready var attack_timer: Timer = $AttackTimer
 # Patrol target bookkeeping
 var _target_marker: Marker2D = null # Which marker we are currently headed toward
 var _target: Vector2    # The world position we are moving toward
@@ -54,6 +59,7 @@ func _ready() -> void:
 		_target = global_position + Vector2(200, 0)
 	#Initialize the UI bar
 	emit_signal("hp_changed", hp, max_hp)
+	
 	
 func _physics_process(delta: float) -> void:
 	# Skip motion during the brief damage lock, keeps movement and hits from figthing 
@@ -96,6 +102,20 @@ func apply_damage(amount: int) -> void:
 		await get_tree().create_timer(0.05).timeout
 		_hit_lock = false
 		
+func shoot_harpoon(target_pos: Vector2):
+	var harpoon = boss_harpoon_scene.instantiate()
+	harpoon.global_position = harpoon_muzzle.global_position
+	var direction = (target_pos - harpoon.global_position).normalized()
+	harpoon.rotation = direction.angle() 
+	harpoon.linear_velocity = direction * 400 #adjust speed 
+	get_tree().current_scene.add_child(harpoon)
+
+func _on_attack_timer_timeout():
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		shoot_harpoon(player.global_position)
+
+
 func _die() -> void:
 	# Tell listeners the boss is dead, then remove this node
 	emit_signal("died")

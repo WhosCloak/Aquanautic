@@ -67,3 +67,12 @@ collision_mask = 255
 position = Vector2(2, -4)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_51lx6")
+
+[node name="HarpoonMuzzle" type="Marker2D" parent="."]
+position = Vector2(-21, -7.3333335)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

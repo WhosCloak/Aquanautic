@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://dggqbsw3wvl3u"]
+
+[ext_resource type="Texture2D" uid="uid://bghackk5717ui" path="res://sprites/barnacle.png" id="1_kxuct"]
+[ext_resource type="Texture2D" uid="uid://dl8wvkqmigxvr" path="res://sprites/barnacle_explosion.png" id="1_wjhr6"]
+[ext_resource type="Script" uid="uid://mbs6djey3fud" path="res://scenes/barnacle.gd" id="1_ws4va"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws4va"]
+atlas = ExtResource("1_wjhr6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3oqt"]
+atlas = ExtResource("1_wjhr6")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydmc1"]
+atlas = ExtResource("1_wjhr6")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3gww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws4va")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3oqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydmc1")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kxuct")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjkio"]
+radius = 16.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
+script = ExtResource("1_ws4va")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_c3gww")
+animation = &"explode"
+autoplay = "normal"
+frame_progress = 0.24576722
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cjkio")

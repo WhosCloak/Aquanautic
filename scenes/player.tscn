@@ -283,7 +283,7 @@ scale = Vector2(1.0113049, 1.021304)
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="BossName" type="Label" parent="CanvasLayer/BossHUD/HBoxContainer"]
+[node name="BossName" type="Label" parent="CanvasLayer/BossHUD/HBoxContainer" groups=["player"]]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_constants/outline_size = 20
