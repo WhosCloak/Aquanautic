@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpjk5qnyiey42"]
+[gd_scene load_steps=16 format=3 uid="uid://bpjk5qnyiey42"]
 
 [ext_resource type="Script" uid="uid://n6ef7fcsqdpe" path="res://scripts/enemy2.gd" id="1_3neu4"]
 [ext_resource type="Texture2D" uid="uid://vhawfygqay17" path="res://sprites/enemy2.png" id="2_3neu4"]
 [ext_resource type="AudioStream" uid="uid://crj5i5mnnde5p" path="res://audios/enemydeath.wav" id="3_mhmjl"]
+[ext_resource type="Texture2D" uid="uid://cu76xvkyr0u24" path="res://sprites/Eel_shield.png" id="4_23kvp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(16, 7.5)
@@ -46,7 +47,36 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
 size = Vector2(16, 7.5)
 
-[node name="enemy2" type="CharacterBody2D" groups=["enemy"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_thqno"]
+atlas = ExtResource("4_23kvp")
+region = Rect2(0, 0, 63, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4k25"]
+atlas = ExtResource("4_23kvp")
+region = Rect2(63, 0, 63, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slk5t"]
+atlas = ExtResource("4_23kvp")
+region = Rect2(126, 0, 63, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rmi40"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thqno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4k25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slk5t")
+}],
+"loop": true,
+"name": &"shield_activate",
+"speed": 7.0
+}]
+
+[node name="enemy2" type="CharacterBody2D" groups=["enemy", "shielded_enemy"]]
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 8
@@ -73,5 +103,12 @@ shape = SubResource("RectangleShape2D_4ra3w")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_mhmjl")
+
+[node name="ShieldSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.5000005, -1)
+scale = Vector2(0.17460318, 0.171875)
+sprite_frames = SubResource("SpriteFrames_rmi40")
+animation = &"shield_activate"
+frame_progress = 0.08256079
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
