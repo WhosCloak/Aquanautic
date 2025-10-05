@@ -42,6 +42,9 @@ func _ready() -> void:
 	if anim:
 		anim.play()
 		
+	if anim:
+		anim.animation_finished.connect(_on_anim_finished)
+		
 	# Hook damage events from the Hurtbox to our handler
 	if hurtbox:
 		hurtbox.monitoring = true
@@ -62,8 +65,11 @@ func _ready() -> void:
 		_target = global_position + Vector2(200, 0)
 	#Initialize the UI bar
 	emit_signal("hp_changed", hp, max_hp)
-	
-	
+
+func _on_anim_finished():
+	if anim.animation == "spit":
+		anim.play("swim")
+
 func _physics_process(delta: float) -> void:
 	# Skip motion during the brief damage lock, keeps movement and hits from figthing 
 	if _hit_lock:
@@ -106,11 +112,13 @@ func apply_damage(amount: int) -> void:
 		_hit_lock = false
 		
 func shoot_harpoon(target_pos: Vector2):
+	if anim:
+		anim.play("spit")
 	var harpoon = boss_harpoon_scene.instantiate()
 	harpoon.global_position = harpoon_muzzle.global_position
 	var direction = (target_pos - harpoon.global_position).normalized()
 	harpoon.rotation = direction.angle() 
-	harpoon.linear_velocity = direction * 250 #adjust speed 
+	harpoon.linear_velocity = direction * 200 #adjust speed 
 	get_tree().current_scene.add_child(harpoon)
 
 func _on_attack_timer_timeout():

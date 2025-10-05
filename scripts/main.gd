@@ -87,6 +87,9 @@ func _go_to_boss_for_level(_idx: int) -> void:
 	_stop_all_spawners_in_tree()
 	_purge_enemies()
 	
+	call_deferred("_stop_all_spawners_in_tree")
+	call_deferred("_purge_enemies")
+	
 	# Move the player to the PlayerSpawn marker inside the boss scene
 	var player := get_tree().get_first_node_in_group("player")
 	var spawn := current_level.find_child("PlayerSpawn", true, false)
@@ -128,6 +131,7 @@ func load_level(path: String) -> void:
 	current_level = level_scene.instantiate()
 	level_root.add_child(current_level)
 	
+
 func _stop_all_spawners_in_tree() -> void:
 	# Disable all enemy psawners, requires spawners to be in group "enemy_spawner"
 	var list := get_tree().get_nodes_in_group("enemy_spawner")
@@ -145,6 +149,17 @@ func _purge_enemies() -> void:
 func go_to_level_2() -> void:
 	load_level("res://scenes/levels/Level_2.tscn")
 	_start_all_spawners_in_tree()
+	
+	# Reset camera zoom and limits (defer to ensure the player and camera exist)
+	call_deferred("_reset_camera_for_regular_level")
+
+func _reset_camera_for_regular_level():
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		var cam = player.get_node_or_null("Camera2D")
+		if cam:
+			cam.zoom = Vector2(3.3, 3.3) # Or whatever fits your regular level window best
+			cam.limit_enabled = false    # Turn limits OFF unless your regular level needs them
 
 func go_to_level_3() -> void:
 	load_level("res://scenes/levels/Level_3.tscn")

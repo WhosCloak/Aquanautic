@@ -136,6 +136,11 @@ sprite_frames = SubResource("SpriteFrames_f1ej7")
 animation = &"playerswim"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_enabled = false
+limit_left = -576
+limit_top = -324
+limit_right = 576
+limit_bottom = 324
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 

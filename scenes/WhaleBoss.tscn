@@ -1,49 +1,118 @@
-[gd_scene load_steps=10 format=3 uid="uid://droi5otfpdguu"]
+[gd_scene load_steps=20 format=3 uid="uid://droi5otfpdguu"]
 
 [ext_resource type="Script" uid="uid://bmbm6t8rmbfii" path="res://scripts/WhaleBoss.gd" id="1_51lx6"]
-[ext_resource type="Texture2D" uid="uid://dohsyisohc036" path="res://sprites/whale_boss.png" id="1_ok4ks"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_51lx6"]
-atlas = ExtResource("1_ok4ks")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_632wf"]
-atlas = ExtResource("1_ok4ks")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k3gwo"]
-atlas = ExtResource("1_ok4ks")
-region = Rect2(128, 0, 64, 64)
+[ext_resource type="Texture2D" uid="uid://b674auv3hw23p" path="res://sprites/spit.png" id="2_632wf"]
+[ext_resource type="Texture2D" uid="uid://c4xyr7iawslr1" path="res://sprites/swiiming.png" id="3_k3gwo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gea0a"]
-atlas = ExtResource("1_ok4ks")
-region = Rect2(192, 0, 64, 64)
+atlas = ExtResource("2_632wf")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n5y4i"]
-atlas = ExtResource("1_ok4ks")
+atlas = ExtResource("2_632wf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4rt2"]
+atlas = ExtResource("2_632wf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03rwq"]
+atlas = ExtResource("2_632wf")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwmm3"]
+atlas = ExtResource("2_632wf")
 region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n03rn"]
+atlas = ExtResource("2_632wf")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51h3n"]
+atlas = ExtResource("2_632wf")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkxwp"]
+atlas = ExtResource("3_k3gwo")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpqc2"]
+atlas = ExtResource("3_k3gwo")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck7xx"]
+atlas = ExtResource("3_k3gwo")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boxs4"]
+atlas = ExtResource("3_k3gwo")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ei0x"]
+atlas = ExtResource("3_k3gwo")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwmwf"]
+atlas = ExtResource("3_k3gwo")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1i0a"]
+atlas = ExtResource("3_k3gwo")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4rt2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_51lx6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_632wf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k3gwo")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_gea0a")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n5y4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4rt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03rwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwmm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n03rn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51h3n")
 }],
 "loop": true,
-"name": &"Whaleswim",
-"speed": 8.0
+"name": &"spit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkxwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpqc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck7xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boxs4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ei0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwmwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1i0a")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_51lx6"]
@@ -57,7 +126,8 @@ max_hp = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g4rt2")
-animation = &"Whaleswim"
+animation = &"spit"
+frame_progress = 0.78834
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 255
