@@ -165,6 +165,10 @@ func update_hearts():
 
 #Player death/gameover
 func die() -> void:
+# Reset local and global score to 0 on death
+	score = 0
+	Global.player_score = 0
+	#Global.reset()
 	# Defer to avoid changing scenes mid signal
 	call_deferred("_gameover")
 

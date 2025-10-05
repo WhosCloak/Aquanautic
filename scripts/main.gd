@@ -145,6 +145,16 @@ func _purge_enemies() -> void:
 		if is_instance_valid(e):
 			e.queue_free()
 		print("[Main] Purged enemies:", list.size())
+		
+func _on_player_death_or_restart():
+# Called when player dies or game is restarting
+	
+# Remove boss portal
+	if is_instance_valid(gate_instance):
+		gate_instance.queue_free()
+		gate_instance = null
+		gate_spawned = false
+ # Reset score, others, load Level 1, etc.
 
 func go_to_level_2() -> void:
 	load_level("res://scenes/levels/Level_2.tscn")
