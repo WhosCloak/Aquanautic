@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://6r6a02a2t45h"]
+
+[ext_resource type="Script" uid="uid://d107rctx05grg" path="res://scripts/interaction_agent.gd" id="1_pbfsy"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_yl1ur"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pbfsy"]
+radius = 18.027756
+
+[sub_resource type="LabelSettings" id="LabelSettings_ji537"]
+font = ExtResource("1_yl1ur")
+font_size = 13
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="InteractionAgent" type="Node2D"]
+script = ExtResource("1_pbfsy")
+
+[node name="InteractRange" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
+shape = SubResource("CircleShape2D_pbfsy")
+
+[node name="Interactlabel" type="Label" parent="."]
+z_index = 30
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.5
+offset_top = -36.0
+offset_right = 52.5
+offset_bottom = -13.0
+grow_horizontal = 2
+text = "[E] to Interact"
+label_settings = SubResource("LabelSettings_ji537")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="InteractRange" to="." method="_on_interact_range_area_entered"]
+[connection signal="area_exited" from="InteractRange" to="." method="_on_interact_range_area_exited"]

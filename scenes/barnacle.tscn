@@ -48,8 +48,8 @@ radius = 38.013157
 radius = 10.049875
 
 [node name="RigidBody2D" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 16
+collision_mask = 3
 gravity_scale = 0.3
 contact_monitor = true
 max_contacts_reported = 1

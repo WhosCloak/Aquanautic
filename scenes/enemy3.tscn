@@ -36,13 +36,12 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(14.6667, 10)
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2iik"]
 
 [node name="enemy3" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(1.5, 1.5)
-collision_layer = 2
-collision_mask = 8
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_qupug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -58,11 +57,12 @@ autoplay = "default"
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 24
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.666667, 1)
-shape = SubResource("RectangleShape2D_4ra3w")
+shape = SubResource("CircleShape2D_o2iik")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_o2iik")

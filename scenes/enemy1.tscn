@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c2s6gvmly86en" path="res://sprites/enemy1.png" id="2_nb0t0"]
 [ext_resource type="AudioStream" uid="uid://crj5i5mnnde5p" path="res://audios/enemydeath.wav" id="3_n665k"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_n665k"]
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n665k"]
 atlas = ExtResource("2_nb0t0")
@@ -29,17 +29,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_lowyn"]
+radius = 12.666667
 
 [node name="enemy1" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(1.5, 1.5)
-collision_layer = 2
-collision_mask = 8
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_nb0t0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_md0e3")
+shape = SubResource("CircleShape2D_n665k")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -54,9 +54,10 @@ flip_h = true
 stream = ExtResource("3_n665k")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 24
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_4ra3w")
+shape = SubResource("CircleShape2D_lowyn")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

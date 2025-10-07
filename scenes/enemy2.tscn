@@ -44,8 +44,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(16, 7.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_23kvp"]
+radius = 9.503289
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_thqno"]
 atlas = ExtResource("4_23kvp")
@@ -78,8 +78,8 @@ animations = [{
 
 [node name="enemy2" type="CharacterBody2D" groups=["enemy", "shielded_enemy"]]
 scale = Vector2(2, 2)
-collision_layer = 2
-collision_mask = 8
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_3neu4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -95,11 +95,12 @@ autoplay = "default"
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 24
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -1.25)
-shape = SubResource("RectangleShape2D_4ra3w")
+shape = SubResource("CircleShape2D_23kvp")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_mhmjl")

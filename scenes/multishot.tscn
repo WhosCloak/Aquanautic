@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://8hmxui6iwmrt"]
+
+[ext_resource type="Script" uid="uid://b8sgi48isk6vw" path="res://scripts/multishot.gd" id="1_7wi61"]
+[ext_resource type="Texture2D" uid="uid://cm4x152fwagvh" path="res://sprites/triple_shot.png" id="1_y57rb"]
+[ext_resource type="PackedScene" uid="uid://cpwtq0ghm5lkf" path="res://scenes/interactable.tscn" id="2_fbcnd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbcnd"]
+atlas = ExtResource("1_y57rb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wi61"]
+atlas = ExtResource("1_y57rb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqxlh"]
+atlas = ExtResource("1_y57rb")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kic7d"]
+atlas = ExtResource("1_y57rb")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou51e"]
+atlas = ExtResource("1_y57rb")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1dme"]
+atlas = ExtResource("1_y57rb")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8o3j6"]
+atlas = ExtResource("1_y57rb")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tce5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbcnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wi61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqxlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kic7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou51e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1dme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8o3j6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_48rt8"]
+radius = 30.066593
+
+[node name="Multishot" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_7wi61")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tce5d")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_48rt8")
+
+[node name="interactable" parent="." instance=ExtResource("2_fbcnd")]
+collision_layer = 8
+collision_mask = 1

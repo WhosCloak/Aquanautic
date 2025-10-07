@@ -43,13 +43,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(7.33333, 4.66667)
+[sub_resource type="CircleShape2D" id="CircleShape2D_pguuh"]
+radius = 5.410278
 
 [node name="enemy4" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(5, 5)
-collision_layer = 2
-collision_mask = 8
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_cq41y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -64,11 +64,12 @@ sprite_frames = SubResource("SpriteFrames_xx6g3")
 autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 24
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1, -0.333333)
-shape = SubResource("RectangleShape2D_4ra3w")
+shape = SubResource("CircleShape2D_pguuh")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_pguuh")
