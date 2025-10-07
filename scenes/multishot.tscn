@@ -65,8 +65,8 @@ animations = [{
 radius = 30.066593
 
 [node name="Multishot" type="Area2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 32
+collision_mask = 64
 script = ExtResource("1_7wi61")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
