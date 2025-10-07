@@ -13,15 +13,16 @@ func _input(event: InputEvent) -> void:
 			await current_interactions[0].interact.call()
 			
 			can_interact = true
+	
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void: #new
 	if current_interactions and can_interact:
 		current_interactions.sort_custom(_sort_by_nearest)
-		if current_interactions[0].is_interactable:
+		if "is_interactable" in current_interactions[0] and current_interactions[0].is_interactable:
 			interact_label.text = current_interactions[0].interact_name
 			interact_label.show()
-	else:
-		interact_label.hide()
+		else:
+			interact_label.hide()
 
 func _sort_by_nearest(area1, area2):
 	var area1_distance = global_position.distance_to(area1.global_position)

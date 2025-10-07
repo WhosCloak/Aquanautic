@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://6r6a02a2t45h"]
+[gd_scene load_steps=6 format=3 uid="uid://6r6a02a2t45h"]
 
 [ext_resource type="Script" uid="uid://d107rctx05grg" path="res://scripts/interaction_agent.gd" id="1_pbfsy"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_yl1ur"]
+[ext_resource type="Script" uid="uid://bb40i4tm3kwtu" path="res://scripts/interactable.gd" id="2_ji537"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbfsy"]
 radius = 18.027756
@@ -18,6 +19,7 @@ script = ExtResource("1_pbfsy")
 [node name="InteractRange" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 32
+script = ExtResource("2_ji537")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
 shape = SubResource("CircleShape2D_pbfsy")

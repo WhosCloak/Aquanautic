@@ -1,13 +1,11 @@
-extends Area2D
-
-@onready var interactable: Area2D = $interactable
-
+extends "res://scripts/interactable.gd"
 
 func _ready() -> void:
-	interactable.is_interactable = true
-	interactable.interact_name = "Multishot"
-	interactable.interact = _on_interact
-	
+	interact_name = "Multishot"
+	is_interactable = true
+	interact = Callable(self, "_on_interact")
+
 func _on_interact():
-	interactable.is_interactable = false
-	print("player is interacting")
+	is_interactable = false
+	print("player is interacting!")
+	self.hide() # Optional: hide powerup after pickup
