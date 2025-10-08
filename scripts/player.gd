@@ -2,13 +2,13 @@ extends CharacterBody2D
 # Player controller, movement, shooting, HUD updates, bubble trail, death flow.
 
 #Variables
-var speed = 250   # Move speed in pixles per second
-var projectilespeed = 500  #harpoon speed
+var speed := 250   # Move speed in pixles per second
+var projectilespeed := 500  #harpoon speed
 var projectile = load("res://scenes/harpoon.tscn") # packed scene for the harpoon
 var score = Global.player_score  # Score is mirrored to a global for persistance
 var max_health := 3
 var health := max_health
-var multi_shot = false
+var multi_shot := false
 
 
 # Audio assets
@@ -110,20 +110,28 @@ func _enter_tree() -> void:
 # Firing Harpoon
 func fire():
 	$Harpoon.play()
-	var projectile_instance = projectile.instantiate()
 	var fire_pos = muzzle.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
 	
-	#position and launch the harpoon
-	projectile_instance.global_position = fire_pos
-	projectile_instance.rotation = direction.angle()
-	projectile_instance.linear_velocity = direction * projectilespeed
-	
-	#tag so enemies and bosses can identify hits
-	projectile_instance.add_to_group("projectile")
-	
-	#add to the active scene
-	get_tree().current_scene.add_child(projectile_instance)
+	if multi_shot:
+		# Fire 3 harpoons spread slightly apart
+		var spread = deg_to_rad(10)  # spread angle
+		for angle_offset in [-spread, 0, spread]:
+			var projectile_instance = projectile.instantiate()
+			projectile_instance.global_position = fire_pos
+			projectile_instance.rotation = direction.angle() + angle_offset
+			projectile_instance.linear_velocity = Vector2.RIGHT.rotated(projectile_instance.rotation) * projectilespeed
+			projectile_instance.add_to_group("projectile")
+			get_tree().current_scene.add_child(projectile_instance)
+	else:
+		# Single harpoon
+		var projectile_instance = projectile.instantiate()
+		projectile_instance.global_position = fire_pos
+		projectile_instance.rotation = direction.angle()
+		projectile_instance.linear_velocity = direction * projectilespeed
+		projectile_instance.add_to_group("projectile")
+		get_tree().current_scene.add_child(projectile_instance)
+
 	
 #Enumerate Score
 func add_score(amount: int = 1) -> void:

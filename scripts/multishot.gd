@@ -7,5 +7,15 @@ func _ready() -> void:
 
 func _on_interact():
 	is_interactable = false
-	print("player is interacting!")
-	self.hide() # Optional: hide powerup after pickup
+	print("Player picked up Multishot!")
+	self.hide()  # hide the pickup after collecting
+
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.multi_shot = true
+		print("Multishot activated!")
+
+		# Optional: make the effect temporary (e.g., 10 seconds)
+		await get_tree().create_timer(10.0).timeout
+		player.multi_shot = false
+		print("Multishot expired!")
