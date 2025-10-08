@@ -68,6 +68,7 @@ radius = 30.066593
 collision_layer = 32
 collision_mask = 64
 script = ExtResource("1_7wi61")
+interact_name = "[E] to Interact"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tce5d")

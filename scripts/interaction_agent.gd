@@ -31,7 +31,9 @@ func _sort_by_nearest(area1, area2):
 
 func _on_interact_range_area_entered(area: Area2D) -> void:
 	current_interactions.push_back(area)
+	$Interactlabel.show()
 
 
 func _on_interact_range_area_exited(area: Area2D) -> void:
 	current_interactions.erase(area)
+	$Interactlabel.hide()

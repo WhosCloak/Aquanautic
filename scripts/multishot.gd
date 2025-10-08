@@ -1,7 +1,7 @@
 extends "res://scripts/interactable.gd"
 
 func _ready() -> void:
-	interact_name = "Multishot"
+	interact_name = "[E] to Interact"
 	is_interactable = true
 	interact = Callable(self, "_on_interact")
 

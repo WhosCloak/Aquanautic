@@ -9,7 +9,7 @@ radius = 18.027756
 
 [sub_resource type="LabelSettings" id="LabelSettings_ji537"]
 font = ExtResource("1_yl1ur")
-font_size = 13
+font_size = 22
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
@@ -25,14 +25,15 @@ script = ExtResource("2_ji537")
 shape = SubResource("CircleShape2D_pbfsy")
 
 [node name="Interactlabel" type="Label" parent="."]
+visible = false
 z_index = 30
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -52.5
-offset_top = -36.0
-offset_right = 52.5
-offset_bottom = -13.0
+offset_left = -114.5
+offset_top = -82.0
+offset_right = 114.5
+offset_bottom = -33.0
 grow_horizontal = 2
 text = "[E] to Interact"
 label_settings = SubResource("LabelSettings_ji537")
