@@ -1,70 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c016ybgxar4qe"]
+[gd_scene load_steps=2 format=3 uid="uid://bshfto7hp6td"]
 
-[ext_resource type="Script" uid="uid://djasbchama0i6" path="res://scripts/enemy3.gd" id="1_qupug"]
-[ext_resource type="Texture2D" uid="uid://dyi5s5fkcw3xi" path="res://sprites/enemy3.png" id="2_qupug"]
-[ext_resource type="AudioStream" uid="uid://crj5i5mnnde5p" path="res://audios/enemydeath.wav" id="3_o2iik"]
+[ext_resource type="PackedScene" uid="uid://dau2bk1ksg4mx" path="res://scenes/enemy.tscn" id="1_jwwc6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(14.6667, 10)
+[node name="enemy" instance=ExtResource("1_jwwc6")]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qupug"]
-atlas = ExtResource("2_qupug")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o2iik"]
-atlas = ExtResource("2_qupug")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kroph"]
-atlas = ExtResource("2_qupug")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xx6g3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qupug")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o2iik")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kroph")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_o2iik"]
-
-[node name="enemy3" type="CharacterBody2D" groups=["enemy"]]
-scale = Vector2(1.5, 1.5)
-collision_layer = 8
-collision_mask = 7
-script = ExtResource("1_qupug")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.666667, 1)
-shape = SubResource("RectangleShape2D_md0e3")
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-position = Vector2(-7.15256e-07, -7.15256e-07)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_xx6g3")
-autoplay = "default"
-flip_h = true
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 24
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-0.666667, 1)
-shape = SubResource("CircleShape2D_o2iik")
-
-[node name="Death" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_o2iik")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.2, 0.2)
+animation = &"enemy3"
+autoplay = "enemy3"

@@ -1,61 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dau2bk1ksg4mx"]
+[gd_scene load_steps=2 format=3 uid="uid://cwl575ud7sbu0"]
 
-[ext_resource type="Script" uid="uid://cr1jhrypcpxj3" path="res://scripts/enemy5.gd" id="1_yw1p2"]
-[ext_resource type="Texture2D" uid="uid://dhi2rpqkh38rc" path="res://sprites/enemy5.png" id="2_yw1p2"]
-[ext_resource type="AudioStream" uid="uid://crj5i5mnnde5p" path="res://audios/enemydeath.wav" id="3_mgl14"]
+[ext_resource type="PackedScene" uid="uid://dau2bk1ksg4mx" path="res://scenes/enemy.tscn" id="1_thk3i"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(13.3333, 6.66667)
+[node name="enemy" instance=ExtResource("1_thk3i")]
+speed = 200.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mgl14"]
-atlas = ExtResource("2_yw1p2")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t7wyn"]
-atlas = ExtResource("2_yw1p2")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xx6g3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mgl14")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t7wyn")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mgl14"]
-radius = 7.7999997
-
-[node name="enemy5" type="CharacterBody2D" groups=["enemy"]]
-scale = Vector2(5, 5)
-collision_layer = 8
-collision_mask = 7
-script = ExtResource("1_yw1p2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_md0e3")
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-position = Vector2(-7.15256e-07, -7.15256e-07)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_xx6g3")
-autoplay = "default"
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 24
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_mgl14")
-
-[node name="Death" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_mgl14")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="Sprite2D" parent="." index="1"]
+animation = &"enemy5"
+autoplay = "enemy5"
+flip_h = true
