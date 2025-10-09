@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dteruq8yhjet2"]
+[gd_scene load_steps=8 format=3 uid="uid://dteruq8yhjet2"]
 
 [ext_resource type="Script" uid="uid://nq23uh7e7byf" path="res://scripts/mainmenu.gd" id="1_r3g3c"]
 [ext_resource type="Texture2D" uid="uid://ccbyfigxbpvu7" path="res://sprites/mainmenu.png" id="2_s5g8n"]
 [ext_resource type="FontFile" uid="uid://c1eso82bi36so" path="res://font/Splashextrabold-5y4v.ttf" id="3_s5g8n"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_7yvfd"]
 [ext_resource type="AudioStream" uid="uid://d1ikbolma4dm7" path="res://audios/Into the Abyss(Main Menu).mp3" id="5_7yvfd"]
+[ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="5_dfy5j"]
 [ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu_select.wav" id="6_7yvfd"]
 
 [node name="mainmenu" type="Control"]
@@ -45,39 +46,48 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -183.0
-offset_top = 230.0
-offset_right = 185.0
-offset_bottom = 314.0
+offset_left = -925.0
+offset_top = 327.0
+offset_right = -557.0
+offset_bottom = 411.0
 theme_override_fonts/font = ExtResource("4_7yvfd")
 theme_override_font_sizes/font_size = 50
 text = "Start"
+icon = ExtResource("5_dfy5j")
+flat = true
+expand_icon = true
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.501
-offset_left = -183.0
-offset_top = 362.0
-offset_right = 183.848
-offset_bottom = 446.0
+offset_left = -925.0
+offset_top = 459.0
+offset_right = -558.15204
+offset_bottom = 543.0
 theme_override_fonts/font = ExtResource("4_7yvfd")
 theme_override_font_sizes/font_size = 50
 text = "Options"
+icon = ExtResource("5_dfy5j")
+flat = true
+expand_icon = true
 
 [node name="Button3" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.501
-offset_left = -183.0
-offset_top = 489.0
-offset_right = 183.848
-offset_bottom = 573.0
+offset_left = -925.0
+offset_top = 586.0
+offset_right = -558.15204
+offset_bottom = 670.0
 theme_override_fonts/font = ExtResource("4_7yvfd")
 theme_override_font_sizes/font_size = 50
 text = "Exit"
+icon = ExtResource("5_dfy5j")
+flat = true
+expand_icon = true
 
 [node name="Mainmenutheme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_7yvfd")
