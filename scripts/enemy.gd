@@ -9,7 +9,7 @@ var player: Node2D
 var _is_dying: bool = false
 var flip_threshold: float = 1.0
 
-@onready var art: AnimatedSprite2D = $Sprite2D
+@onready var art: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _hurtbox: Area2D = $Area2D
 @onready var _death_sound: AudioStreamPlayer2D = $Death
 var fallback_sound := preload("res://audios/enemydeath.wav")

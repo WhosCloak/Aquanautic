@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://buk43vvonn5u6"]
+[gd_scene load_steps=7 format=3 uid="uid://buk43vvonn5u6"]
 
 [ext_resource type="Script" uid="uid://bqjgs7hyfgmoh" path="res://scripts/gameover.gd" id="1_ncp31"]
 [ext_resource type="Texture2D" uid="uid://b4ds0bq107oo2" path="res://sprites/gameover.png" id="2_2mkfd"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="3_h8i2o"]
 [ext_resource type="AudioStream" uid="uid://dg5gldpvr1ct1" path="res://audios/gameover.mp3" id="4_h8i2o"]
+[ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="4_qwp2v"]
 [ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu_select.wav" id="5_mt7yr"]
 
 [node name="gameover" type="Control"]
@@ -24,39 +25,50 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 60.0
-offset_right = 1923.0
-offset_bottom = 456.0
+offset_top = 53.0
+offset_right = 1920.0
+offset_bottom = 187.0
 theme_override_fonts/font = ExtResource("3_h8i2o")
 theme_override_font_sizes/font_size = 100
-text = "GAME OVER
-PRESS ESC TO QUIT
-"
+text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 474.0
+offset_top = 157.0
 offset_right = 1917.0
-offset_bottom = 604.0
+offset_bottom = 291.0
 theme_override_fonts/font = ExtResource("3_h8i2o")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 75
 text = "Highest Score : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 920.0
+offset_right = 1917.0
+offset_bottom = 1054.0
+theme_override_fonts/font = ExtResource("3_h8i2o")
+theme_override_font_sizes/font_size = 75
+text = "Or Press ESC to quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 739.0
-offset_top = 725.0
+offset_top = 809.0
 offset_right = 1162.0
-offset_bottom = 836.0
+offset_bottom = 920.0
 theme_override_fonts/font = ExtResource("3_h8i2o")
 theme_override_font_sizes/font_size = 50
 text = "TRY AGAIN"
+icon = ExtResource("4_qwp2v")
+expand_icon = true
 
 [node name="Gameovertheme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_h8i2o")

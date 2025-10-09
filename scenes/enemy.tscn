@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://dau2bk1ksg4mx"]
+[gd_scene load_steps=28 format=3 uid="uid://dau2bk1ksg4mx"]
 
 [ext_resource type="Script" uid="uid://cr1jhrypcpxj3" path="res://scripts/enemy.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://c2s6gvmly86en" path="res://sprites/enemy1.png" id="2_5uy6h"]
+[ext_resource type="Shader" uid="uid://wv08im4h25hu" path="res://scenes/enemy.gdshader" id="2_md484"]
 [ext_resource type="AudioStream" uid="uid://crj5i5mnnde5p" path="res://audios/enemydeath.wav" id="3_c4w8v"]
 [ext_resource type="Texture2D" uid="uid://vhawfygqay17" path="res://sprites/enemy2.png" id="3_nenq2"]
 [ext_resource type="Texture2D" uid="uid://dyi5s5fkcw3xi" path="res://sprites/enemy3.png" id="3_xwavj"]
@@ -10,6 +11,11 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
 radius = 2.3999999
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipns3"]
+shader = ExtResource("2_md484")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
 atlas = ExtResource("2_5uy6h")
@@ -156,12 +162,13 @@ script = ExtResource("1_4ra3w")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_md0e3")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_ipns3")
 position = Vector2(-7.15256e-07, -7.15256e-07)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_md0e3")
-animation = &"enemy2"
+animation = &"enemy1"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 24

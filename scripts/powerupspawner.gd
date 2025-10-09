@@ -6,7 +6,7 @@ var multishot = preload("res://scenes/multishot.tscn")
 
 # Spawn tuning 
 var spawn_distance = 500 # how far from the player to spawn
-var spawn_interval = 0.8 # seconds between spawns
+var spawn_interval = 15 # seconds between spawns
 var timer := 0.0 # counts up to spawn_interval
 var player: Node2D # cached player refrence
 

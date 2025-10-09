@@ -7,7 +7,7 @@ var enemy_scene_4 = preload("res://scenes/enemy4.tscn")
 var enemy_scene_5 = preload("res://scenes/enemy5.tscn")
 
 var spawn_distance = 500 
-var spawn_interval = 0.8
+var spawn_interval = 1
 var timer := 0.0
 var player: Node2D 
 
