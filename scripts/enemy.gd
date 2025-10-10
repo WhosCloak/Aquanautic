@@ -8,6 +8,7 @@ class_name EnemyBase
 var player: Node2D
 var _is_dying: bool = false
 var flip_threshold: float = 1.0
+var flash_duration := 0.1
 
 @onready var art: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _hurtbox: Area2D = $Area2D
@@ -16,6 +17,8 @@ var fallback_sound := preload("res://audios/enemydeath.wav")
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
+	_duplicate_materials_recursive(self)
+	
 
 func _physics_process(_delta: float) -> void:
 	if player and not _is_dying:
@@ -32,17 +35,47 @@ func _update_art_facing() -> void:
 	art.rotation = 0.0
 
 func take_damage(_amount: int = 1) -> void:
+	await flash_hit()
+	await get_tree().create_timer(flash_duration).timeout
 	die()
+
+func flash_hit() -> void:
+	var affected_nodes = _get_flashable_nodes(self)
+	for node in affected_nodes:
+		var mat: ShaderMaterial =  node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 1.0)
+
+	await get_tree().create_timer(0.1).timeout
+
+	for node in affected_nodes:
+		var mat: ShaderMaterial =  node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 0.0)
+
+func _get_flashable_nodes(root: Node) -> Array:
+	var nodes := []
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			nodes.append(child)
+		nodes += _get_flashable_nodes(child) # recursive
+	return nodes
+
+func _duplicate_materials_recursive(root: Node) -> void:
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			child.material = child.material.duplicate()
+		_duplicate_materials_recursive(child)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if _is_dying:
 		return
 	if body.is_in_group("player"):
 		if body.has_method("take_damage"):
-			if has_method("take_damage"):
-				take_damage(1)
-			else:
-				die()
+			body.take_damage(damage)
+			await flash_hit()
+			await get_tree().create_timer(flash_duration).timeout
+			die()
 
 func die():
 	if _is_dying:

@@ -162,6 +162,7 @@ volume_db = -7.0
 [node name="HighScore" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, 3)
 stream = ExtResource("4_fjrip")
+volume_db = -10.0
 
 [node name="BubbleTrail" type="GPUParticles2D" parent="."]
 position = Vector2(-18, 3)

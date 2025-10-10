@@ -8,8 +8,8 @@ func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy"):
 		if body.is_in_group("shielded_enemy") and body.has_method("take_damage"):
 			body.take_damage()
-		elif body.has_method("die"):
-			body.die()
+		elif body.has_method("take_damage"):
+			body.take_damage(1)
 		queue_free()
 	elif body.is_in_group("boss"):
 		if body.has_method("apply_damage"):

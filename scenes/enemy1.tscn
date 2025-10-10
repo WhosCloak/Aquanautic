@@ -6,4 +6,7 @@
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.08, 0.08)
-animation = &"enemy1"
+autoplay = "enemy1"
+
+[node name="Death" parent="." index="3"]
+volume_db = -10.0

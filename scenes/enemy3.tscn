@@ -4,7 +4,7 @@
 
 [node name="enemy" instance=ExtResource("1_jwwc6")]
 
-[node name="Sprite2D" parent="." index="1"]
-scale = Vector2(0.2, 0.2)
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(0.18, 0.18)
 animation = &"enemy3"
 autoplay = "enemy3"
