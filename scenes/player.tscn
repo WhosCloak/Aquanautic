@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=35 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://desvr2v3k785w" path="res://sprites/player_swimming.png" id="2_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://c3f4ol47x30d2" path="res://sprites/StunEffect.png" id="3_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://brsvr27fldspt" path="res://audios/harpoon_shot.mp3" id="3_fjrip"]
 [ext_resource type="Texture2D" uid="uid://spae466slxs6" path="res://sprites/harpoongun.png" id="3_y4r1p"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
@@ -72,6 +73,35 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+atlas = ExtResource("3_3v2ag")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
+atlas = ExtResource("3_3v2ag")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
+atlas = ExtResource("3_3v2ag")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qfm1y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ej7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oprun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ls1")
+}],
+"loop": true,
+"name": &"stun_flash",
+"speed": 15.0
+}]
+
 [sub_resource type="Gradient" id="Gradient_ur7pv"]
 offsets = PackedFloat32Array(0.109091, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.784314)
@@ -133,9 +163,20 @@ shape = SubResource("CircleShape2D_tuyoq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-2.7083676, -1.0000004)
 rotation = -1.5707964
+scale = Vector2(0.7360732, 0.7929015)
 sprite_frames = SubResource("SpriteFrames_f1ej7")
 animation = &"playerswim"
+frame_progress = 0.7786909
+
+[node name="StunEffect" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1, -1.9073486e-06)
+scale = Vector2(0.59375, 0.578125)
+sprite_frames = SubResource("SpriteFrames_qfm1y")
+animation = &"stun_flash"
+frame_progress = 0.17726101
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_enabled = false

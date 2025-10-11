@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bshfto7hp6td"]
+[gd_scene load_steps=3 format=3 uid="uid://bshfto7hp6td"]
 
 [ext_resource type="PackedScene" uid="uid://dau2bk1ksg4mx" path="res://scenes/enemy.tscn" id="1_jwwc6"]
+[ext_resource type="Script" uid="uid://baec6ihdp53ml" path="res://scripts/Jellyfish.gd" id="2_qupug"]
 
-[node name="enemy" instance=ExtResource("1_jwwc6")]
+[node name="Jellyfish" instance=ExtResource("1_jwwc6")]
+script = ExtResource("2_qupug")
+can_stun = true
+stun_duration = 1.5
+stun_cooldown = 2.0
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.18, 0.18)

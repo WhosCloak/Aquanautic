@@ -9,8 +9,7 @@ var score = Global.player_score  # Score is mirrored to a global for persistance
 var max_health := 3
 var health := max_health
 var multi_shot := false
-
-
+var _is_stunned: bool = false
 # Audio assets
 var harpoonsound = preload("res://audios/harpoon_shot.mp3")
 var highscore = preload("res://audios/high-score.mp3")
@@ -48,6 +47,8 @@ func _ready():
 
 #Basic Movement and animation
 func _physics_process(_delta):
+	if _is_stunned:
+		return
 	# Read movements input and move
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	velocity = input_vector.normalized() * speed
@@ -87,6 +88,37 @@ func _physics_process(_delta):
 		bubble_mat.initial_velocity_min = 20.0 + spd * 0.02
 		bubble_mat.initial_velocity_max = 40.0 + spd * 0.05
 		bubbles.amount = int(clamp(base_amount + spd * 0.6, base_amount, max_amount))
+
+func stun(duration: float)-> void:
+	if _is_stunned:
+		return
+	_is_stunned = true
+	velocity = Vector2.ZERO
+	print("Player stunned!")
+
+# Play the stun overlay animation
+	if $StunEffect:
+		$StunEffect.visible = true
+		$StunEffect.play("stun_flash")
+	
+# Wait for stun duration
+	await get_tree().create_timer(duration).timeout
+	
+	if $StunEffect:
+		$StunEffect.visible = false
+		$StunEffect.stop()
+
+# Recover from stun
+	_is_stunned = false
+	print("Player recovered")
+	
+# Return to normal swimming animation if moving 
+	if $AnimatedSprite2D:
+		if Input.get_vector("left", "right", "up", "down").length() > 0:
+			$AnimatedSprite2D.play("playerswim")
+		else:
+			$AnimatedSprite2D.pause()
+
 
 # Bubble trial set up
 func _enter_tree() -> void:
