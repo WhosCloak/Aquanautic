@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=37 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
 [ext_resource type="Texture2D" uid="uid://desvr2v3k785w" path="res://sprites/player_swimming.png" id="2_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://c3f4ol47x30d2" path="res://sprites/StunEffect.png" id="3_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://brsvr27fldspt" path="res://audios/harpoon_shot.mp3" id="3_fjrip"]
@@ -15,6 +16,11 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 22.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1ej7"]
+shader = ExtResource("2_jej6c")
+shader_parameter/flash_strength = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("2_tuyoq")
@@ -163,6 +169,7 @@ shape = SubResource("CircleShape2D_tuyoq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_f1ej7")
 position = Vector2(-2.7083676, -1.0000004)
 rotation = -1.5707964
 scale = Vector2(0.7360732, 0.7929015)
@@ -186,7 +193,7 @@ limit_right = 576
 limit_bottom = 324
 position_smoothing_speed = 10.0
 
-[node name="Muzzle" type="Sprite2D" parent="."]
+[node name="gun" type="Sprite2D" parent="."]
 position = Vector2(9, 1)
 scale = Vector2(1.03125, 1)
 texture = ExtResource("3_y4r1p")
@@ -206,7 +213,8 @@ stream = ExtResource("4_fjrip")
 volume_db = -10.0
 
 [node name="BubbleTrail" type="GPUParticles2D" parent="."]
-position = Vector2(-18, 3)
+position = Vector2(-9.255, 10.495)
+rotation = 1.5707964
 amount = 80
 texture = ExtResource("8_smehm")
 lifetime = 1.6

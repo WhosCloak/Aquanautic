@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cr1jhrypcpxj3" path="res://scripts/enemy.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://c2s6gvmly86en" path="res://sprites/enemy1.png" id="2_5uy6h"]
-[ext_resource type="Shader" uid="uid://wv08im4h25hu" path="res://shaders/enemy.gdshader" id="2_md484"]
+[ext_resource type="Shader" uid="uid://wv08im4h25hu" path="res://shaders/enemyhitflash.gdshader" id="2_md484"]
 [ext_resource type="AudioStream" uid="uid://crj5i5mnnde5p" path="res://audios/enemydeath.wav" id="3_c4w8v"]
 [ext_resource type="Texture2D" uid="uid://vhawfygqay17" path="res://sprites/enemy2.png" id="3_nenq2"]
 [ext_resource type="Texture2D" uid="uid://dyi5s5fkcw3xi" path="res://sprites/enemy3.png" id="3_xwavj"]

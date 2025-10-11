@@ -10,6 +10,7 @@ var max_health := 3
 var health := max_health
 var multi_shot := false
 var _is_stunned: bool = false
+var flash_duration := 0.1
 # Audio assets
 var harpoonsound = preload("res://audios/harpoon_shot.mp3")
 var highscore = preload("res://audios/high-score.mp3")
@@ -27,7 +28,7 @@ var  _current_boss: Node = null
 @onready var boss_name: Label = $CanvasLayer/BossHUD/HBoxContainer/BossName
 @onready var boss_bar: Range = $CanvasLayer/BossHUD/HBoxContainer/BossBar
 @onready var cam := $Camera2D # gameplay camera
-@onready var muzzle = $Muzzle # spawn point for harpoons
+@onready var gun = $gun # spawn point for harpoons
 @onready var score_label = $CanvasLayer/Score/Label
 @onready var bubbles: GPUParticles2D = $BubbleTrail
 @onready var hearts := [   #heart sprites in the HUD
@@ -42,6 +43,7 @@ func _ready():
 	cam.zoom = Vector2(3.5, 3.5)
 	update_hearts()
 	cam.set_process(true)
+	_duplicate_materials_recursive(self)
 	if boss_hud:
 		boss_hud.visible = false
 
@@ -54,7 +56,7 @@ func _physics_process(_delta):
 	velocity = input_vector.normalized() * speed
 	move_and_slide()
 	# Face the mouse when aiming 
-	muzzle.look_at(get_global_mouse_position())
+	gun.look_at(get_global_mouse_position())
 	# Fire on click mapped to "fire"
 	if Input.is_action_just_pressed("fire"):
 		fire()
@@ -142,7 +144,7 @@ func _enter_tree() -> void:
 # Firing Harpoon
 func fire():
 	$Harpoon.play()
-	var fire_pos = muzzle.global_position
+	var fire_pos = gun.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
 	
 	if multi_shot:
@@ -183,6 +185,8 @@ func add_score(amount: int = 1) -> void:
 # Health,damage,healing
 func take_damage(amount: int):
 	# Reduce health, refresh hearts, play hit sound
+	await flash_hit()
+	await get_tree().create_timer(flash_duration).timeout
 	health -= amount
 	update_hearts()
 	$DamageTaken.play()
@@ -191,7 +195,35 @@ func take_damage(amount: int):
 		if score > Global.high_score:
 			Global.high_score = score
 		die()
-		
+
+func flash_hit() -> void:
+	var affected_nodes = _get_flashable_nodes(self)
+	for node in affected_nodes:
+		var mat: ShaderMaterial =  node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 1.0)
+
+	await get_tree().create_timer(0.1).timeout
+
+	for node in affected_nodes:
+		var mat: ShaderMaterial =  node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 0.0)
+
+func _get_flashable_nodes(root: Node) -> Array:
+	var nodes := []
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			nodes.append(child)
+		nodes += _get_flashable_nodes(child) # recursive
+	return nodes
+
+func _duplicate_materials_recursive(root: Node) -> void:
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			child.material = child.material.duplicate()
+		_duplicate_materials_recursive(child)
+
 #Heal HP
 func heal(amount: int):
 	# Clamp heal to max and refresh hearts
