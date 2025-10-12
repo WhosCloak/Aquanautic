@@ -1,0 +1,155 @@
+[gd_scene load_steps=22 format=3 uid="uid://dyl0m1i0mkqby"]
+
+[ext_resource type="Script" uid="uid://b758rg6ec4h3h" path="res://scripts/CrabBoss.gd" id="1_yc35l"]
+[ext_resource type="Texture2D" uid="uid://c7u5h0soix5b6" path="res://sprites/Crab_boss_walk.png" id="2_2h2no"]
+[ext_resource type="Texture2D" uid="uid://wodb2a8pf28e" path="res://sprites/Crab_boss_block.png" id="3_bl4x5"]
+[ext_resource type="Texture2D" uid="uid://b5aqe03l8dlmy" path="res://sprites/Crab_boss_throw_coins.png" id="4_yc35l"]
+[ext_resource type="Texture2D" uid="uid://cyycfnw3nlk8o" path="res://sprites/Crab_boss_slam.png" id="5_yc35l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrto6"]
+atlas = ExtResource("2_2h2no")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bl4x5"]
+atlas = ExtResource("2_2h2no")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc35l"]
+atlas = ExtResource("2_2h2no")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqel8"]
+atlas = ExtResource("3_bl4x5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45qh1"]
+atlas = ExtResource("3_bl4x5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ueqgw"]
+atlas = ExtResource("3_bl4x5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee0xn"]
+atlas = ExtResource("4_yc35l")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47hxn"]
+atlas = ExtResource("4_yc35l")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fl5u"]
+atlas = ExtResource("4_yc35l")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ts4q"]
+atlas = ExtResource("5_yc35l")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epp4m"]
+atlas = ExtResource("5_yc35l")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6oc6"]
+atlas = ExtResource("5_yc35l")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x7ps"]
+atlas = ExtResource("5_yc35l")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4360"]
+atlas = ExtResource("5_yc35l")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4rt2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrto6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bl4x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc35l")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqel8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45qh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ueqgw")
+}],
+"loop": true,
+"name": &"block",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee0xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47hxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fl5u")
+}],
+"loop": true,
+"name": &"cointoss",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ts4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epp4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6oc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x7ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4360")
+}],
+"loop": true,
+"name": &"slam",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_51lx6"]
+radius = 12.0
+height = 66.0
+
+[node name="CrabBoss" type="Node2D" groups=["boss"]]
+scale = Vector2(3, 3)
+script = ExtResource("1_yc35l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g4rt2")
+animation = &"Walk"
+frame_progress = 0.47226655
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(2, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_51lx6")
+
+[node name="CoinMuzzle" type="Marker2D" parent="."]
+position = Vector2(19.666668, 10.666668)
+
+[node name="AttackTimer" type="Timer" parent="."]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbeyyet5yg6ey"]
+
+[ext_resource type="Script" uid="uid://bjk1ke5xyi0d5" path="res://scripts/gold_coin_projectile.gd" id="1_414t0"]
+[ext_resource type="Texture2D" uid="uid://do2apgeyhla40" path="res://sprites/gold_coin.png" id="1_rgbnn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_414t0"]
+atlas = ExtResource("1_rgbnn")
+region = Rect2(0, 0, 20, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g30ar"]
+atlas = ExtResource("1_rgbnn")
+region = Rect2(20, 0, 20, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gx6c"]
+atlas = ExtResource("1_rgbnn")
+region = Rect2(40, 0, 20, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gnyl"]
+atlas = ExtResource("1_rgbnn")
+region = Rect2(60, 0, 20, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odhv7"]
+atlas = ExtResource("1_rgbnn")
+region = Rect2(80, 0, 20, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njbn6"]
+atlas = ExtResource("1_rgbnn")
+region = Rect2(104, 0, 20, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rcwc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_414t0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g30ar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gx6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gnyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odhv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njbn6")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_04v0a"]
+
+[node name="GoldCoinProjectile" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_414t0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2rcwc")
+animation = &"spin"
+frame_progress = 0.95767957
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_04v0a")
+
+[node name="LifeTimer" type="Timer" parent="."]

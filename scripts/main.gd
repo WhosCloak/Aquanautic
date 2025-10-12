@@ -34,21 +34,24 @@ func _process(_delta: float) -> void:
 		check_next_level()
 
 func check_next_level() -> void:
-	# Level 1, when score hits 20 and no gate yet, spawn the boss portal
-	if level_reached == 1 and Global.player_score >= 20 and not gate_spawned:
+	# Level 1: when score hits 20 and no gate yet, spawn the boss portal
+	if level_reached == 1 and Global.player_score >= 2 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
-	#After boss 1 is done, these handle later level transitions by score
-	elif level_reached == 2 and Global.player_score >= 40:
+
+	# After boss 1, fade to Level 2
+	elif level_reached == 2 and Global.player_score >= 4:
 		Fade.transition()
 		await Fade.on_transition_finished
 		go_to_level_3()
 		level_reached = 3
-	elif level_reached == 3 and Global.player_score >= 60:
-		Fade.transition()
-		await Fade.on_transition_finished
-		go_to_level_4()
-		level_reached = 4
+		gate_spawned = false  # Reset flag so new gate can spawn later
+
+	# Level 3: when score hits 60, spawn a new gate (same WhirlpoolGate scene)
+	elif level_reached == 3 and Global.player_score >= 6 and not gate_spawned:
+		_spawn_boss_gate_near_player()
+		gate_spawned = true
+
 		
 func _spawn_boss_gate_near_player() -> void:
 	# Find the player by group and place the portal a bit to the right 
@@ -65,25 +68,31 @@ func _spawn_boss_gate_near_player() -> void:
 	else:
 		add_child(gate_instance)
 		
-func _on_gate_entered() -> void: 
-	# Mark that we are entering a boss, stop spawning, and clear leftovers
+func _on_gate_entered() -> void:
 	in_boss = true
 	_stop_all_spawners_in_tree()
 	_purge_enemies()
-	
-	# Remove the portal once used 
+
 	if is_instance_valid(gate_instance):
 		gate_instance.queue_free()
-		
-	# Fade, then load the boss level
+
 	Fade.transition()
 	await Fade.on_transition_finished
-	_go_to_boss_for_level(1)
+
+	if level_reached == 1:
+		_go_to_boss_for_level(1)
+	elif level_reached == 3:
+		_go_to_boss_for_level(3)
 	
-func _go_to_boss_for_level(_idx: int) -> void:
-	# Load the boss scene for the current level
-	load_level(boss_1_scene)
-	# Make sure spawners are stopped and any stragglers are cleared
+func _go_to_boss_for_level(idx: int) -> void:
+	var boss_scene_path := ""
+	match idx:
+		1:
+			boss_scene_path = boss_1_scene
+		3:
+			boss_scene_path = "res://scenes/Level_3_Boss.tscn" # or whatever your boss 3 file is named
+
+	load_level(boss_scene_path)
 	_stop_all_spawners_in_tree()
 	_purge_enemies()
 	

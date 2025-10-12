@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6gx1p1cb4cae"]
+
+[ext_resource type="Texture2D" uid="uid://cgqviltciptbu" path="res://sprites/ice_sparkles.png" id="1_ot5vh"]
+[ext_resource type="Script" uid="uid://cenicwqv6xvbu" path="res://scripts/CoinSparkle.gd" id="2_2b2ef"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b2ef"]
+atlas = ExtResource("1_ot5vh")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6br6"]
+atlas = ExtResource("1_ot5vh")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccemk"]
+atlas = ExtResource("1_ot5vh")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh008"]
+atlas = ExtResource("1_ot5vh")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq641"]
+atlas = ExtResource("1_ot5vh")
+region = Rect2(192, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g3l4r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b2ef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6br6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccemk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oh008")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq641")
+}],
+"loop": false,
+"name": &"sparkle",
+"speed": 8.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_g3l4r")
+animation = &"sparkle"
+autoplay = "sparkle"
+frame = 4
+frame_progress = 1.0
+script = ExtResource("2_2b2ef")

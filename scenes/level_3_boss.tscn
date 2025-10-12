@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://xg6maj4jmyt2"]
+
+[ext_resource type="Script" uid="uid://deev88elhti5a" path="res://scripts/level_3_boss.gd" id="1_1m6vk"]
+[ext_resource type="Texture2D" uid="uid://cuviu4068s003" path="res://sprites/CrabBossLevel.png" id="2_yx4p4"]
+[ext_resource type="PackedScene" uid="uid://dyl0m1i0mkqby" path="res://scenes/crab_boss.tscn" id="3_1m6vk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
+size = Vector2(1154, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obacn"]
+size = Vector2(1200, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rb64a"]
+size = Vector2(20, 672)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41ab6"]
+size = Vector2(20, 666)
+
+[node name="Level_3_Boss" type="Node2D"]
+script = ExtResource("1_1m6vk")
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_yx4p4")
+
+[node name="ArenaWalls" type="StaticBody2D" parent="." groups=["ground"]]
+collision_mask = 3
+
+[node name="Top" type="CollisionShape2D" parent="ArenaWalls"]
+position = Vector2(0, -315)
+shape = SubResource("RectangleShape2D_rppgv")
+
+[node name="Bottom" type="CollisionShape2D" parent="ArenaWalls"]
+position = Vector2(-6, 315)
+shape = SubResource("RectangleShape2D_obacn")
+
+[node name="Left" type="CollisionShape2D" parent="ArenaWalls"]
+position = Vector2(-566, 6)
+shape = SubResource("RectangleShape2D_rb64a")
+
+[node name="Right" type="CollisionShape2D" parent="ArenaWalls"]
+position = Vector2(565, 7)
+shape = SubResource("RectangleShape2D_41ab6")
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 105)
+
+[node name="CrabSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 225)
+scale = Vector2(1.5, 1.5)
+
+[node name="CrabBoss" parent="CrabSpawn" instance=ExtResource("3_1m6vk")]
+position = Vector2(0, -30)
+path_a_path = NodePath("../../PathA")
+path_b_path = NodePath("../../PathB")
+
+[node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, 189)
+volume_db = -14.136
+
+[node name="PathA" type="Marker2D" parent="."]
+position = Vector2(-383, 165)
+
+[node name="PathB" type="Marker2D" parent="."]
+position = Vector2(419, 165)
