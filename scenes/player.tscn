@@ -201,6 +201,16 @@ scale = Vector2(1.03125, 1)
 texture = ExtResource("3_y4r1p")
 offset = Vector2(15.515152, 4)
 
+[node name="BubbleTrail" type="GPUParticles2D" parent="."]
+position = Vector2(-9.255, 10.495)
+rotation = 1.5707964
+amount = 80
+texture = ExtResource("8_smehm")
+lifetime = 1.6
+speed_scale = 0.7
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_jej6c")
+
 [node name="Harpoon" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_fjrip")
 volume_db = -7.0
@@ -213,16 +223,6 @@ volume_db = -7.0
 position = Vector2(0, 3)
 stream = ExtResource("4_fjrip")
 volume_db = -10.0
-
-[node name="BubbleTrail" type="GPUParticles2D" parent="."]
-position = Vector2(-9.255, 10.495)
-rotation = 1.5707964
-amount = 80
-texture = ExtResource("8_smehm")
-lifetime = 1.6
-speed_scale = 0.7
-randomness = 0.3
-process_material = SubResource("ParticleProcessMaterial_jej6c")
 
 [node name="InteractionAgent" parent="." instance=ExtResource("11_d2wvv")]
 
@@ -272,28 +272,28 @@ grow_vertical = 2
 
 [node name="Heart1" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 1007.0
-offset_right = 199.0
-offset_bottom = 1166.0001
+offset_left = 44.0
+offset_top = 1007.701
+offset_right = 203.0
+offset_bottom = 1166.7012
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_smehm")
 
 [node name="Heart2" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 140.94223
-offset_top = 1007.701
-offset_right = 299.94226
-offset_bottom = 1166.701
+offset_left = 135.94223
+offset_top = 1007.7009
+offset_right = 294.94226
+offset_bottom = 1166.7009
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_smehm")
 
 [node name="Heart3" type="TextureRect" parent="CanvasLayer/Hearts"]
 layout_mode = 0
-offset_left = 222.98724
-offset_top = 1008.2059
-offset_right = 381.9872
-offset_bottom = 1167.2057
+offset_left = 222.987
+offset_top = 1007.701
+offset_right = 381.98697
+offset_bottom = 1166.7008
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_smehm")
 
