@@ -24,9 +24,7 @@ Fade="*res://scenes/fade.tscn"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-mouse_cursor/custom_image="uid://yb84nwlwpv4i"
+window/stretch/mode="canvas_items"
 
 [file_customization]
 
