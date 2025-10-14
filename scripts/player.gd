@@ -187,7 +187,6 @@ func take_damage(amount: int):
 	# Reduce health, refresh hearts, play hit sound
 	await flash_hit()
 	await get_tree().create_timer(flash_duration).timeout
-	cam.apply_shake()
 	health -= amount
 	update_hearts()
 	$DamageTaken.play()
