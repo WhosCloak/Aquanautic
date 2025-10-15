@@ -138,7 +138,9 @@ script = ExtResource("1_yc35l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g4rt2")
-animation = &"slam"
+animation = &"cointoss"
+frame = 2
+frame_progress = 0.5752706
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 255
@@ -150,7 +152,7 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_51lx6")
 
 [node name="CoinMuzzle" type="Marker2D" parent="."]
-position = Vector2(19.666668, 10.666668)
+position = Vector2(-22.333332, -22.666668)
 
 [node name="AttackTimer" type="Timer" parent="."]
 

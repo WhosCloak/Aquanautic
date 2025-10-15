@@ -1,8 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqcrs1wjn08e6"]
+[gd_scene load_steps=14 format=3 uid="uid://bqcrs1wjn08e6"]
 
-[ext_resource type="Script" uid="uid://km08l7bi0a4n" path="res://scenes/RockBoulder.gd" id="1_g2uuj"]
-[ext_resource type="Texture2D" uid="uid://gp015r4k83of" path="res://sprites/rockfall1.png" id="2_l51j6"]
+[ext_resource type="Script" uid="uid://km08l7bi0a4n" path="res://scripts/RockBoulder.gd" id="1_g2uuj"]
+[ext_resource type="Texture2D" uid="uid://bquwwbjevc3im" path="res://sprites/rockfall1.png" id="2_l51j6"]
+[ext_resource type="Texture2D" uid="uid://cip0bbejbpgcw" path="res://sprites/rockfall1-explode-Sheet.png" id="2_qlwk5"]
 [ext_resource type="AudioStream" uid="uid://du5o0d0ai3c3h" path="res://audios/rock fall.mp3" id="3_l51j6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04sk5"]
+atlas = ExtResource("2_qlwk5")
+region = Rect2(0, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnfs4"]
+atlas = ExtResource("2_qlwk5")
+region = Rect2(80, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhhnw"]
+atlas = ExtResource("2_qlwk5")
+region = Rect2(160, 0, 80, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlwk5"]
 atlas = ExtResource("2_l51j6")
@@ -18,6 +31,20 @@ region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c3gww"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04sk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnfs4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhhnw")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 3.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlwk5")
@@ -49,11 +76,10 @@ linear_damp = 2.0
 script = ExtResource("1_g2uuj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_c3gww")
-animation = &"normal"
+animation = &"explode"
 autoplay = "normal"
-frame_progress = 0.18407342
+frame_progress = 0.4677781
 flip_v = true
 
 [node name="Area2D" type="Area2D" parent="."]
