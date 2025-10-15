@@ -90,7 +90,7 @@ func _go_to_boss_for_level(idx: int) -> void:
 		1:
 			boss_scene_path = boss_1_scene
 		3:
-			boss_scene_path = "res://scenes/Level_3_Boss.tscn" # or whatever your boss 3 file is named
+			boss_scene_path = "res://scenes/Level_3_Boss.tscn" # 🦀 Crab Boss scene
 
 	load_level(boss_scene_path)
 	_stop_all_spawners_in_tree()
@@ -104,16 +104,21 @@ func _go_to_boss_for_level(idx: int) -> void:
 	var spawn := current_level.find_child("PlayerSpawn", true, false)
 	if player and spawn:
 		player.global_position = spawn.global_position
-	# Hook the boss death signal so we can advance after the fight 
+
+	# 🧩 Boss connection setup (NEW)
 	var boss := current_level.find_child("WhaleBoss", true, false)
+	if not boss:
+		boss = current_level.find_child("CrabBoss", true, false) # 🦀 fallback for Level 3
+	
 	if boss:
-		# show the HUD on the player
 		var pname := "Boss"
-		if  "display_name" in boss:
+		if "display_name" in boss:
 			pname = boss.display_name
+
 		if player and player.has_method("boss_ui_show"):
 			player.boss_ui_show(boss, pname)
 			print("[Main] calling boss_ui_show with:", pname)
+
 		boss.died.connect(_on_boss_died)
 
 func _on_boss_died() -> void:

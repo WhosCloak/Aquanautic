@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnoqmjgby1h15"]
+[gd_scene load_steps=9 format=3 uid="uid://bnoqmjgby1h15"]
 
 [ext_resource type="Texture2D" uid="uid://dwltpnyraxevc" path="res://sprites/whirlpool.png" id="1_8nkpi"]
 [ext_resource type="Script" uid="uid://b0k8wklg6r308" path="res://scripts/WhirlpoolGate.gd" id="1_swckb"]
@@ -6,21 +6,28 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_swckb"]
 radius = 24.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_swckb"]
+atlas = ExtResource("1_8nkpi")
+region = Rect2(0, 0, 100, 100)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7qwq"]
 atlas = ExtResource("1_8nkpi")
-region = Rect2(0, 0, 256, 256)
+region = Rect2(100, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vveut"]
 atlas = ExtResource("1_8nkpi")
-region = Rect2(256, 0, 256, 256)
+region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_63414"]
 atlas = ExtResource("1_8nkpi")
-region = Rect2(512, 0, 256, 256)
+region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3qwin"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swckb")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r7qwq")
 }, {
@@ -32,7 +39,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"loop",
-"speed": 12.0
+"speed": 14.0
 }]
 
 [node name="WhirlpoolGate" type="Area2D"]
@@ -48,4 +55,4 @@ light_mask = 1023
 visibility_layer = 991
 sprite_frames = SubResource("SpriteFrames_3qwin")
 animation = &"loop"
-frame_progress = 0.55856705
+frame_progress = 0.74575466
