@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cgfyctat7thqf"
+path="res://.godot/imported/crab ground slam.mp3-0ccc4b39514dfadb7cc4040d0637d8cb.mp3str"
+
+[deps]
+
+source_file="res://audios/crab ground slam.mp3"
+dest_files=["res://.godot/imported/crab ground slam.mp3-0ccc4b39514dfadb7cc4040d0637d8cb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

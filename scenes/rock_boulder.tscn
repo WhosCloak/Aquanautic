@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqcrs1wjn08e6"]
+
+[ext_resource type="Script" uid="uid://km08l7bi0a4n" path="res://scenes/RockBoulder.gd" id="1_g2uuj"]
+[ext_resource type="Texture2D" uid="uid://gp015r4k83of" path="res://sprites/rockfall1.png" id="2_l51j6"]
+[ext_resource type="AudioStream" uid="uid://du5o0d0ai3c3h" path="res://audios/rock fall.mp3" id="3_l51j6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlwk5"]
+atlas = ExtResource("2_l51j6")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6223"]
+atlas = ExtResource("2_l51j6")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7ewu"]
+atlas = ExtResource("2_l51j6")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3gww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlwk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6223")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7ewu")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjkio"]
+radius = 38.013157
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ws4va"]
+radius = 10.049875
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 3
+gravity_scale = 0.3
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp = 2.0
+script = ExtResource("1_g2uuj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_c3gww")
+animation = &"normal"
+autoplay = "normal"
+frame_progress = 0.18407342
+flip_v = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cjkio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_ws4va")
+
+[node name="SlamSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_l51j6")

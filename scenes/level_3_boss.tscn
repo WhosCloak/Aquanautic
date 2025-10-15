@@ -53,6 +53,7 @@ scale = Vector2(1.5, 1.5)
 position = Vector2(0, -30)
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
+rock_drop_markers_path = NodePath("../../RockDropRoot")
 
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, 189)
@@ -63,3 +64,25 @@ position = Vector2(-383, 165)
 
 [node name="PathB" type="Marker2D" parent="."]
 position = Vector2(419, 165)
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="RockDropRoot" type="Node2D" parent="."]
+position = Vector2(-6, -8)
+
+[node name="RockMarker1" type="Marker2D" parent="RockDropRoot"]
+position = Vector2(-408, -248)
+
+[node name="RockMarker2" type="Marker2D" parent="RockDropRoot"]
+position = Vector2(-250, -256)
+
+[node name="RockMarker3" type="Marker2D" parent="RockDropRoot"]
+position = Vector2(6, -216)
+
+[node name="RockMarker4" type="Marker2D" parent="RockDropRoot"]
+position = Vector2(126, -216)
+
+[node name="RockMarker5" type="Marker2D" parent="RockDropRoot"]
+position = Vector2(294, -248)
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

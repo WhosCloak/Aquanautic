@@ -1,6 +1,14 @@
 extends AnimatedSprite2D
 
+@onready var sfx: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+
 func _ready():
-	# Automatically queue_free after the animation finishes
+	# Play sparkle sound
+	var sparkle_sound = preload("res://audios/gold_coin_hit1.mp3")
+	sfx.stream = sparkle_sound
+	add_child(sfx)
+	sfx.play()
+	
+	# Automatically remove after animation
 	await animation_finished
 	queue_free()
