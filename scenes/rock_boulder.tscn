@@ -41,7 +41,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dhhnw")
 }],
-"loop": true,
+"loop": false,
 "name": &"explode",
 "speed": 3.0
 }, {
@@ -79,11 +79,11 @@ script = ExtResource("1_g2uuj")
 sprite_frames = SubResource("SpriteFrames_c3gww")
 animation = &"explode"
 autoplay = "normal"
-frame_progress = 0.4677781
 flip_v = true
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 16
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_cjkio")

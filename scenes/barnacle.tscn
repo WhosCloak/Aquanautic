@@ -48,8 +48,8 @@ radius = 38.013157
 radius = 10.049875
 
 [node name="RigidBody2D" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 17
+collision_layer = 16
+collision_mask = 3
 gravity_scale = 0.3
 contact_monitor = true
 max_contacts_reported = 1
@@ -66,7 +66,8 @@ frame_progress = 1.0
 flip_v = true
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 16
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_cjkio")
