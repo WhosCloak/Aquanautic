@@ -1,73 +1,74 @@
 extends Node2D
 
-# Path to the boss level scene for Level 1
-var boss_1_scene := "res://scenes/Level_1_Boss.tscn" #change for future levels
-# Preloaded portal scene that the player enters to start the boss fight
+# ===============================
+# 🔹 LEVEL MANAGEMENT VARIABLES
+# ===============================
+
+var boss_1_scene := "res://scenes/Level_1_Boss.tscn"
 var gate_scene := preload("res://scenes/WhirlpoolGate.tscn")
 
-#True when the game is currently in a boss encounter
 var in_boss := false
-#True once the portal has been spawned for the current level
 var gate_spawned := false
-# Reference to the spawned portal instance, used so we can free itr later
 var gate_instance: Area2D
 
-# Node that holds the currenrtly loaded level as a child
 @onready var level_root = $LevelRoot
-# Refrence to the current level instance under level_root
 var current_level: Node = null
-# Simple progresssion flag to know which level we have reahced
 var level_reached := 1
 
-func _start_all_spawners_in_tree() -> void:
-	var list := get_tree().get_nodes_in_group("enemy_spawner")
-	for s in list:
-		s.set_process(true)
+
+# ===============================
+# 🔹 READY & PROCESS
+# ===============================
 
 func _ready() -> void:
-	# Start the game on Level 1
 	load_level("res://scenes/levels/Level_1.tscn")
 
+
 func _process(_delta: float) -> void:
-	# While not in a boss fight, keep checking if we should advance or spawn the gate
 	if not in_boss:
 		check_next_level()
 
+
+# ===============================
+# 🔹 LEVEL PROGRESSION LOGIC
+# ===============================
+
 func check_next_level() -> void:
-	# Level 1: when score hits 20 and no gate yet, spawn the boss portal
 	if level_reached == 1 and Global.player_score >= 2 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	# After boss 1, fade to Level 2
 	elif level_reached == 2 and Global.player_score >= 4:
 		Fade.transition()
 		await Fade.on_transition_finished
 		go_to_level_3()
 		level_reached = 3
-		gate_spawned = false  # Reset flag so new gate can spawn later
+		gate_spawned = false
 
-	# Level 3: when score hits 60, spawn a new gate (same WhirlpoolGate scene)
 	elif level_reached == 3 and Global.player_score >= 6 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-		
+
+# ===============================
+# 🔹 BOSS GATE HANDLING
+# ===============================
+
 func _spawn_boss_gate_near_player() -> void:
-	# Find the player by group and place the portal a bit to the right 
 	var player := get_tree().get_first_node_in_group("player")
 	if player == null:
 		return
+
 	gate_instance = gate_scene.instantiate()
-	gate_instance.global_position = player.global_position + Vector2(120 , 0)
-	# Listen for the portals entered signal to begin the boss flow
+	gate_instance.global_position = player.global_position + Vector2(120, 0)
 	gate_instance.entered.connect(_on_gate_entered)
-	# Parent the poretal inside the current level if possible 
+
 	if current_level:
 		current_level.add_child(gate_instance)
 	else:
 		add_child(gate_instance)
-		
+
+
 func _on_gate_entered() -> void:
 	in_boss = true
 	_stop_all_spawners_in_tree()
@@ -83,32 +84,35 @@ func _on_gate_entered() -> void:
 		_go_to_boss_for_level(1)
 	elif level_reached == 3:
 		_go_to_boss_for_level(3)
-	
+
+
+# ===============================
+# 🔹 BOSS LEVEL TRANSITION
+# ===============================
+
 func _go_to_boss_for_level(idx: int) -> void:
 	var boss_scene_path := ""
 	match idx:
 		1:
 			boss_scene_path = boss_1_scene
 		3:
-			boss_scene_path = "res://scenes/Level_3_Boss.tscn" # 🦀 Crab Boss scene
+			boss_scene_path = "res://scenes/Level_3_Boss.tscn"
 
 	load_level(boss_scene_path)
 	_stop_all_spawners_in_tree()
 	_purge_enemies()
-	
+
 	call_deferred("_stop_all_spawners_in_tree")
 	call_deferred("_purge_enemies")
-	
-	# Move the player to the PlayerSpawn marker inside the boss scene
+
 	var player := get_tree().get_first_node_in_group("player")
 	var spawn := current_level.find_child("PlayerSpawn", true, false)
 	if player and spawn:
 		player.global_position = spawn.global_position
 
-	# 🧩 Boss connection setup (NEW)
 	var boss := current_level.find_child("WhaleBoss", true, false)
 	if not boss:
-		boss = current_level.find_child("CrabBoss", true, false) # 🦀 fallback for Level 3
+		boss = current_level.find_child("CrabBoss", true, false)
 	
 	if boss:
 		var pname := "Boss"
@@ -121,74 +125,99 @@ func _go_to_boss_for_level(idx: int) -> void:
 
 		boss.died.connect(_on_boss_died)
 
+
+# ===============================
+# 🔹 BOSS DEFEAT HANDLING
+# ===============================
+
 func _on_boss_died() -> void:
-	# hide HUD
 	var player := get_tree().get_first_node_in_group("player")
 	if player and player.has_method("boss_ui_hide"):
 		player.boss_ui_hide()
 	
-	# After the boss is defeated, fade and advance to Level 2
 	Fade.transition()
 	await Fade.on_transition_finished
 	level_reached = 2
 	in_boss = false
 	gate_spawned = false
 	go_to_level_2()
-	
+
+
+# ===============================
+# 🔹 LEVEL LOADING
+# ===============================
+
 func load_level(path: String) -> void:
-	# Replace the current level under level_root with a new instance from path
 	if current_level and current_level.is_inside_tree():
 		current_level.queue_free()
+
 	var level_scene = load(path)
 	if not level_scene:
 		return
+
 	current_level = level_scene.instantiate()
 	level_root.add_child(current_level)
-	
+
+
+# ===============================
+# 🔹 SPAWNER & ENEMY MANAGEMENT
+# ===============================
+
+func _start_all_spawners_in_tree() -> void:
+	var list := get_tree().get_nodes_in_group("enemy_spawner")
+	for s in list:
+		s.set_process(true)
+
 
 func _stop_all_spawners_in_tree() -> void:
-	# Disable all enemy psawners, requires spawners to be in group "enemy_spawner"
 	var list := get_tree().get_nodes_in_group("enemy_spawner")
 	for s in list:
 		s.set_process(false)
-		
+
+
 func _purge_enemies() -> void:
-	# Remove any live enemies, requires enemies to be in group "enemy"
 	var list := get_tree().get_nodes_in_group("enemy")
 	for e in list:
 		if is_instance_valid(e):
 			e.queue_free()
-		print("[Main] Purged enemies:", list.size())
-		
+	print("[Main] Purged enemies:", list.size())
+
+
+# ===============================
+# 🔹 PLAYER DEATH / RESTART
+# ===============================
+
 func _on_player_death_or_restart():
-# Called when player dies or game is restarting
-	
-# Remove boss portal
 	if is_instance_valid(gate_instance):
 		gate_instance.queue_free()
 		gate_instance = null
 		gate_spawned = false
- # Reset score, others, load Level 1, etc.
+
+
+# ===============================
+# 🔹 LEVEL TRANSITION HELPERS
+# ===============================
 
 func go_to_level_2() -> void:
 	load_level("res://scenes/levels/Level_2.tscn")
 	_start_all_spawners_in_tree()
-	
-	# Reset camera zoom and limits (defer to ensure the player and camera exist)
 	call_deferred("_reset_camera_for_regular_level")
+
 
 func _reset_camera_for_regular_level():
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		var cam = player.get_node_or_null("Camera2D")
 		if cam:
-			cam.zoom = Vector2(3.3, 3.3) # Or whatever fits your regular level window best
-			cam.limit_enabled = false    # Turn limits OFF unless your regular level needs them
+			cam.zoom = Vector2(3.3, 3.3)
+			cam.limit_enabled = false
+
 
 func go_to_level_3() -> void:
 	load_level("res://scenes/levels/Level_3.tscn")
 	_start_all_spawners_in_tree()
-	
+
+
 func go_to_level_4() -> void:
 	load_level("res://scenes/levels/level_4.tscn")
 	_start_all_spawners_in_tree()

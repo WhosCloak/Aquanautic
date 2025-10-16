@@ -43,6 +43,8 @@ var _current_boss: Node = null
 @onready var gun = $gun
 @onready var score_label = $CanvasLayer/Score/Label
 @onready var bubbles: GPUParticles2D = $BubbleTrail
+@onready var cooldowntimer: Timer = $cooldowntimer
+@onready var cooldownbar: ProgressBar = $CanvasLayer/cooldown/cooldownbar
 @onready var hearts := [
 	$CanvasLayer/Hearts/Heart1,
 	$CanvasLayer/Hearts/Heart2,
@@ -66,6 +68,10 @@ func _ready():
 	# Hide boss HUD at start
 	if boss_hud:
 		boss_hud.visible = false
+		
+	# Cooldown Progress Bar
+	cooldownbar.max_value = cooldowntimer.wait_time
+	cooldownbar.value = cooldowntimer.wait_time
 
 
 func _enter_tree() -> void:
@@ -102,7 +108,7 @@ func _physics_process(_delta):
 	gun.look_at(get_global_mouse_position())
 
 	# --- Shooting ---
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_just_pressed("fire") and cooldowntimer.is_stopped():
 		fire()
 
 	# --- Animation ---
@@ -113,6 +119,12 @@ func _physics_process(_delta):
 
 	# --- Bubble Trail ---
 	_update_bubble_trail()
+	
+	# --- Cooldown Progess Bar ---
+	if cooldowntimer.time_left > 0:
+		cooldownbar.value = cooldowntimer.time_left
+	else:
+		cooldownbar.value = 100
 
 
 # ==============================================
@@ -151,6 +163,7 @@ func fire():
 	$Harpoon.play()
 	var fire_pos = gun.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
+	cooldowntimer.start()
 
 	if multi_shot:
 		var spread = deg_to_rad(10)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=40 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
@@ -159,6 +159,12 @@ border_width_bottom = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wvv"]
 bg_color = Color(0.92941177, 0.1254902, 0.18039216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1ej7"]
+bg_color = Color(1.347661e-06, 0.6689988, 0.7969179, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oprun"]
+bg_color = Color(1, 0.33528557, 0.3390485, 1)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -369,3 +375,22 @@ theme_override_fonts/font = ExtResource("6_tuyoq")
 theme_override_font_sizes/font_size = 23
 theme_override_styles/background = SubResource("StyleBoxFlat_y4r1p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d2wvv")
+
+[node name="cooldown" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="cooldownbar" type="ProgressBar" parent="CanvasLayer/cooldown"]
+layout_mode = 0
+offset_left = 986.0
+offset_top = 540.0
+offset_right = 990.0
+offset_bottom = 567.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/background = SubResource("StyleBoxFlat_f1ej7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oprun")
+fill_mode = 2
+show_percentage = false
+
+[node name="cooldowntimer" type="Timer" parent="."]
+one_shot = true
