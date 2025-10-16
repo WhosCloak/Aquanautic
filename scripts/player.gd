@@ -14,6 +14,7 @@ var score = Global.player_score       # Local mirror of global score
 var max_health := 3
 var health := max_health
 var multi_shot := false
+var firerate := false
 var _is_stunned: bool = false
 var flash_duration := 0.1
 
@@ -161,10 +162,15 @@ func _update_bubble_trail():
 
 func fire():
 	$Harpoon.play()
+	cooldowntimer.start()
 	var fire_pos = gun.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
-	cooldowntimer.start()
-
+	
+	if not firerate:
+		cooldowntimer.start()
+	else:
+		cooldowntimer.stop()
+	
 	if multi_shot:
 		var spread = deg_to_rad(10)
 		for angle_offset in [-spread, 0, spread]:
@@ -359,3 +365,7 @@ func _on_boss_hp_changed(cur: int, mx: int) -> void:
 
 func _on_boss_died_hide() -> void:
 	boss_ui_hide()
+	
+func _on_power_up() -> void:
+	if multi_shot == true:
+		pass

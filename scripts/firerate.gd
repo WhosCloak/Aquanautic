@@ -10,11 +10,10 @@ func _on_interact():
 
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		player.multi_shot = true
+		player.firerate = true
 
 
-		await get_tree().create_timer(10.0).timeout
-		player.multi_shot = false
-		print("multishot expired")
+		await get_tree().create_timer(2.0).timeout
+		player.firerate = false
 
 	self.queue_free()

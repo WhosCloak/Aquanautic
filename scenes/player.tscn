@@ -381,11 +381,18 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="cooldownbar" type="ProgressBar" parent="CanvasLayer/cooldown"]
-layout_mode = 0
-offset_left = 986.0
-offset_top = 540.0
-offset_right = 990.0
-offset_bottom = 567.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1850.0
+offset_top = 747.0
+offset_right = 1865.3333
+offset_bottom = 935.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(1.5, 1.5)
 theme_override_styles/background = SubResource("StyleBoxFlat_f1ej7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_oprun")
