@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Aquanautic"
-run/main_scene="uid://dteruq8yhjet2"
+run/main_scene="uid://cas66d7g8grep"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/image="uid://f4deonfbhoh8"
 config/icon="uid://cthpvmc63dewv"
