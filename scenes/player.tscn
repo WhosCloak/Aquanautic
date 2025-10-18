@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=49 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
@@ -14,6 +14,8 @@
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="8_smehm"]
 [ext_resource type="PackedScene" uid="uid://6r6a02a2t45h" path="res://scenes/interaction_agent.tscn" id="11_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://l35jp1yonild" path="res://sprites/progressbar.png" id="15_a8ls1"]
+[ext_resource type="Script" uid="uid://dlkfjxfkiiahh" path="res://scripts/cooldown_visual.gd" id="16_qfm1y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 22.0
@@ -165,6 +167,56 @@ bg_color = Color(1.347661e-06, 0.6689988, 0.7969179, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oprun"]
 bg_color = Color(1, 0.33528557, 0.3390485, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
+atlas = ExtResource("15_a8ls1")
+region = Rect2(112, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
+atlas = ExtResource("15_a8ls1")
+region = Rect2(96, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
+atlas = ExtResource("15_a8ls1")
+region = Rect2(80, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
+atlas = ExtResource("15_a8ls1")
+region = Rect2(64, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
+atlas = ExtResource("15_a8ls1")
+region = Rect2(48, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
+atlas = ExtResource("15_a8ls1")
+region = Rect2(32, 0, 16, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l71n6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fulsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60mlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4ail")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a38lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ni07")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -381,6 +433,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="cooldownbar" type="ProgressBar" parent="CanvasLayer/cooldown"]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -398,6 +451,22 @@ theme_override_styles/background = SubResource("StyleBoxFlat_f1ej7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_oprun")
 fill_mode = 2
 show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/cooldown"]
+position = Vector2(1877.5, 954)
+scale = Vector2(5, 5)
+texture = ExtResource("15_a8ls1")
+region_enabled = true
+region_rect = Rect2(3, 8, 10.9409075, 32)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/cooldown"]
+position = Vector2(1877.5, 954)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_l71n6")
+autoplay = "default"
+frame_progress = 0.9424803
+offset = Vector2(-0.5, 0)
+script = ExtResource("16_qfm1y")
 
 [node name="cooldowntimer" type="Timer" parent="."]
 one_shot = true

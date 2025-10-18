@@ -74,7 +74,6 @@ func _ready():
 	cooldownbar.max_value = cooldowntimer.wait_time
 	cooldownbar.value = cooldowntimer.wait_time
 
-
 func _enter_tree() -> void:
 	# Prepare the bubble trail material and settings
 	if bubbles == null:
