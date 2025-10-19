@@ -7,7 +7,7 @@ extends Control
 @export var action_name : String = "up"
 
 func _ready():
-	set_process_unhandled_key_input(false)
+	set_process_unhandled_input(false)
 	set_action_name()
 	set_text_for_key()
 
@@ -34,33 +34,40 @@ func set_text_for_key() -> void:
 	if action_event is InputEventKey:
 		var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
 		button.text = "%s" % action_keycode
+	elif action_event is InputEventMouseButton:
+		match action_event.button_index:
+			MOUSE_BUTTON_LEFT:
+				button.text = "LMB"
+			MOUSE_BUTTON_RIGHT:
+				button.text = "RMB"
+			MOUSE_BUTTON_MIDDLE:
+				button.text = "MMB"
+			_:
+				button.text = "Mouse %d" % action_event.button_index
 	else:
 		button.text = "?"
 
-
 func _on_button_toggled(button_pressed):
 	if button_pressed:
-		button.text = "Press any key..."
-		set_process_unhandled_key_input(button_pressed)
+		button.text = "Press any key or mouse..."
+		set_process_unhandled_input(button_pressed)
 		
 		for i in get_tree().get_nodes_in_group("hotkey_button"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = false
-				i.set_process_unhandled_key_input(false)
-		
+				i.set_process_unhandled_input(false)
 	else:
-		
 		for i in get_tree().get_nodes_in_group("hotkey_button"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = true
-				i.set_process_unhandled_key_input(false)
+				i.set_process_unhandled_input(false)
 		set_text_for_key()
 
 
-func _unhandled_key_input(event):
-	rebind_action_key(event)
-	button.button_pressed = false
-
+func _unhandled_input(event):
+	if event is InputEventKey or event is InputEventMouseButton:
+		rebind_action_key(event)
+		button.button_pressed = false
 
 
 func rebind_action_key(event) -> void:
