@@ -272,15 +272,18 @@ process_material = SubResource("ParticleProcessMaterial_jej6c")
 [node name="Harpoon" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_fjrip")
 volume_db = -7.0
+bus = &"SFX"
 
 [node name="DamageTaken" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ur7pv")
 volume_db = -7.0
+bus = &"SFX"
 
 [node name="HighScore" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, 3)
 stream = ExtResource("4_fjrip")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="InteractionAgent" parent="." instance=ExtResource("11_d2wvv")]
 

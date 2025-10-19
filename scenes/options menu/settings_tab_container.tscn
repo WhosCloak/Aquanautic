@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckpyg5xibxjx1"]
+[gd_scene load_steps=5 format=3 uid="uid://ckpyg5xibxjx1"]
 
 [ext_resource type="PackedScene" uid="uid://bd4fu5hhab36n" path="res://scenes/options menu/hotkey_rebind_button.tscn" id="1_0v3h5"]
 [ext_resource type="PackedScene" uid="uid://dlnvepr7j8mxg" path="res://scenes/options menu/window_mode_button.tscn" id="1_8fdhs"]
+[ext_resource type="PackedScene" uid="uid://t102e5pov2l2" path="res://scenes/options menu/audio_slider_settings.tscn" id="1_a7vdq"]
 [ext_resource type="PackedScene" uid="uid://bk61v3s25safy" path="res://scenes/options menu/resolution_mode_button.tscn" id="2_uoiki"]
 
 [node name="Settings_Tab_Container" type="Control"]
@@ -24,10 +25,9 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Sound" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -48,7 +48,26 @@ layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Sound/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sound/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Audio_Slider_Settings" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_a7vdq")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="Audio_Slider_Settings2" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_a7vdq")]
+layout_mode = 2
+
+[node name="Audio_Slider_Settings3" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_a7vdq")]
+layout_mode = 2
+bus_name = "SFX"
+
 [node name="Graphics" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

@@ -8,3 +8,6 @@ speed = 200.0
 [node name="AnimatedSprite2D" parent="." index="1"]
 animation = &"enemy5"
 autoplay = "enemy5"
+
+[node name="Death" parent="." index="3"]
+bus = &"SFX"

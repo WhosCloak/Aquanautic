@@ -59,6 +59,7 @@ rock_drop_markers_path = NodePath("../../RockDropRoot")
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, 189)
 volume_db = -14.136
+bus = &"Music"
 
 [node name="PathA" type="Marker2D" parent="."]
 position = Vector2(-383, 165)

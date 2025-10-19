@@ -63,3 +63,4 @@ position = Vector2(272, -42)
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_41ab6")
 volume_db = -14.136
+bus = &"Music"

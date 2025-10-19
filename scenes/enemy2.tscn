@@ -41,6 +41,9 @@ scale = Vector2(0.05, 0.05)
 animation = &"enemy2"
 autoplay = "enemy2"
 
+[node name="Death" parent="." index="3"]
+bus = &"SFX"
+
 [node name="ShieldSprite" type="AnimatedSprite2D" parent="." index="4"]
 scale = Vector2(0.105, 0.105)
 sprite_frames = SubResource("SpriteFrames_thqno")

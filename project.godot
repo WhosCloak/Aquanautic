@@ -17,6 +17,10 @@ boot_splash/image="uid://f4deonfbhoh8"
 config/icon="uid://cthpvmc63dewv"
 boot_splash/minimum_display_time=2000
 
+[audio]
+
+buses/default_bus_layout="res://audios/default_bus_layout.tres"
+
 [autoload]
 
 Global="*res://scripts/global.gd"
