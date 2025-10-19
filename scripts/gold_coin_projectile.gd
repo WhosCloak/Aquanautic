@@ -27,7 +27,7 @@ func _physics_process(delta):
 	position += velocity * delta
 
 func _spawn_sparkle():
-	var sparkle_scene = preload("res://scenes/CoinSparkle.tscn")
+	var sparkle_scene = preload("res://scenes/CrabBossNormal/CoinSparkle.tscn")
 	var sparkle = sparkle_scene.instantiate()
 	sparkle.global_position = global_position
 	get_tree().current_scene.add_child(sparkle)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://deev88elhti5a" path="res://scripts/level_3_boss.gd" id="1_1m6vk"]
 [ext_resource type="Texture2D" uid="uid://cuviu4068s003" path="res://sprites/CrabBossLevel.png" id="2_yx4p4"]
-[ext_resource type="PackedScene" uid="uid://dyl0m1i0mkqby" path="res://scenes/crab_boss.tscn" id="3_1m6vk"]
+[ext_resource type="PackedScene" uid="uid://dyl0m1i0mkqby" path="res://scenes/CrabBossNormal/crab_boss.tscn" id="3_1m6vk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
 size = Vector2(1154, 20)
@@ -51,6 +51,7 @@ scale = Vector2(1.5, 1.5)
 
 [node name="CrabBoss" parent="CrabSpawn" instance=ExtResource("3_1m6vk")]
 position = Vector2(0, -30)
+max_hp = 50
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 rock_drop_markers_path = NodePath("../../RockDropRoot")

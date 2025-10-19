@@ -16,22 +16,29 @@ signal hp_changed(current: int, maximum: int)
 @export var slam_cooldown := 3.0
 @export var cointoss_cooldown := 6.0
 
-#Internal state
+# Phase 2 tweaks
+@export var phase2_walk_speed := 70.0
+@export var phase2_slam_cooldown := 2.5
+@export var phase2_cointoss_cooldown := 4.5
+@export var gold_spriteframes: SpriteFrames
+
+# Internal state
 var hp := 0
 var _hit_lock := false
 var _target_marker: Marker2D = null
 var _target: Vector2
 var _is_attacking := false
+var _is_blocking := false
+var _in_phase2 := false
 
-#Preloads (for later)
-var coin_scene := preload("res://scenes/GoldCoinProjectile.tscn")
-var rock_scene := preload("res://scenes/rock_boulder.tscn")
+# Preloads
+var coin_scene := preload("res://scenes/CrabBossNormal/GoldCoinProjectile.tscn")
+var rock_scene := preload("res://scenes/CrabBossNormal/rock_boulder.tscn")
 @export var rock_drop_markers_path: NodePath
 @onready var rock_drop_root: Node = get_node_or_null(rock_drop_markers_path)
 @export var rock_fall_sound: AudioStream = preload("res://audios/rock fall.mp3")
 
-
-#Cached nodes
+# Cached nodes
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var path_a: Marker2D = get_node_or_null(path_a_path)
@@ -53,14 +60,14 @@ func _ready() -> void:
 		hurtbox.area_entered.connect(_on_hurt_area_entered)
 		hurtbox.body_entered.connect(_on_hurt_area_entered)
 		
-# pick initial patrol target
+	# pick initial patrol target
 	if path_a and path_b:
 		var da := global_position.distance_to(path_a.global_position)
 		var db := global_position.distance_to(path_b.global_position)
 		_target_marker = path_b if db < da else path_a
 		_target = _target_marker.global_position
 		
-# start attack pattern
+	# start attack pattern
 	if attack_timer:
 		attack_timer.wait_time = slam_cooldown
 		attack_timer.start()
@@ -69,7 +76,7 @@ func _physics_process(delta: float) -> void:
 	if _hit_lock or _is_attacking:
 		return
 	
-# move toward current  target 
+	# move toward current target 
 	var to_t := _target - global_position
 	if to_t.length() > arrive_dist:
 		var step := to_t.normalized() * walk_speed * delta
@@ -78,7 +85,7 @@ func _physics_process(delta: float) -> void:
 			var moving_left := step.x < 0
 			anim.flip_h = moving_left if faces_right_default else not moving_left
 	else:
-		#reach one end, switch direction
+		# reach one end, switch direction
 		if path_a and path_b and _target_marker:
 			_target_marker = path_a if _target_marker == path_b else path_b
 			_target = _target_marker.global_position
@@ -91,16 +98,37 @@ func _on_hurt_area_entered(b: Node) -> void:
 		apply_damage(contact_damage)
 		
 func apply_damage(amount: int) -> void:
+	if _is_blocking:
+		print("Crab blocked all damage!")
+		return  # takes no damage
+
 	hp = max(0, hp - amount)
 	emit_signal("hp_changed", hp, max_hp)
-	
+
+	# checks if phase2 should start
+	if not _in_phase2 and hp <= max_hp * 0.5:
+		_enter_phase2()
+
 	if hp == 0:
 		_die()
 	else:
 		_hit_lock = true
 		await get_tree().create_timer(0.05).timeout
 		_hit_lock = false
+		
+
+func _enter_phase2() -> void:
+	_in_phase2 = true
+	print("Crab has entered Phase 2!")
 	
+	if gold_spriteframes and anim:
+		anim.sprite_frames = gold_spriteframes
+		anim.play("Walk")
+	
+	walk_speed = phase2_walk_speed
+	slam_cooldown = phase2_slam_cooldown
+	cointoss_cooldown = phase2_cointoss_cooldown
+
 func _die() -> void:
 	emit_signal("died")
 	queue_free()
@@ -110,53 +138,134 @@ func _on_anim_finished() -> void:
 	_is_attacking = false
 	if anim:
 		anim.play("Walk")
-		
-# Attack pattern cycle
-
+	_is_blocking = false # resets blocking when animation ends
 	
-#Attacks
-func _perform_slam():
-	if anim:
-		anim.play("slam")
-	_is_attacking = true
 
-	# Play slam sound if it exists
+# --- ATTACKS --- #
+
+func _perform_slam() -> void:
+	if _is_attacking:
+		return
+	_is_attacking = true
+	anim.play("slam")
+
 	var slam_audio = $SlamSound if has_node("SlamSound") else null
 	if slam_audio:
 		slam_audio.play()
 
-	# Delay slightly so rocks fall right after the impact frame
+	# Drop rocks after delay
 	await get_tree().create_timer(1.2).timeout
 	_spawn_rocks()
 
-	await anim.animation_finished
+	# Wait roughly as long as the slam animation duration
+	await get_tree().create_timer(1.0).timeout
+
+	# Return to walking
+	anim.play("Walk")
 	_is_attacking = false
+
+	# Walk break before next attack
+	await get_tree().create_timer(2.0).timeout
+	if attack_timer:
+		attack_timer.wait_time = randf_range(slam_cooldown, cointoss_cooldown)
+		attack_timer.start()
+
+
+func _perform_cointoss() -> void:
+	if _is_attacking:
+		return
+	_is_attacking = true
+	anim.play("cointoss")
+
+	# Wait a short moment before tossing coin
+	await get_tree().create_timer(0.5).timeout
+	_shoot_coin()
+
+	# Wait roughly same as the cointoss animation length
+	await get_tree().create_timer(1.0).timeout
+
+	anim.play("Walk")
+	_is_attacking = false
+
+	await get_tree().create_timer(2.0).timeout
+	if attack_timer:
+		attack_timer.wait_time = randf_range(slam_cooldown, cointoss_cooldown)
+		attack_timer.start()
+
+
+func _perform_block() -> void:
+	if _is_attacking:
+		return
+	_is_attacking = true
+	_is_blocking = true
+	anim.play("block")
+
+	# Stay blocking for a bit
+	await get_tree().create_timer(1.5).timeout
+	_is_blocking = false
+	_is_attacking = false
+
+	# Return to walking
+	anim.play("Walk")
+
+	await get_tree().create_timer(2.0).timeout
+	if attack_timer:
+		attack_timer.wait_time = randf_range(slam_cooldown, cointoss_cooldown)
+		attack_timer.start()
+
+
+func _perform_sword_slash() -> void:
+	if _is_attacking:
+		return
+	_is_attacking = true
+	anim.play("flame_slash")
+
+	# Create short-lived hitbox
+	var hitbox := Area2D.new()
+	var shape := CollisionShape2D.new()
+	var rect := RectangleShape2D.new()
+	rect.extents = Vector2(40, 20)
+	shape.shape = rect
+	hitbox.add_child(shape)
+
+	hitbox.position = Vector2(-60 if anim.flip_h else 60, 0)
+	add_child(hitbox)
+	hitbox.set_deferred("monitoring", true)
+	hitbox.body_entered.connect(func(b):
+		if b.is_in_group("player") and b.has_method("apply_damage"):
+			b.apply_damage(2)
+	)
+
+	# Keep hitbox active for a moment
+	await get_tree().create_timer(0.4).timeout
+	hitbox.queue_free()
+
+	# Wait roughly same as the sword slash animation
+	await get_tree().create_timer(1.0).timeout
+
+	anim.play("Walk")
+	_is_attacking = false
+
+	await get_tree().create_timer(2.0).timeout
+	if attack_timer:
+		attack_timer.wait_time = randf_range(slam_cooldown, cointoss_cooldown)
+		attack_timer.start()
 
 func _spawn_rocks():
 	if not rock_drop_root or not rock_scene:
 		return
 
-	# Play falling sound
 	var fall_audio = AudioStreamPlayer2D.new()
 	fall_audio.stream = rock_fall_sound
 	add_child(fall_audio)
 	fall_audio.play()
 
-	# For every Marker2D under the root, spawn a rock
 	for marker in rock_drop_root.get_children():
 		if marker is Marker2D:
 			var rock = rock_scene.instantiate()
 			rock.global_position = marker.global_position
 			get_tree().current_scene.add_child(rock)
 
-func _perform_cointoss():
-	if anim:
-		anim.play("cointoss")
-	_is_attacking = true
-	
-	await get_tree().create_timer(0.5).timeout #wait before firing coin
-	_shoot_coin()
-	
 func _shoot_coin():
 	if not coin_scene or not coin_muzzle:
 		return
@@ -169,29 +278,23 @@ func _shoot_coin():
 	coin.global_position = coin_muzzle.global_position
 	get_tree().current_scene.add_child(coin)
 		
-	# give the coin a refrence to the player for homing
 	if coin.has_method("set_target"):
 		coin.set_target(player)
 
-func _perform_block():
-	if anim:
-		anim.play("block")
-	_is_attacking = true
-	await get_tree().create_timer(1.5).timeout
-	_is_attacking = false
-
 
 func _on_attack_timer_timeout() -> void:
-	if hp <= 0:
+	if _is_attacking:
 		return
-		
-	# choose attack based on HP
-	if hp <= max_hp * 0.3:
-		_perform_block()
-	elif randi() % 2 == 0:
-		_perform_slam()
-	else:
-		_perform_cointoss()
-		
-	attack_timer.wait_time = randf_range(slam_cooldown, cointoss_cooldown)
-	attack_timer.start()
+
+	var attacks = ["slam", "cointoss", "sword_slash", "block"]
+	var attack = attacks[randi() % attacks.size()]
+
+	match attack:
+		"slam":
+			_perform_slam()
+		"cointoss":
+			_perform_cointoss()
+		"sword_slash":
+			_perform_sword_slash()
+		"block":
+			_perform_block()
