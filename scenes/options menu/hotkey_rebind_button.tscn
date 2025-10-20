@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd4fu5hhab36n"]
+[gd_scene load_steps=3 format=3 uid="uid://bd4fu5hhab36n"]
 
 [ext_resource type="Script" uid="uid://dwgnekrs6sv2n" path="res://scenes/options menu/hotkey_rebind_button.gd" id="1_wri5r"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="2_pag7w"]
 
 [node name="Hotkey_Rebind_Button" type="Control" groups=["hotkey_button"]]
 layout_mode = 3
@@ -25,6 +26,7 @@ alignment = 1
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(400, 30)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pag7w")
 theme_override_font_sizes/font_size = 32
 text = "ACTION"
 vertical_alignment = 1
@@ -37,6 +39,7 @@ theme_override_constants/separation = 200
 [node name="Button" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pag7w")
 toggle_mode = true
 text = "ACTION_KEY"
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b5trt3i877woh" path="res://sprites/WhaleLevel.png" id="1_gn26o"]
 [ext_resource type="Script" uid="uid://br78hmutlmdb0" path="res://scripts/Level_1_Boss.gd" id="1_obacn"]
-[ext_resource type="PackedScene" uid="uid://droi5otfpdguu" path="res://scenes/WhaleBoss.tscn" id="2_rppgv"]
+[ext_resource type="PackedScene" uid="uid://droi5otfpdguu" path="res://scenes/BossLevels/WhaleBoss.tscn" id="2_rppgv"]
 [ext_resource type="AudioStream" uid="uid://dvrxjwujokmgx" path="res://audios/Whale Boss's Decent.mp3" id="5_41ab6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]

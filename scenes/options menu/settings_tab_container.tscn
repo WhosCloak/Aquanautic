@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckpyg5xibxjx1"]
+[gd_scene load_steps=7 format=3 uid="uid://ckpyg5xibxjx1"]
 
 [ext_resource type="PackedScene" uid="uid://bd4fu5hhab36n" path="res://scenes/options menu/hotkey_rebind_button.tscn" id="1_0v3h5"]
 [ext_resource type="PackedScene" uid="uid://dlnvepr7j8mxg" path="res://scenes/options menu/window_mode_button.tscn" id="1_8fdhs"]
 [ext_resource type="PackedScene" uid="uid://t102e5pov2l2" path="res://scenes/options menu/audio_slider_settings.tscn" id="1_a7vdq"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_eggv2"]
 [ext_resource type="PackedScene" uid="uid://bk61v3s25safy" path="res://scenes/options menu/resolution_mode_button.tscn" id="2_uoiki"]
 [ext_resource type="PackedScene" uid="uid://b0uvg626gkymd" path="res://scenes/options menu/color_blind_toggle_button.tscn" id="5_qldpk"]
 
@@ -25,11 +26,14 @@ offset_right = -100.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_eggv2")
+theme_override_font_sizes/font_size = 24
 tab_alignment = 1
 current_tab = 0
 
 [node name="Sound" type="TabBar" parent="TabContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sound"]
@@ -70,6 +74,7 @@ bus_name = "SFX"
 [node name="Graphics" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
@@ -105,6 +110,7 @@ layout_mode = 2
 [node name="Controls" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
@@ -160,6 +166,7 @@ theme_override_constants/separation = 12
 [node name="Accesibility" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Accesibility"]

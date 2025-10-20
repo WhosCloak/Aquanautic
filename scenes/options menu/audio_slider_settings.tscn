@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://t102e5pov2l2"]
+[gd_scene load_steps=3 format=3 uid="uid://t102e5pov2l2"]
 
 [ext_resource type="Script" uid="uid://ddadw547kj48x" path="res://scenes/options menu/audio_slider_settings.gd" id="1_6qwrs"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="2_1eyy4"]
 
 [node name="Audio_Slider_Settings" type="Control"]
 layout_mode = 3
@@ -21,6 +22,7 @@ theme_override_constants/separation = 42
 [node name="Audio_Name_Lbl" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1eyy4")
 theme_override_font_sizes/font_size = 32
 text = "Master Volume"
 
@@ -40,5 +42,6 @@ layout_mode = 2
 [node name="Audio_Num_Lbl" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1eyy4")
 theme_override_font_sizes/font_size = 32
 text = "99.2"

@@ -49,7 +49,7 @@ func set_text_for_key() -> void:
 
 func _on_button_toggled(button_pressed):
 	if button_pressed:
-		button.text = "Press any key or mouse..."
+		button.text = "Press any key..."
 		set_process_unhandled_input(button_pressed)
 		
 		for i in get_tree().get_nodes_in_group("hotkey_button"):

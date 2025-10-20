@@ -4,7 +4,7 @@ extends Node2D
 # 🔹 LEVEL MANAGEMENT VARIABLES
 # ===============================
 
-var boss_1_scene := "res://scenes/Level_1_Boss.tscn"
+var boss_1_scene := "res://scenes/BossLevels/Level_1_Boss.tscn"
 var gate_scene := preload("res://scenes/WhirlpoolGate.tscn")
 
 var in_boss := false
@@ -96,7 +96,7 @@ func _go_to_boss_for_level(idx: int) -> void:
 		1:
 			boss_scene_path = boss_1_scene
 		3:
-			boss_scene_path = "res://scenes/Level_3_Boss.tscn"
+			boss_scene_path = "res://scenes/BossLevels/Level_3_Boss.tscn"
 
 	load_level(boss_scene_path)
 	_stop_all_spawners_in_tree()

@@ -1,10 +1,10 @@
 extends Node2D
 
-var enemy_scene_1 = preload("res://scenes/enemy1.tscn")
-var enemy_scene_2 = preload("res://scenes/enemy2.tscn")
-var enemy_scene_3 = preload("res://scenes/enemy3.tscn")
-var enemy_scene_4 = preload("res://scenes/enemy4.tscn")
-var enemy_scene_5 = preload("res://scenes/enemy5.tscn")
+var enemy_scene_1 = preload("res://scenes/Enemies/enemy1.tscn")
+var enemy_scene_2 = preload("res://scenes/Enemies/enemy2.tscn")
+var enemy_scene_3 = preload("res://scenes/Enemies/enemy3.tscn")
+var enemy_scene_4 = preload("res://scenes/Enemies/enemy4.tscn")
+var enemy_scene_5 = preload("res://scenes/Enemies/enemy5.tscn")
 
 var spawn_distance = 500 
 var spawn_interval = 1

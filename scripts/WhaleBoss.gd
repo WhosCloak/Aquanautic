@@ -17,11 +17,11 @@ signal hp_changed(current: int, maximum: int) # Emitted on init and every time H
 var hp := 0       # Current health, initialized in _ready
 var _hit_lock := false # Short lockout to avoid double hits in one frame
 #barnacle preload scene 
-var barnacle_scene = preload("res://scenes/barnacle.tscn")
+var barnacle_scene = preload("res://scenes/BossLevels/barnacle.tscn")
 @onready var barnacle_drop = $BarnacleDrop
 
 
-var boss_harpoon_scene = preload("res://scenes/boss_harpoon.tscn")
+var boss_harpoon_scene = preload("res://scenes/BossLevels/boss_harpoon.tscn")
 @onready var harpoon_muzzle = $HarpoonMuzzle
 
 # Cached node refrences 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cas66d7g8grep"]
+[gd_scene load_steps=9 format=3 uid="uid://cas66d7g8grep"]
 
 [ext_resource type="Script" uid="uid://bi8xsa15unjl2" path="res://scenes/mainmenu/main_menu.gd" id="1_xwbgg"]
 [ext_resource type="Texture2D" uid="uid://ccbyfigxbpvu7" path="res://sprites/mainmenu.png" id="2_pctyl"]
 [ext_resource type="FontFile" uid="uid://c1eso82bi36so" path="res://font/Splashextrabold-5y4v.ttf" id="3_goenu"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="4_116ea"]
 [ext_resource type="PackedScene" uid="uid://bu55w2k50pmp1" path="res://scenes/options menu/options_menu.tscn" id="5_a3yut"]
+[ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="5_l3hwl"]
 [ext_resource type="AudioStream" uid="uid://d1ikbolma4dm7" path="res://audios/Into the Abyss(Main Menu).mp3" id="6_flhc5"]
 [ext_resource type="AudioStream" uid="uid://bkvfir86mr2c5" path="res://audios/menu_select.wav" id="7_ymaje"]
 
@@ -34,14 +35,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+scale = Vector2(0.99127716, 1.0042387)
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
 
 [node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -60,10 +61,12 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 0
+theme_override_constants/separation = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 64
 alignment = 1
 
@@ -71,25 +74,31 @@ alignment = 1
 layout_mode = 2
 
 [node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 32)
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_116ea")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
+theme_override_icons/icon = ExtResource("5_l3hwl")
 text = "Start Game"
+expand_icon = true
 
 [node name="Options_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 32)
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_116ea")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
+theme_override_icons/icon = ExtResource("5_l3hwl")
 text = "Options"
+expand_icon = true
 
 [node name="Exit_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 32)
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_116ea")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
+theme_override_icons/icon = ExtResource("5_l3hwl")
 text = "Exit Game"
+expand_icon = true
 
 [node name="Options_Menu" parent="." instance=ExtResource("5_a3yut")]
 visible = false

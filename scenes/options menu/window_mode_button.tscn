@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlnvepr7j8mxg"]
+[gd_scene load_steps=4 format=3 uid="uid://dlnvepr7j8mxg"]
 
 [ext_resource type="PackedScene" uid="uid://b6e2tame0crsg" path="res://scenes/options menu/options_display_button.tscn" id="1_7joyn"]
 [ext_resource type="Script" uid="uid://uirkp5uuax30" path="res://scenes/options menu/window_mode_button.gd" id="2_0nrek"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="3_l8pli"]
 
 [node name="Window_Mode_Button" instance=ExtResource("1_7joyn")]
 script = ExtResource("2_0nrek")
 
 [node name="Label" parent="HBoxContainer" index="0"]
+theme_override_fonts/font = ExtResource("3_l8pli")
 text = "Window Mode"
+
+[node name="OptionButton" parent="HBoxContainer" index="2"]
+theme_override_fonts/font = ExtResource("3_l8pli")
