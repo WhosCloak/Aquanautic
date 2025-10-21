@@ -25,6 +25,7 @@ buses/default_bus_layout="res://audios/default_bus_layout.tres"
 
 Global="*res://scripts/global.gd"
 Fade="*res://scenes/fade.tscn"
+global_accesibility_signal="*res://addons/accesibilitytools/global_accesibility_signal.gd"
 
 [display]
 
@@ -33,6 +34,10 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/size/borderless=true
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/accesibilitytools/plugin.cfg")
 
 [file_customization]
 

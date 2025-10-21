@@ -29,9 +29,10 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 theme_override_font_sizes/font_size = 24
 tab_alignment = 1
-current_tab = 0
+current_tab = 3
 
 [node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 0
@@ -164,7 +165,6 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Accesibility" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 3

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0uvg626gkymd"]
 
-[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_one7r"]
+[ext_resource type="PackedScene" uid="uid://c71411b05bf7u" path="res://scenes/colorblind_optionbutton.tscn" id="1_one7r"]
 
 [node name="ColorBlind_Toggle_Button" type="Control"]
 layout_mode = 3
@@ -10,31 +10,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="ColorBlindOptions" parent="." instance=ExtResource("1_one7r")]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 64
-
-[node name="Name_Label" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_one7r")
-theme_override_font_sizes/font_size = 32
-text = "Color Blind Mode"
-
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 124
-
-[node name="CheckButton" type="CheckButton" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 124
-
-[node name="State_Label" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_one7r")
-theme_override_font_sizes/font_size = 32
-text = "Off"
+offset_left = 105.0
+offset_top = 94.0
+offset_right = 244.0
+offset_bottom = 125.0
