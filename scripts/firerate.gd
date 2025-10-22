@@ -13,7 +13,7 @@ func _on_interact():
 		player.firerate = true
 
 
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(5.0).timeout
 		player.firerate = false
 
 	self.queue_free()

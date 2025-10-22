@@ -15,7 +15,7 @@ func _on_interact():
 	if player:
 		player.multi_shot = true
 		audio_stream_player.play()
-		await get_tree().create_timer(10.0).timeout
+		await get_tree().create_timer(7.0).timeout
 		player.multi_shot = false
 		print("multishot expired")
 
