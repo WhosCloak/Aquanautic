@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbeyyet5yg6ey"]
+[gd_scene load_steps=12 format=3 uid="uid://cbeyyet5yg6ey"]
 
 [ext_resource type="Script" uid="uid://bjk1ke5xyi0d5" path="res://scripts/gold_coin_projectile.gd" id="1_414t0"]
 [ext_resource type="Texture2D" uid="uid://do2apgeyhla40" path="res://sprites/gold_coin.png" id="1_rgbnn"]
+[ext_resource type="AudioStream" uid="uid://cpeua1wv2kvhe" path="res://scenes/CrabBossNormal/crab_coin_toss_2.mp3" id="3_ydevn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_414t0"]
 atlas = ExtResource("1_rgbnn")
@@ -71,3 +72,7 @@ frame_progress = 0.95767957
 shape = SubResource("CircleShape2D_04v0a")
 
 [node name="LifeTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ydevn")
+bus = &"SFX"

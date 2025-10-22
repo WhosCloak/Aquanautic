@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5eqqq5oxvi0f"]
+[gd_scene load_steps=6 format=3 uid="uid://c5eqqq5oxvi0f"]
 
 [ext_resource type="Texture2D" uid="uid://dvam5npmtv7jg" path="res://sprites/level2extended.png" id="1_ra442"]
 [ext_resource type="Texture2D" uid="uid://cofv46mijmkhl" path="res://sprites/level2.png" id="2_fiq81"]
 [ext_resource type="Texture2D" uid="uid://dvwaean46cgpi" path="res://sprites/RockFloor2.png" id="3_l37oo"]
+[ext_resource type="AudioStream" uid="uid://djxlxkwocs3yg" path="res://audios/abyssal.mp3" id="4_fiq81"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ts7"]
 size = Vector2(20, 1.13)
@@ -42,3 +43,9 @@ centered = false
 position = Vector2(23, 794)
 scale = Vector2(10000, 50)
 shape = SubResource("RectangleShape2D_u0ts7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fiq81")
+autoplay = true
+max_distance = 4096.0
+bus = &"Music"

@@ -12,6 +12,9 @@ signal hp_changed(current: int, maximum: int) # Emitted on init and every time H
 @export var path_b_path: NodePath # Drag PathB Marker2D here in the Inspector
 @export var faces_right_default := false # True if the base sprite faces right by default
 @export var display_name := "Wrath of the Deep" #here ur able to change the name of the boss
+@onready var harpoon_shot: AudioStreamPlayer2D = $AttackTimer/harpoon_shot
+@onready var barnacle_drop_audio: AudioStreamPlayer2D = $BarnacleTimer/barnacle_drop_audio
+
 
 # Internal state
 var hp := 0       # Current health, initialized in _ready
@@ -120,7 +123,9 @@ func shoot_harpoon(target_pos: Vector2):
 	harpoon.rotation = direction.angle() 
 	harpoon.linear_velocity = direction * 200 #adjust speed 
 	get_tree().current_scene.add_child(harpoon)
-
+	# harpoon sound
+	if harpoon_shot:
+		harpoon_shot.play()
 func _on_attack_timer_timeout():
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
@@ -130,6 +135,9 @@ func drop_barnacle():
 	var barnacle = barnacle_scene.instantiate()
 	barnacle.global_position = barnacle_drop.global_position
 	get_tree().current_scene.add_child(barnacle)
+
+	if barnacle_drop_audio:
+		barnacle_drop_audio.play()
 
 func _on_barnacle_timer_timeout() -> void:
 	drop_barnacle()

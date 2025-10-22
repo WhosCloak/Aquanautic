@@ -31,6 +31,6 @@ func spawn_powerup():
 	var powerups = [multishot, firerate]
 	var poweruprandomizer = powerups[randi() % powerups.size()]
 	 
-	var spawnpowerup = poweruprandomizer.instantiate()
-	spawnpowerup.global_position = spawn_pos
-	get_parent().add_child(spawnpowerup)
+	# var spawnpowerup = poweruprandomizer.instantiate()
+	# spawnpowerup.global_position = spawn_pos
+	# get_parent().add_child(spawnpowerup)

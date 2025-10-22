@@ -22,6 +22,7 @@ signal hp_changed(current: int, maximum: int)
 @export var phase2_cointoss_cooldown := 4.5
 @export var gold_spriteframes: SpriteFrames
 
+
 # Internal state
 var hp := 0
 var _hit_lock := false
@@ -38,6 +39,10 @@ var rock_scene := preload("res://scenes/CrabBossNormal/rock_boulder.tscn")
 @onready var rock_drop_root: Node = get_node_or_null(rock_drop_markers_path)
 @export var rock_fall_sound: AudioStream = preload("res://audios/rock fall.mp3")
 
+@export var slam_attack_sound: AudioStream = preload("res://audios/crab_ground_slam_2.mp3")
+@export var coin_attack_sound: AudioStream = preload("res://audios/crab_coin_toss_2.mp3")
+
+
 # Cached nodes
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurtbox: Area2D = $Hurtbox
@@ -45,6 +50,9 @@ var rock_scene := preload("res://scenes/CrabBossNormal/rock_boulder.tscn")
 @onready var path_b: Marker2D = get_node_or_null(path_b_path)
 @onready var attack_timer: Timer = $AttackTimer
 @onready var coin_muzzle := $CoinMuzzle
+
+@onready var slam_audio: AudioStreamPlayer2D = $SlamAudio
+@onready var coin_audio: AudioStreamPlayer2D = $CoinAudio
 
 func _ready() -> void:
 	add_to_group("boss")
@@ -149,8 +157,8 @@ func _perform_slam() -> void:
 	_is_attacking = true
 	anim.play("slam")
 
-	var slam_audio = $SlamSound if has_node("SlamSound") else null
 	if slam_audio:
+		slam_audio.stream = slam_attack_sound
 		slam_audio.play()
 
 	# Drop rocks after delay
@@ -170,12 +178,14 @@ func _perform_slam() -> void:
 		attack_timer.wait_time = randf_range(slam_cooldown, cointoss_cooldown)
 		attack_timer.start()
 
-
 func _perform_cointoss() -> void:
 	if _is_attacking:
 		return
 	_is_attacking = true
 	anim.play("cointoss")
+	if coin_audio:
+		coin_audio.stream = coin_attack_sound
+		coin_audio.play()
 
 	# Wait a short moment before tossing coin
 	await get_tree().create_timer(0.5).timeout
@@ -259,6 +269,9 @@ func _spawn_rocks():
 	fall_audio.stream = rock_fall_sound
 	add_child(fall_audio)
 	fall_audio.play()
+	
+	
+
 
 	for marker in rock_drop_root.get_children():
 		if marker is Marker2D:

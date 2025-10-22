@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://qfjg8mkbhh6k"]
+[gd_scene load_steps=10 format=3 uid="uid://qfjg8mkbhh6k"]
 
 [ext_resource type="Script" uid="uid://oare372lvcw3" path="res://scripts/boss_harpoon.gd" id="1_nfq6j"]
 [ext_resource type="Texture2D" uid="uid://byierjxv6llim" path="res://sprites/Bloody_Rusty_Harpoon.png" id="2_nfq6j"]
+[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://scenes/BossLevels/harpoon_shot2.0.wav" id="3_rokdb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7dhc"]
 size = Vector2(16, 6)
@@ -62,5 +63,8 @@ sprite_frames = SubResource("SpriteFrames_spjy1")
 animation = &"Harpoon"
 autoplay = "Harpoon"
 frame_progress = 0.9706582
+
+[node name="harpoon" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rokdb")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
