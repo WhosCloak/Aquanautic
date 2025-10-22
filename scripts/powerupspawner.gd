@@ -28,7 +28,7 @@ func spawn_powerup():
 	var direction = Vector2(randf() * 2 - 1, randf() * 2 - 1).normalized()
 	var spawn_pos = player.global_position + direction * spawn_distance
 
-	var powerups = [multishot, firerate, multishot]
+	var powerups = [multishot, firerate]
 	var poweruprandomizer = powerups[randi() % powerups.size()]
 	 
 	var spawnpowerup = poweruprandomizer.instantiate()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://8hmxui6iwmrt"]
+[gd_scene load_steps=14 format=3 uid="uid://8hmxui6iwmrt"]
 
 [ext_resource type="Script" uid="uid://b8sgi48isk6vw" path="res://scripts/multishot.gd" id="1_7wi61"]
 [ext_resource type="Texture2D" uid="uid://cm4x152fwagvh" path="res://sprites/triple_shot.png" id="1_y57rb"]
 [ext_resource type="PackedScene" uid="uid://cpwtq0ghm5lkf" path="res://scenes/interactable.tscn" id="2_fbcnd"]
+[ext_resource type="AudioStream" uid="uid://73o861twvxot" path="res://audios/player_powerup_pickup.mp3" id="4_xqxlh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbcnd"]
 atlas = ExtResource("1_y57rb")
@@ -80,3 +81,6 @@ shape = SubResource("CircleShape2D_48rt8")
 [node name="interactable" parent="." instance=ExtResource("2_fbcnd")]
 collision_layer = 8
 collision_mask = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xqxlh")
