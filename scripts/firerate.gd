@@ -11,8 +11,7 @@ func _on_interact():
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.firerate = true
-
-
+		$firerateaudio.play()
 		await get_tree().create_timer(5.0).timeout
 		player.firerate = false
 

@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://csolis2asqc4t"]
+
+[ext_resource type="Script" uid="uid://c5galw1l6apft" path="res://scripts/camerashakecontrol.gd" id="1_nkxfv"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="2_40hmj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ngak4"]
+font = ExtResource("2_40hmj")
+font_size = 19
+
+[sub_resource type="LabelSettings" id="LabelSettings_spy1g"]
+font = ExtResource("2_40hmj")
+font_size = 20
+
+[node name="camerashakecontrol" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nkxfv")
+
+[node name="shake_slider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 196.0
+offset_right = 329.0
+offset_bottom = 212.0
+max_value = 10.0
+value = 10.0
+
+[node name="strength_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 191.0
+offset_right = 391.0
+offset_bottom = 216.0
+text = "0"
+label_settings = SubResource("LabelSettings_ngak4")
+
+[node name="camera_shake" type="Label" parent="."]
+layout_mode = 0
+offset_top = 190.0
+offset_right = 141.0
+offset_bottom = 216.0
+text = "Camera Shake"
+label_settings = SubResource("LabelSettings_spy1g")
+
+[connection signal="value_changed" from="shake_slider" to="." method="_on_shake_slider_value_changed"]

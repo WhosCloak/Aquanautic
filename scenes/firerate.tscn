@@ -1,25 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx2kiuxhrgfgs"]
+[gd_scene load_steps=10 format=3 uid="uid://dx2kiuxhrgfgs"]
 
 [ext_resource type="Script" uid="uid://dtglmixj06da3" path="res://scripts/firerate.gd" id="1_uhoes"]
-[ext_resource type="Texture2D" uid="uid://cx88dl27wdr2x" path="res://sprites/shopkeeper.png" id="2_bsdl0"]
+[ext_resource type="Texture2D" uid="uid://dajn0grmeaje8" path="res://sprites/Firerate.png" id="2_uhoes"]
 [ext_resource type="PackedScene" uid="uid://cpwtq0ghm5lkf" path="res://scenes/interactable.tscn" id="3_b0gjv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b0gjv"]
-atlas = ExtResource("2_bsdl0")
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsdl0"]
+atlas = ExtResource("2_uhoes")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q03kg"]
-atlas = ExtResource("2_bsdl0")
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0gjv"]
+atlas = ExtResource("2_uhoes")
 region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q03kg"]
+atlas = ExtResource("2_uhoes")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qoqh"]
+atlas = ExtResource("2_uhoes")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tce5d"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_bsdl0")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_b0gjv")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q03kg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qoqh")
 }],
 "loop": true,
 "name": &"default",
@@ -44,3 +58,5 @@ shape = SubResource("CircleShape2D_48rt8")
 [node name="interactable" parent="." instance=ExtResource("3_b0gjv")]
 collision_layer = 8
 collision_mask = 1
+
+[node name="firerateaudio" type="AudioStreamPlayer" parent="."]
