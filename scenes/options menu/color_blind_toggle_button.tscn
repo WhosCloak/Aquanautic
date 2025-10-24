@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0uvg626gkymd"]
+[gd_scene load_steps=3 format=3 uid="uid://b0uvg626gkymd"]
 
-[ext_resource type="PackedScene" uid="uid://c71411b05bf7u" path="res://scenes/colorblind_optionbutton.tscn" id="1_one7r"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="2_88285"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_t680u"]
-font = ExtResource("2_88285")
-font_size = 20
+[ext_resource type="Script" uid="uid://ld8xa6ptns86" path="res://addons/accesibilitytools/shaders/daltonismo_optionbutton.gd" id="2_t680u"]
 
 [node name="ColorBlind_Toggle_Button" type="Control"]
 layout_mode = 3
@@ -15,17 +11,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorBlindOptions" parent="." instance=ExtResource("1_one7r")]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 188.0
-offset_top = 95.0
-offset_right = 365.0
-offset_bottom = 132.0
+offset_left = 1.0
+offset_top = 110.0
+offset_right = 627.0
+offset_bottom = 152.0
+theme_override_constants/separation = 45
 
-[node name="colorblind_options" type="Label" parent="."]
-layout_mode = 0
-offset_top = 98.0
-offset_right = 133.0
-offset_bottom = 121.0
+[node name="colorblind_options" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_88285")
+theme_override_font_sizes/font_size = 32
 text = "Coloblind Options"
-label_settings = SubResource("LabelSettings_t680u")
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="DaltonismoItemList" type="OptionButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_88285")
+theme_override_font_sizes/font_size = 22
+alignment = 1
+selected = 0
+item_count = 4
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Deuteranopía"
+popup/item_1/id = 1
+popup/item_2/text = "Protanopía"
+popup/item_2/id = 2
+popup/item_3/text = "Tritanopía"
+popup/item_3/id = 3
+script = ExtResource("2_t680u")

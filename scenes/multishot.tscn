@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://8hmxui6iwmrt"]
+[gd_scene load_steps=15 format=3 uid="uid://8hmxui6iwmrt"]
 
 [ext_resource type="Script" uid="uid://b8sgi48isk6vw" path="res://scripts/multishot.gd" id="1_7wi61"]
 [ext_resource type="Texture2D" uid="uid://cm4x152fwagvh" path="res://sprites/triple_shot.png" id="1_y57rb"]
 [ext_resource type="PackedScene" uid="uid://cpwtq0ghm5lkf" path="res://scenes/interactable.tscn" id="2_fbcnd"]
+[ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="2_kic7d"]
 [ext_resource type="AudioStream" uid="uid://73o861twvxot" path="res://audios/player_powerup_pickup.mp3" id="4_xqxlh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbcnd"]
@@ -66,12 +67,22 @@ animations = [{
 radius = 30.066593
 
 [node name="Multishot" type="Area2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 32
 collision_mask = 64
 script = ExtResource("1_7wi61")
 interact_name = "[E] to Interact"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(3, 3)
+texture = ExtResource("2_kic7d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+y_sort_enabled = true
+position = Vector2(0, 0.33333334)
+scale = Vector2(0.20000002, 0.20000002)
 sprite_frames = SubResource("SpriteFrames_tce5d")
 autoplay = "default"
 

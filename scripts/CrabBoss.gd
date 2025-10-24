@@ -51,8 +51,6 @@ var rock_scene := preload("res://scenes/CrabBossNormal/rock_boulder.tscn")
 @onready var attack_timer: Timer = $AttackTimer
 @onready var coin_muzzle := $CoinMuzzle
 
-@onready var slam_audio: AudioStreamPlayer2D = $SlamAudio
-@onready var coin_audio: AudioStreamPlayer2D = $CoinAudio
 
 func _ready() -> void:
 	add_to_group("boss")
@@ -157,10 +155,6 @@ func _perform_slam() -> void:
 	_is_attacking = true
 	anim.play("slam")
 
-	if slam_audio:
-		slam_audio.stream = slam_attack_sound
-		slam_audio.play()
-
 	# Drop rocks after delay
 	await get_tree().create_timer(1.2).timeout
 	_spawn_rocks()
@@ -183,9 +177,6 @@ func _perform_cointoss() -> void:
 		return
 	_is_attacking = true
 	anim.play("cointoss")
-	if coin_audio:
-		coin_audio.stream = coin_attack_sound
-		coin_audio.play()
 
 	# Wait a short moment before tossing coin
 	await get_tree().create_timer(0.5).timeout

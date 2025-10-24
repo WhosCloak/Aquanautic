@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://xg6maj4jmyt2"]
+[gd_scene load_steps=9 format=3 uid="uid://xg6maj4jmyt2"]
 
 [ext_resource type="Script" uid="uid://deev88elhti5a" path="res://scripts/level_3_boss.gd" id="1_1m6vk"]
 [ext_resource type="Texture2D" uid="uid://cuviu4068s003" path="res://sprites/CrabBossLevel.png" id="2_yx4p4"]
 [ext_resource type="PackedScene" uid="uid://dyl0m1i0mkqby" path="res://scenes/CrabBossNormal/crab_boss.tscn" id="3_1m6vk"]
-[ext_resource type="AudioStream" uid="uid://dylijrrbms8st" path="res://scenes/BossLevels/crab_coin_toss_2.mp3" id="4_r5g3q"]
-[ext_resource type="AudioStream" uid="uid://c0m4uou401wdc" path="res://scenes/BossLevels/crab_ground_slam_2.mp3" id="5_6uk48"]
 [ext_resource type="AudioStream" uid="uid://cbq43ie61clgn" path="res://audios/King Crab.mp3" id="6_6uk48"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
@@ -58,16 +56,6 @@ max_hp = 50
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 rock_drop_markers_path = NodePath("../../RockDropRoot")
-
-[node name="coin_audio" type="AudioStreamPlayer2D" parent="CrabSpawn/CrabBoss"]
-stream = ExtResource("4_r5g3q")
-volume_db = 8.347
-bus = &"SFX"
-
-[node name="slam_audio" type="AudioStreamPlayer2D" parent="CrabSpawn/CrabBoss"]
-stream = ExtResource("5_6uk48")
-volume_db = 10.496
-bus = &"SFX"
 
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, 189)
