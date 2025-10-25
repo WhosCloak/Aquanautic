@@ -26,6 +26,7 @@ buses/default_bus_layout="res://audios/default_bus_layout.tres"
 Global="*res://scripts/global.gd"
 Fade="*res://scenes/fade.tscn"
 global_accesibility_signal="*res://addons/accesibilitytools/global_accesibility_signal.gd"
+GlobalWorldEnvironment="*res://scenes/world_environment.tscn"
 
 [display]
 

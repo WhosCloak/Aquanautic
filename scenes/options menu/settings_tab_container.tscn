@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckpyg5xibxjx1"]
+[gd_scene load_steps=9 format=3 uid="uid://ckpyg5xibxjx1"]
 
 [ext_resource type="PackedScene" uid="uid://bd4fu5hhab36n" path="res://scenes/options menu/hotkey_rebind_button.tscn" id="1_0v3h5"]
 [ext_resource type="PackedScene" uid="uid://dlnvepr7j8mxg" path="res://scenes/options menu/window_mode_button.tscn" id="1_8fdhs"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bk61v3s25safy" path="res://scenes/options menu/resolution_mode_button.tscn" id="2_uoiki"]
 [ext_resource type="PackedScene" uid="uid://b0uvg626gkymd" path="res://scenes/options menu/color_blind_toggle_button.tscn" id="5_qldpk"]
 [ext_resource type="PackedScene" uid="uid://csolis2asqc4t" path="res://scenes/options menu/camerashakecontrol.tscn" id="7_1mdlc"]
+[ext_resource type="PackedScene" uid="uid://bfk77kanw32tx" path="res://scenes/options menu/brightnesscontrol.tscn" id="8_r5sbi"]
 
 [node name="Settings_Tab_Container" type="Control"]
 layout_mode = 3
@@ -30,9 +31,10 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 theme_override_font_sizes/font_size = 24
 tab_alignment = 1
-current_tab = 0
+current_tab = 3
 
 [node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 0
@@ -165,7 +167,6 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Accesibility" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 3
@@ -192,4 +193,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="camerashakecontrol" parent="TabContainer/Accesibility/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("7_1mdlc")]
+layout_mode = 2
+
+[node name="brightnesscontrol" parent="TabContainer/Accesibility/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("8_r5sbi")]
 layout_mode = 2
