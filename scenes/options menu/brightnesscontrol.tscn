@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfk77kanw32tx"]
+[gd_scene load_steps=3 format=3 uid="uid://bfk77kanw32tx"]
 
 [ext_resource type="Script" uid="uid://c7b8hiy50j416" path="res://scripts/brightness.gd" id="1_sn42e"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="2_5f4vm"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_cp866"]
-font = ExtResource("2_5f4vm")
-font_size = 20
 
 [node name="brightnesscontrol" type="Control"]
 layout_mode = 3
@@ -15,24 +11,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="brightness" type="HSlider" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 222.0
-offset_top = 348.0
-offset_right = 477.0
-offset_bottom = 364.0
+offset_top = 218.0
+offset_right = 809.0
+offset_bottom = 260.0
+theme_override_constants/separation = 90
+
+[node name="brightnesslabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5f4vm")
+theme_override_font_sizes/font_size = 32
+text = "Brightness"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="brightness" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
 min_value = 0.01
 max_value = 4.0
 step = 0.01
 value = 1.0
 script = ExtResource("1_sn42e")
 
-[node name="brightnesslabel" type="Label" parent="."]
-layout_mode = 0
-offset_top = 344.0
-offset_right = 108.0
-offset_bottom = 370.0
-text = "Brightness"
-label_settings = SubResource("LabelSettings_cp866")
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
 
-[connection signal="value_changed" from="brightness" to="brightness" method="_on_value_changed"]
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5f4vm")
+theme_override_font_sizes/font_size = 32
+text = "10"
+
+[connection signal="value_changed" from="HBoxContainer/brightness" to="HBoxContainer/brightness" method="_on_value_changed"]

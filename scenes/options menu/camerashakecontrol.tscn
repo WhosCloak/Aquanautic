@@ -44,6 +44,7 @@ layout_mode = 2
 [node name="strength_label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_40hmj")
 theme_override_font_sizes/font_size = 32
 text = "0"
 vertical_alignment = 1

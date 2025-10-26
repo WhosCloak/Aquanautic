@@ -13,17 +13,17 @@ grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 1.0
+offset_left = -1.0
 offset_top = 110.0
-offset_right = 627.0
-offset_bottom = 152.0
-theme_override_constants/separation = 45
+offset_right = 629.0
+offset_bottom = 174.0
+theme_override_constants/separation = 32
 
 [node name="colorblind_options" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_88285")
 theme_override_font_sizes/font_size = 32
-text = "Coloblind Options"
+text = "Colorblind Options"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2

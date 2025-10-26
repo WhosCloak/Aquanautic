@@ -13,8 +13,8 @@ config_version=5
 config/name="Aquanautic"
 run/main_scene="uid://cas66d7g8grep"
 config/features=PackedStringArray("4.5", "Forward Plus")
-boot_splash/image="uid://f4deonfbhoh8"
-config/icon="uid://cthpvmc63dewv"
+boot_splash/image="uid://chql0bhq15cuo"
+config/icon="uid://c5vpu0iuyjp3u"
 boot_splash/minimum_display_time=2000
 
 [audio]

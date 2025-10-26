@@ -5,6 +5,7 @@ extends Node2D
 # ===============================
 
 var boss_1_scene := "res://scenes/BossLevels/Level_1_Boss.tscn"
+var boss_2_scene := "res://scenes/BossLevels/Level_2_Boss.tscn"
 var gate_scene := preload("res://scenes/WhirlpoolGate.tscn")
 
 var in_boss := false
@@ -38,16 +39,14 @@ func check_next_level() -> void:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	elif level_reached == 2 and Global.player_score >= 4:
-		Fade.transition()
-		await Fade.on_transition_finished
-		go_to_level_3()
-		level_reached = 3
-		gate_spawned = false
+	elif level_reached == 2 and Global.player_score >= 4 and not gate_spawned:
+		_spawn_boss_gate_near_player()
+		gate_spawned = true
 
 	elif level_reached == 3 and Global.player_score >= 6 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
+	print("[Main] level:", level_reached, " score:", Global.player_score, " gate_spawned:", gate_spawned)
 
 
 # ===============================
@@ -82,8 +81,11 @@ func _on_gate_entered() -> void:
 
 	if level_reached == 1:
 		_go_to_boss_for_level(1)
+	elif level_reached == 2:
+		_go_to_boss_for_level(2)
 	elif level_reached == 3:
 		_go_to_boss_for_level(3)
+
 
 
 # ===============================
@@ -95,6 +97,8 @@ func _go_to_boss_for_level(idx: int) -> void:
 	match idx:
 		1:
 			boss_scene_path = boss_1_scene
+		2:
+			boss_scene_path = boss_2_scene
 		3:
 			boss_scene_path = "res://scenes/BossLevels/Level_3_Boss.tscn"
 
@@ -110,10 +114,12 @@ func _go_to_boss_for_level(idx: int) -> void:
 	if player and spawn:
 		player.global_position = spawn.global_position
 
-	var boss := current_level.find_child("WhaleBoss", true, false)
+	var boss := current_level.find_child("SharkBoss", true, false)
+	if not boss:
+		boss = current_level.find_child("WhaleBoss", true, false)
 	if not boss:
 		boss = current_level.find_child("CrabBoss", true, false)
-	
+
 	if boss:
 		var pname := "Boss"
 		if "display_name" in boss:
@@ -122,7 +128,6 @@ func _go_to_boss_for_level(idx: int) -> void:
 		if player and player.has_method("boss_ui_show"):
 			player.boss_ui_show(boss, pname)
 			print("[Main] calling boss_ui_show with:", pname)
-
 		boss.died.connect(_on_boss_died)
 
 
@@ -134,13 +139,20 @@ func _on_boss_died() -> void:
 	var player := get_tree().get_first_node_in_group("player")
 	if player and player.has_method("boss_ui_hide"):
 		player.boss_ui_hide()
-	
+
 	Fade.transition()
 	await Fade.on_transition_finished
-	level_reached = 2
-	in_boss = false
-	gate_spawned = false
-	go_to_level_2()
+
+	if level_reached == 1:
+		level_reached = 2
+		in_boss = false
+		gate_spawned = false
+		go_to_level_2()
+	elif level_reached == 2:
+		level_reached = 3
+		in_boss = false
+		gate_spawned = false
+		go_to_level_3()
 
 
 # ===============================
