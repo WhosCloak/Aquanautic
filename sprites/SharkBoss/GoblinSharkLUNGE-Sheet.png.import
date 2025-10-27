@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xr30is6ikobt"
-path="res://.godot/imported/GoblinSharkLunge.png-58b027dcddb77d956b61c29321cb731c.ctex"
+uid="uid://c3pieudd75csg"
+path="res://.godot/imported/GoblinSharkLUNGE-Sheet.png-43415ef55f2e5839e04c602ca666a0ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/SharkBoss/GoblinSharkLunge.png"
-dest_files=["res://.godot/imported/GoblinSharkLunge.png-58b027dcddb77d956b61c29321cb731c.ctex"]
+source_file="res://sprites/SharkBoss/GoblinSharkLUNGE-Sheet.png"
+dest_files=["res://.godot/imported/GoblinSharkLUNGE-Sheet.png-43415ef55f2e5839e04c602ca666a0ca.ctex"]
 
 [params]
 

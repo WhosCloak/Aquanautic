@@ -1,6 +1,10 @@
 extends HSlider
 
+@onready var label: Label = $"../Label"
 
-@warning_ignore("shadowed_variable_base_class")
-func _on_value_changed(value: float) -> void:
-	GlobalWorldEnvironment.environment.adjustment_brightness = value
+func _ready() -> void:
+	_on_value_changed(self.value)
+
+func _on_value_changed(slider_value: float) -> void:
+	GlobalWorldEnvironment.environment.adjustment_brightness = slider_value
+	label.text = str(snapped(slider_value, 1)) + "%" 

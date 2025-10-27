@@ -16,8 +16,8 @@ layout_mode = 0
 offset_left = -1.0
 offset_top = 110.0
 offset_right = 629.0
-offset_bottom = 174.0
-theme_override_constants/separation = 32
+offset_bottom = 152.0
+theme_override_constants/separation = 11
 
 [node name="colorblind_options" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -26,10 +26,12 @@ theme_override_font_sizes/font_size = 32
 text = "Colorblind Options"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="DaltonismoItemList" type="OptionButton" parent="HBoxContainer"]
-custom_minimum_size = Vector2(256, 64)
+custom_minimum_size = Vector2(270, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_88285")
 theme_override_font_sizes/font_size = 22

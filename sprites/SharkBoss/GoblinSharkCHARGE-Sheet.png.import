@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkyci0nrqiii1"
-path="res://.godot/imported/GoblinSharkBossChomp-Sheet.png-c1acbdb7fa2ddb844addd10d903b2df2.ctex"
+uid="uid://bhn7qo6l2fc7k"
+path="res://.godot/imported/GoblinSharkCHARGE-Sheet.png-e77df9b58e24ce6f42c3aba91a8b2a2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/SharkBoss/GoblinSharkBossChomp-Sheet.png"
-dest_files=["res://.godot/imported/GoblinSharkBossChomp-Sheet.png-c1acbdb7fa2ddb844addd10d903b2df2.ctex"]
+source_file="res://sprites/SharkBoss/GoblinSharkCHARGE-Sheet.png"
+dest_files=["res://.godot/imported/GoblinSharkCHARGE-Sheet.png-e77df9b58e24ce6f42c3aba91a8b2a2c.ctex"]
 
 [params]
 

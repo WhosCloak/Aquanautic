@@ -9,4 +9,4 @@ func _ready() -> void:
 
 func _on_shake_slider_value_changed(value: float) -> void:
 	Global.randomstrength = shake_slider.value
-	strength_label.text = str(snapped(value, 1))
+	strength_label.text = str(snapped(value, 1)) + "%"
