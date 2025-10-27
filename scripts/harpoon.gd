@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 func _ready():
+	add_to_group("projectile")
 	await get_tree().create_timer(2.0).timeout
 	queue_free()
    

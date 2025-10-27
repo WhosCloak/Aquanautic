@@ -143,6 +143,9 @@ func _on_boss_died() -> void:
 	Fade.transition()
 	await Fade.on_transition_finished
 
+	# Ensure camera resets between boss and regular level
+	call_deferred("_reset_camera_for_regular_level")
+
 	if level_reached == 1:
 		level_reached = 2
 		in_boss = false
@@ -153,6 +156,7 @@ func _on_boss_died() -> void:
 		in_boss = false
 		gate_spawned = false
 		go_to_level_3()
+
 
 
 # ===============================
@@ -228,6 +232,7 @@ func _reset_camera_for_regular_level():
 func go_to_level_3() -> void:
 	load_level("res://scenes/levels/Level_3.tscn")
 	_start_all_spawners_in_tree()
+	call_deferred("_reset_camera_for_regular_level")
 
 
 func go_to_level_4() -> void:

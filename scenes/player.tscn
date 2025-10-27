@@ -458,15 +458,15 @@ fill_mode = 2
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/cooldown"]
-position = Vector2(1877.5, 954)
-scale = Vector2(5, 5)
+position = Vector2(1873, 883)
+scale = Vector2(5, 8)
 texture = ExtResource("15_a8ls1")
 region_enabled = true
 region_rect = Rect2(3, 8, 10.9409075, 32)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/cooldown"]
-position = Vector2(1877.5, 954)
-scale = Vector2(5, 5)
+position = Vector2(1873, 881)
+scale = Vector2(5, 8)
 sprite_frames = SubResource("SpriteFrames_l71n6")
 autoplay = "default"
 frame_progress = 0.9424803
