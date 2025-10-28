@@ -17,6 +17,7 @@ var multi_shot := false
 var firerate := false
 var _is_stunned: bool = false
 var flash_duration := 0.1
+var flip_threshold: float = 1.0
 
 
 # ===== AUDIO =====
@@ -37,11 +38,12 @@ var _current_boss: Node = null
 
 
 # ===== NODE REFERENCES =====
+@onready var diver_anim: AnimatedSprite2D = $diver_anim
+@onready var diver_arm: Sprite2D = $diver_arm
 @onready var boss_hud: Control = $CanvasLayer/BossHUD
 @onready var boss_name: Label = $CanvasLayer/BossHUD/HBoxContainer/BossName
 @onready var boss_bar: Range = $CanvasLayer/BossHUD/HBoxContainer/BossBar
 @onready var cam := $Camera2D
-@onready var gun = $gun
 @onready var score_label = $CanvasLayer/Score/Label
 @onready var bubbles: GPUParticles2D = $BubbleTrail
 @onready var cooldowntimer: Timer = $cooldowntimer
@@ -103,9 +105,10 @@ func _physics_process(_delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	velocity = input_vector.normalized() * speed
 	move_and_slide()
+	model_facing()
 
 	# --- Aiming ---
-	gun.look_at(get_global_mouse_position())
+	diver_arm.look_at(get_global_mouse_position())
 
 	# --- Shooting ---
 	if Input.is_action_just_pressed("fire") and cooldowntimer.is_stopped():
@@ -113,9 +116,9 @@ func _physics_process(_delta):
 
 	# --- Animation ---
 	if input_vector:
-		$AnimatedSprite2D.play("playerswim")
+		diver_anim.play("playerswim")
 	else:
-		$AnimatedSprite2D.pause()
+		diver_anim.pause()
 
 	# --- Bubble Trail ---
 	_update_bubble_trail()
@@ -126,6 +129,22 @@ func _physics_process(_delta):
 	else:
 		cooldownbar.value = 100
 
+func model_facing() -> void:
+	if diver_anim == null:
+		return
+
+	if abs(velocity.x) > flip_threshold:
+		diver_anim.flip_h = velocity.x < 0.0
+
+	var mouse_pos = get_global_mouse_position()
+	var player_pos = global_position
+
+	if mouse_pos.x < player_pos.x:
+		diver_anim.flip_h = true
+		diver_arm.flip_v = true
+	elif mouse_pos.x > player_pos.x:
+		diver_anim.flip_h = false
+		diver_arm.flip_v = false
 
 # ==============================================
 # ==== BUBBLE TRAIL LOGIC ====
@@ -162,7 +181,7 @@ func _update_bubble_trail():
 func fire():
 	$Harpoon.play()
 	cooldowntimer.start()
-	var fire_pos = gun.global_position
+	var fire_pos = diver_arm.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
 	
 	if not firerate:
