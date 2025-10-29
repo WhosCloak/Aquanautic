@@ -33,7 +33,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0yhn"]
-radius = 91.02197
+radius = 54.147945
 
 [node name="SharkBite" type="Node2D" groups=["enemy_attack"]]
 script = ExtResource("1_k0yhn")

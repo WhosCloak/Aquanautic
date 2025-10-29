@@ -3,7 +3,7 @@ extends Node2D
 signal died
 signal hp_changed(current_hp: int, max_hp: int)
 
-@export var dive_chance := 1.0
+@export var dive_chance := 0.4
 @export var dive_speed := 200.0
 @export var disappear_delay := 0.5
 @export var reappear_delay := 1.5
