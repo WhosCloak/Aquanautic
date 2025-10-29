@@ -3,6 +3,11 @@ extends Node2D
 signal died
 signal hp_changed(current_hp: int, max_hp: int)
 
+@export var dive_chance := 1.0
+@export var dive_speed := 200.0
+@export var disappear_delay := 0.5
+@export var reappear_delay := 1.5
+@export var shark_bite_scene: PackedScene
 @export var swim_speed := 60.0
 @export var arrive_dist := 8.0
 @export var path_a_path: NodePath
@@ -27,18 +32,20 @@ var _is_lunging := false
 var _lunge_timer := 0.0
 var _lunge_dir := Vector2.ZERO
 var _hit_lock := false
+var _is_diving := false
 
+# -------------------------------
+# INITIAL SETUP
+# -------------------------------
 func _ready() -> void:
 	add_to_group("boss")
 	hp = max_hp
 	if anim:
-		# Play any default swim/idle animation if present
 		if "Swim" in anim.sprite_frames.get_animation_names():
 			anim.play("Swim")
 		else:
 			anim.play()
 
-	# Pick initial patrol target
 	if path_a and path_b:
 		var da = global_position.distance_to(path_a.global_position)
 		var db = global_position.distance_to(path_b.global_position)
@@ -47,7 +54,6 @@ func _ready() -> void:
 	else:
 		push_warning("SharkBoss missing path markers")
 
-	# Hook hurtbox signals robustly (both area and body), and ensure monitoring is on
 	if hurtbox:
 		hurtbox.monitoring = true
 		if not hurtbox.is_connected("area_entered", Callable(self, "_on_hurt_area_entered")):
@@ -57,9 +63,21 @@ func _ready() -> void:
 	else:
 		push_warning("SharkBoss: Hurtbox node missing or not found")
 
-	# Initialize boss HP UI
 	hp_changed.emit(hp, max_hp)
 
+# -------------------------------
+# HELPER: UPDATE FACING
+# -------------------------------
+func update_facing(dir: Vector2) -> void:
+	if not anim:
+		return
+	if abs(dir.x) > 0.1:
+		var moving_left = dir.x < 0
+		anim.flip_h = moving_left if faces_right_default else not moving_left
+
+# -------------------------------
+# DAMAGE + DEATH
+# -------------------------------
 func take_damage(amount: int) -> void:
 	if _hit_lock:
 		return
@@ -68,71 +86,123 @@ func take_damage(amount: int) -> void:
 	if hp == 0:
 		die()
 	else:
-		# brief invulnerability to prevent multi-hit in a single frame
 		_hit_lock = true
 		await get_tree().create_timer(0.05).timeout
 		_hit_lock = false
 
-# Area2D overlaps (projectile as Area2D)
+func apply_damage(amount: int) -> void:
+	take_damage(amount)
+
+func die() -> void:
+	died.emit()
+	queue_free()
+
+# -------------------------------
+# HURTBOX SIGNALS
+# -------------------------------
 func _on_hurt_area_entered(area: Area2D) -> void:
-	# Debug prints help confirm collisions in case of filter issues
-	# print("Shark hurtbox area_entered:", area.name)
 	if _hit_lock:
 		return
 	if area.is_in_group("projectile"):
 		area.queue_free()
 		take_damage(1)
 
-# PhysicsBody2D overlaps (projectile as Body)
 func _on_hurt_body_entered(body: Node) -> void:
-	# print("Shark hurtbox body_entered:", body.name)
 	if _hit_lock:
 		return
-
-	# If projectile is implemented as a Body in this level
 	if body.is_in_group("projectile"):
-		if body is Node:
-			body.queue_free()
+		body.queue_free()
 		take_damage(1)
-		return
-
-	# Player contact damage while lunging or on contact
-	if body.is_in_group("player"):
+	elif body.is_in_group("player"):
 		if body.has_method("take_damage"):
 			body.take_damage(contact_damage)
 
-# Back-compat: allow other code to apply damage directly
-func apply_damage(amount: int) -> void:
-	take_damage(amount)
-
+# -------------------------------
+# MOVEMENT + ATTACKS
+# -------------------------------
 func _physics_process(delta: float) -> void:
 	if not _target_marker:
 		return
 
 	if _is_lunging:
 		global_position += _lunge_dir * lunge_speed * delta
+		update_facing(_lunge_dir) # fix flip while lunging
 		_lunge_timer -= delta
 		if _lunge_timer <= 0.0:
 			_is_lunging = false
 		return
 
-	# Swim toward target marker
 	var to_target = _target - global_position
-	if to_target.length() > arrive_dist:
+	if to_target.length() > arrive_dist and not _is_diving:
 		var step = to_target.normalized() * swim_speed * delta
 		global_position += step
-		if anim:
-			var moving_left = step.x < 0.0
-			anim.flip_h = moving_left if faces_right_default else not moving_left
+		update_facing(step) # fix flip during normal swim
 	else:
-		# Reached marker: swap target and possibly lunge
 		_target_marker = path_a if _target_marker == path_b else path_b
 		_target = _target_marker.global_position
 
-		# Simple random lunge trigger on turns
-		if randi_range(0, 2) == 0:
+		var roll = randf()
+		if roll < dive_chance:
+			start_dive_attack()
+		elif roll < 0.5:
 			start_lunge()
 
+# -------------------------------
+# DIVE ATTACK
+# -------------------------------
+func start_dive_attack() -> void:
+	if _is_diving:
+		return
+	_is_diving = true
+	print("SharkBoss begins dive attack!")
+
+	var dir = (_target - global_position).normalized()
+	update_facing(dir)
+	var offscreen_target = global_position + dir * 800.0
+	var travel_time = (offscreen_target - global_position).length() / dive_speed
+
+	if anim:
+		anim.modulate = Color(0.7, 0.7, 0.7)
+		anim.play("Swim")
+
+	var tween = create_tween()
+	tween.tween_property(self, "global_position", offscreen_target, travel_time)
+	await tween.finished
+
+	visible = false
+	await get_tree().create_timer(disappear_delay).timeout
+
+	summon_shark_bite()
+	await get_tree().create_timer(reappear_delay).timeout
+	reappear()
+
+func reappear() -> void:
+	print("SharkBoss returns to battle!")
+	visible = true
+	anim.modulate = Color(1, 1, 1)
+	_is_diving = false
+
+# -------------------------------
+# SHARK BITE SUMMON
+# -------------------------------
+func summon_shark_bite() -> void:
+	if not shark_bite_scene:
+		push_warning("No shark_bite_scene assigned in Inspector.")
+		return
+
+	var player = get_tree().get_first_node_in_group("player")
+	if not player:
+		push_warning("No player found for Shark Bite.")
+		return
+
+	var bite = shark_bite_scene.instantiate()
+	bite.global_position = player.global_position
+	get_parent().add_child(bite)
+	print("Summoned Shark Bite attack at player position!")
+
+# -------------------------------
+# LUNGE ATTACK
+# -------------------------------
 func start_lunge() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:
@@ -141,20 +211,17 @@ func start_lunge() -> void:
 	_is_lunging = true
 	_lunge_timer = lunge_duration
 	_lunge_dir = (player.global_position - global_position).normalized()
+	update_facing(_lunge_dir) # fix flip before lunging
 
-	# Telegraph with animation or tint
 	if anim:
 		if "Charge" in anim.sprite_frames.get_animation_names():
 			anim.play("Charge")
 		else:
 			anim.modulate = Color(1, 0.3, 0.3)
+
 	await get_tree().create_timer(0.3).timeout
+
 	if anim:
 		anim.modulate = Color(1, 1, 1)
 		if "Lunge" in anim.sprite_frames.get_animation_names():
 			anim.play("Lunge")
-
-func die() -> void:
-	# print("SharkBoss defeated!")
-	died.emit()
-	queue_free()
