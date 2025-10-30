@@ -5,6 +5,11 @@ var enemy_scene_2 = preload("res://scenes/Enemies/enemy2.tscn")
 var enemy_scene_3 = preload("res://scenes/Enemies/enemy3.tscn")
 var enemy_scene_4 = preload("res://scenes/Enemies/enemy4.tscn")
 var enemy_scene_5 = preload("res://scenes/Enemies/enemy5.tscn")
+var enemy_scene_6 = preload("res://scenes/Enemies/enemy6.tscn")
+var enemy_scene_7 = preload("res://scenes/Enemies/enemy7.tscn")
+var enemy_scene_8 = preload("res://scenes/Enemies/enemy8.tscn")
+var enemy_scene_9 = preload("res://scenes/Enemies/enemy9.tscn")
+var enemy_scene_10 = preload("res://scenes/Enemies/enemy10.tscn")
 
 var spawn_distance = 500 
 var spawn_interval = 1
@@ -31,12 +36,22 @@ func spawn_enemy():
 	
 	if player.score >= 10:
 		enemy_scene = enemy_scene_2
-	if player.score >= 20:
+	if player.score >= 15:
 		enemy_scene = enemy_scene_3
-	if player.score >= 25:
+	if player.score >= 20:
 		enemy_scene = enemy_scene_4
-	if player.score >= 30:
+	if player.score >= 25:
 		enemy_scene = enemy_scene_5
+	if player.score >= 30:
+		enemy_scene = enemy_scene_6
+	if player.score >= 35:
+		enemy_scene = enemy_scene_7
+	if player.score >= 40:
+		enemy_scene = enemy_scene_8
+	if player.score >= 45:
+		enemy_scene = enemy_scene_9
+	if player.score >= 50:
+		enemy_scene = enemy_scene_10
 
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = spawn_pos

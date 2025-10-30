@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://iqaftvis6kyl"]
+
+[ext_resource type="PackedScene" uid="uid://dau2bk1ksg4mx" path="res://scenes/Enemies/enemy.tscn" id="1_t3mt1"]
+
+[node name="enemy" instance=ExtResource("1_t3mt1")]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(0.14, 0.14)
+animation = &"enemy6"
+frame_progress = 0.0
