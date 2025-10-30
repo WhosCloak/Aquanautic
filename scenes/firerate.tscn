@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dx2kiuxhrgfgs"]
+[gd_scene load_steps=12 format=3 uid="uid://dx2kiuxhrgfgs"]
 
 [ext_resource type="Script" uid="uid://dtglmixj06da3" path="res://scripts/firerate.gd" id="1_uhoes"]
 [ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="2_bsdl0"]
 [ext_resource type="Texture2D" uid="uid://dajn0grmeaje8" path="res://sprites/Firerate.png" id="2_uhoes"]
 [ext_resource type="PackedScene" uid="uid://cpwtq0ghm5lkf" path="res://scenes/interactable.tscn" id="3_b0gjv"]
+[ext_resource type="AudioStream" uid="uid://73o861twvxot" path="res://audios/player_powerup_pickup.mp3" id="5_b0gjv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bsdl0"]
 atlas = ExtResource("2_uhoes")
@@ -70,3 +71,4 @@ collision_layer = 8
 collision_mask = 1
 
 [node name="firerateaudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_b0gjv")
