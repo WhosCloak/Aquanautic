@@ -10,10 +10,10 @@ func _on_interact():
 
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		player.multi_shot = true
-		$multishotaudio.play()
+		player.speed = 500
+		$speedupaudio.play()
 		self.hide()
-		await get_tree().create_timer(7.0).timeout
-		player.multi_shot = false
+		await get_tree().create_timer(5.0).timeout
+		player.speed = 250
 
 	self.queue_free()

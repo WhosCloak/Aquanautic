@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://csu7ykrfdqm0h"]
+
+[ext_resource type="PackedScene" uid="uid://cpwtq0ghm5lkf" path="res://scenes/interactable.tscn" id="1_f4lbi"]
+[ext_resource type="Script" uid="uid://dg8ifo0hpkt1t" path="res://scripts/speedup.gd" id="1_j6y3j"]
+[ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="1_nxcth"]
+[ext_resource type="Texture2D" uid="uid://c3627nutcko6t" path="res://sprites/speedyflippers.png" id="2_j6y3j"]
+[ext_resource type="AudioStream" uid="uid://73o861twvxot" path="res://audios/player_powerup_pickup.mp3" id="5_115eg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_115eg"]
+atlas = ExtResource("2_j6y3j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii0j1"]
+atlas = ExtResource("2_j6y3j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fumab"]
+atlas = ExtResource("2_j6y3j")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2cku"]
+atlas = ExtResource("2_j6y3j")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_usp36"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_115eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii0j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fumab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2cku")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_whxlp"]
+radius = 23.0
+
+[node name="speedup" type="Area2D"]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("1_j6y3j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_nxcth")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_usp36")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_whxlp")
+
+[node name="interactable" parent="." instance=ExtResource("1_f4lbi")]
+
+[node name="speedupaudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_115eg")

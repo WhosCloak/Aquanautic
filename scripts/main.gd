@@ -46,7 +46,6 @@ func check_next_level() -> void:
 	elif level_reached == 3 and Global.player_score >= 6 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
-	print("[Main] level:", level_reached, " score:", Global.player_score, " gate_spawned:", gate_spawned)
 
 
 # ===============================

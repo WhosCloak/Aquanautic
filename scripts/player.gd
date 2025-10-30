@@ -237,10 +237,11 @@ func take_damage(amount: int):
 		die()
 
 
-func heal(amount: int):
+
+func heal(amount: int = 3):
+	print("Healed for", amount, " | Current:", health, "/", max_health)
 	health = min(health + amount, max_health)
 	update_hearts()
-
 
 func flash_hit() -> void:
 	var affected_nodes = _get_flashable_nodes(self)

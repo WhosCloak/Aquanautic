@@ -2,6 +2,8 @@ extends Node2D
 
 var powerup_multishot = preload("res://scenes/multishot.tscn")
 var powerup_firerate = preload("res://scenes/firerate.tscn")
+var powerup_speedup = preload("res://scenes/speedup.tscn")
+var powerup_maxhealth = preload("res://scenes/maxhealth.tscn")
 
 var spawn_distance := 400
 var spawn_interval := 2
@@ -27,7 +29,10 @@ func spawn_powerup():
 	var direction = Vector2(randf() * 2 - 1, randf() * 2 - 1).normalized()
 	var spawn_pos = player.global_position + direction * spawn_distance
 
-	var powerup_scene = powerup_multishot if randi() % 2 == 0 else powerup_firerate
+	var options = [powerup_multishot, powerup_firerate, powerup_speedup, powerup_maxhealth]
+	var powerup_scene = options[randi() % options.size()]
+
+
 
 	var powerup = powerup_scene.instantiate()
 	powerup.global_position = spawn_pos

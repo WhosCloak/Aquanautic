@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2ajbr5o683kg"]
+
+[ext_resource type="Script" uid="uid://ba7srcvp8lpv" path="res://scripts/maxhealth.gd" id="1_h2owv"]
+[ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="1_hxfei"]
+[ext_resource type="PackedScene" uid="uid://cpwtq0ghm5lkf" path="res://scenes/interactable.tscn" id="1_yqw7n"]
+[ext_resource type="Texture2D" uid="uid://5yvtfbt0kq4a" path="res://sprites/oxygen_tank.png" id="2_esn0m"]
+[ext_resource type="AudioStream" uid="uid://73o861twvxot" path="res://audios/player_powerup_pickup.mp3" id="4_1vs5r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vs5r"]
+atlas = ExtResource("2_esn0m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h2owv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vs5r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_esn0m"]
+radius = 22.022715
+
+[node name="maxhealth" type="Area2D"]
+script = ExtResource("1_h2owv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_hxfei")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_h2owv")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_esn0m")
+
+[node name="interactable" parent="." instance=ExtResource("1_yqw7n")]
+
+[node name="maxhealthaudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1vs5r")

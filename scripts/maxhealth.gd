@@ -10,10 +10,6 @@ func _on_interact():
 
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		player.multi_shot = true
-		$multishotaudio.play()
-		self.hide()
-		await get_tree().create_timer(7.0).timeout
-		player.multi_shot = false
-
+		player.heal()
+		$maxhealthaudio.play()
 	self.queue_free()
