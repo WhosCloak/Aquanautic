@@ -1,9 +1,95 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5eqqq5oxvi0f"]
+[gd_scene load_steps=18 format=3 uid="uid://c5eqqq5oxvi0f"]
 
-[ext_resource type="Texture2D" uid="uid://dvam5npmtv7jg" path="res://sprites/level2extended.png" id="1_ra442"]
-[ext_resource type="Texture2D" uid="uid://cofv46mijmkhl" path="res://sprites/level2.png" id="2_fiq81"]
+[ext_resource type="Texture2D" uid="uid://db780e8muv3kw" path="res://sprites/level2extended-Sheet-export.png" id="1_fiq81"]
+[ext_resource type="Texture2D" uid="uid://bnytg1pp7n5b1" path="res://sprites/Level_2-Sheet.png" id="2_fiq81"]
 [ext_resource type="Texture2D" uid="uid://dvwaean46cgpi" path="res://sprites/RockFloor2.png" id="3_l37oo"]
 [ext_resource type="AudioStream" uid="uid://djxlxkwocs3yg" path="res://audios/abyssal.mp3" id="4_fiq81"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsp8v"]
+atlas = ExtResource("1_fiq81")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt80m"]
+atlas = ExtResource("1_fiq81")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brxtv"]
+atlas = ExtResource("1_fiq81")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv7cl"]
+atlas = ExtResource("1_fiq81")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r88tb"]
+atlas = ExtResource("1_fiq81")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1yj8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsp8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nt80m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brxtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv7cl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r88tb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l37oo"]
+atlas = ExtResource("2_fiq81")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpwj6"]
+atlas = ExtResource("2_fiq81")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibugp"]
+atlas = ExtResource("2_fiq81")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qukl"]
+atlas = ExtResource("2_fiq81")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p04p"]
+atlas = ExtResource("2_fiq81")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsp8v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l37oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpwj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibugp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qukl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p04p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ts7"]
 size = Vector2(20, 1.13)
@@ -15,17 +101,21 @@ size = Vector2(20, 1.13)
 [node name="WaterLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 324)
 
-[node name="OpenOcean" type="Sprite2D" parent="ParallaxBackground/WaterLayer"]
+[node name="OpenOcean" type="AnimatedSprite2D" parent="ParallaxBackground/WaterLayer"]
 texture_repeat = 2
-texture = ExtResource("1_ra442")
+sprite_frames = SubResource("SpriteFrames_1yj8c")
+autoplay = "default"
+frame_progress = 0.9279599
 centered = false
 
 [node name="FloorLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 0)
 
-[node name="OceanFloor" type="Sprite2D" parent="ParallaxBackground/FloorLayer"]
+[node name="OceanFloor" type="AnimatedSprite2D" parent="ParallaxBackground/FloorLayer"]
 position = Vector2(0, 500)
-texture = ExtResource("2_fiq81")
+sprite_frames = SubResource("SpriteFrames_qsp8v")
+autoplay = "default"
+frame_progress = 0.35242474
 centered = false
 
 [node name="RockLayer" type="ParallaxLayer" parent="ParallaxBackground"]

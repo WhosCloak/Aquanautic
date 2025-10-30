@@ -1,9 +1,95 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca177v0e87aki"]
+[gd_scene load_steps=18 format=3 uid="uid://ca177v0e87aki"]
 
-[ext_resource type="Texture2D" uid="uid://gvuq8fbny1y3" path="res://sprites/level4extended.png" id="1_w6h2s"]
-[ext_resource type="Texture2D" uid="uid://uxdc3cktyixj" path="res://sprites/level4.png" id="2_w6h2s"]
+[ext_resource type="Texture2D" uid="uid://c6elra2npi8yg" path="res://sprites/level4extended-Sheet-export.png" id="1_ogj6a"]
+[ext_resource type="Texture2D" uid="uid://qh27l2k5pjgi" path="res://sprites/Level_4-Sheet.png" id="2_ogj6a"]
 [ext_resource type="Texture2D" uid="uid://6jlvnuakbldu" path="res://sprites/RockFloor4.png" id="3_ogj6a"]
 [ext_resource type="AudioStream" uid="uid://o8kxautcqhyw" path="res://audios/Electric Tides.mp3" id="4_ogj6a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glw47"]
+atlas = ExtResource("1_ogj6a")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wsov"]
+atlas = ExtResource("1_ogj6a")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvnao"]
+atlas = ExtResource("1_ogj6a")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsvsk"]
+atlas = ExtResource("1_ogj6a")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcb7b"]
+atlas = ExtResource("1_ogj6a")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w6h2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glw47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wsov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvnao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsvsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcb7b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anwe6"]
+atlas = ExtResource("2_ogj6a")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rej77"]
+atlas = ExtResource("2_ogj6a")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vn0v"]
+atlas = ExtResource("2_ogj6a")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts8eg"]
+atlas = ExtResource("2_ogj6a")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um320"]
+atlas = ExtResource("2_ogj6a")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_glw47"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anwe6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rej77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vn0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts8eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_um320")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ts7"]
 size = Vector2(20, 1.13)
@@ -15,17 +101,20 @@ size = Vector2(20, 1.13)
 [node name="WaterLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 324)
 
-[node name="OpenOcean" type="Sprite2D" parent="ParallaxBackground/WaterLayer"]
+[node name="OpenOcean" type="AnimatedSprite2D" parent="ParallaxBackground/WaterLayer"]
 texture_repeat = 2
-texture = ExtResource("1_w6h2s")
+sprite_frames = SubResource("SpriteFrames_w6h2s")
+autoplay = "default"
+frame_progress = 0.48868814
 centered = false
 
 [node name="FloorLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 0)
 
-[node name="OceanFloor" type="Sprite2D" parent="ParallaxBackground/FloorLayer"]
+[node name="OceanFloor" type="AnimatedSprite2D" parent="ParallaxBackground/FloorLayer"]
 position = Vector2(0, 500)
-texture = ExtResource("2_w6h2s")
+sprite_frames = SubResource("SpriteFrames_glw47")
+autoplay = "default"
 centered = false
 
 [node name="RockLayer" type="ParallaxLayer" parent="ParallaxBackground"]

@@ -1,10 +1,96 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3ci5m2ebr62h"]
+[gd_scene load_steps=19 format=3 uid="uid://b3ci5m2ebr62h"]
 
-[ext_resource type="Texture2D" uid="uid://dp377bxi83hlj" path="res://sprites/level1extended.png" id="1_nsrm0"]
-[ext_resource type="Texture2D" uid="uid://c0gbswtt84cd3" path="res://sprites/level1.png" id="2_x42e6"]
+[ext_resource type="Texture2D" uid="uid://bi3a72qm2rnx" path="res://sprites/level1extended-Sheet-export.png" id="1_6761a"]
+[ext_resource type="Texture2D" uid="uid://bj4uk4qcei6tu" path="res://sprites/Level_1-Sheet.png" id="2_6761a"]
 [ext_resource type="Texture2D" uid="uid://bdr1mocncbgtg" path="res://sprites/RockFloor.png" id="3_6761a"]
 [ext_resource type="AudioStream" uid="uid://cmmkv1y4poe26" path="res://audios/Down I Go(Level 1).mp3" id="4_x42e6"]
 [ext_resource type="PackedScene" uid="uid://bnoqmjgby1h15" path="res://scenes/WhirlpoolGate.tscn" id="5_6761a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_excbq"]
+atlas = ExtResource("1_6761a")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iav0o"]
+atlas = ExtResource("1_6761a")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnkej"]
+atlas = ExtResource("1_6761a")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm8aj"]
+atlas = ExtResource("1_6761a")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtwp4"]
+atlas = ExtResource("1_6761a")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x42e6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_excbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iav0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnkej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm8aj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtwp4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk5k4"]
+atlas = ExtResource("2_6761a")
+region = Rect2(0, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc4kc"]
+atlas = ExtResource("2_6761a")
+region = Rect2(576, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8va5"]
+atlas = ExtResource("2_6761a")
+region = Rect2(1152, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dga24"]
+atlas = ExtResource("2_6761a")
+region = Rect2(1728, 0, 576, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxy0u"]
+atlas = ExtResource("2_6761a")
+region = Rect2(2304, 0, 576, 324)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_excbq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk5k4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc4kc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8va5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dga24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxy0u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ts7"]
 size = Vector2(20, 1.13)
@@ -16,17 +102,21 @@ size = Vector2(20, 1.13)
 [node name="WaterLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 324)
 
-[node name="OpenOcean" type="Sprite2D" parent="ParallaxBackground/WaterLayer"]
+[node name="OpenOcean" type="AnimatedSprite2D" parent="ParallaxBackground/WaterLayer"]
 texture_repeat = 2
-texture = ExtResource("1_nsrm0")
+sprite_frames = SubResource("SpriteFrames_x42e6")
+autoplay = "default"
+frame_progress = 0.21516638
 centered = false
 
 [node name="FloorLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 0)
 
-[node name="OceanFloor" type="Sprite2D" parent="ParallaxBackground/FloorLayer"]
+[node name="OceanFloor" type="AnimatedSprite2D" parent="ParallaxBackground/FloorLayer"]
 position = Vector2(0, 500)
-texture = ExtResource("2_x42e6")
+sprite_frames = SubResource("SpriteFrames_excbq")
+autoplay = "default"
+frame_progress = 0.097593166
 centered = false
 
 [node name="RockLayer" type="ParallaxLayer" parent="ParallaxBackground"]
