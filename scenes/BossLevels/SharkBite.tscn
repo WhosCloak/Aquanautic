@@ -29,7 +29,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Bite",
-"speed": 2.0
+"speed": 4.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0yhn"]
@@ -39,7 +39,7 @@ radius = 54.147945
 script = ExtResource("1_k0yhn")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_gtorv")
 animation = &"Bite"
 frame = 2

@@ -44,10 +44,11 @@ position = Vector2(565, 7)
 shape = SubResource("RectangleShape2D_41ab6")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(0, 105)
+position = Vector2(0, 158)
 
 [node name="BossSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -42)
+position = Vector2(0, -87)
+scale = Vector2(1.7, 1.7)
 
 [node name="WhaleBoss" parent="BossSpawn" instance=ExtResource("2_rppgv")]
 max_hp = 10
@@ -55,10 +56,10 @@ path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 
 [node name="PathA" type="Marker2D" parent="."]
-position = Vector2(-278, -42)
+position = Vector2(-445, -104)
 
 [node name="PathB" type="Marker2D" parent="."]
-position = Vector2(272, -42)
+position = Vector2(409, -104)
 
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_41ab6")

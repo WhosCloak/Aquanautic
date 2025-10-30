@@ -60,21 +60,16 @@ var _current_boss: Node = null
 # ==============================================
 
 func _ready():
-	# Initial camera setup
 	cam.zoom = Vector2(3.5, 3.5)
 	update_hearts()
 	cam.set_process(true)
-
-	# Duplicate shader materials (for hit flash)
 	_duplicate_materials_recursive(self)
-
-	# Hide boss HUD at start
 	if boss_hud:
 		boss_hud.visible = false
-		
-	# Cooldown Progress Bar
 	cooldownbar.max_value = cooldowntimer.wait_time
 	cooldownbar.value = cooldowntimer.wait_time
+	_ensure_idle_loop()
+
 
 func _enter_tree() -> void:
 	# Prepare the bubble trail material and settings
@@ -97,6 +92,15 @@ func _enter_tree() -> void:
 # ==== PHYSICS AND MOVEMENT ====
 # ==============================================
 
+func _ensure_idle_loop() -> void:
+	# Make sure the idle animation is set to loop (safety in case SpriteFrames isn’t configured)
+	if diver_anim and diver_anim.sprite_frames:
+		var frames := diver_anim.sprite_frames
+		if frames.has_animation("playerswim"):
+			frames.set_animation_loop("playerswim", true)
+
+
+
 func _physics_process(_delta):
 	if _is_stunned:
 		return
@@ -115,10 +119,17 @@ func _physics_process(_delta):
 		fire()
 
 	# --- Animation ---
-	if input_vector:
-		diver_anim.play("playerswim")
+	var move_input := Input.get_vector("left", "right", "up", "down")
+	var is_moving := move_input.length() > 0.0
+	if is_moving:
+		# While moving, keep the same idle swim if that’s your only loop,
+		# or change this to a run/swim-fast clip if you add one later.
+		if diver_anim.animation != "playerswim" or diver_anim.is_playing() == false:
+			diver_anim.play("playerswim")
 	else:
-		diver_anim.pause()
+		# No WASD input: keep the looping idle playing even when only aiming with mouse.
+		if diver_anim.animation != "playerswim" or diver_anim.is_playing() == false:
+			diver_anim.play("playerswim")
 
 	# --- Bubble Trail ---
 	_update_bubble_trail()

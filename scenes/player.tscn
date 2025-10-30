@@ -1,9 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=48 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
 [ext_resource type="Texture2D" uid="uid://c3f4ol47x30d2" path="res://sprites/StunEffect.png" id="3_3v2ag"]
-[ext_resource type="Texture2D" uid="uid://b430m2qmm4s4q" path="res://sprites/Diver.png" id="3_a8ls1"]
+[ext_resource type="Texture2D" uid="uid://dagwdnvvqvns1" path="res://sprites/DiverDefautlIdleSheet.png" id="3_a8ls1"]
 [ext_resource type="AudioStream" uid="uid://brsvr27fldspt" path="res://audios/harpoon_shot.mp3" id="3_fjrip"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 [ext_resource type="AudioStream" uid="uid://d1vksb0j38bdm" path="res://audios/high-score.mp3" id="4_fjrip"]
@@ -29,15 +29,50 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 atlas = ExtResource("3_a8ls1")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
+atlas = ExtResource("3_a8ls1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ow"]
+atlas = ExtResource("3_a8ls1")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
+atlas = ExtResource("3_a8ls1")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31cv2"]
+atlas = ExtResource("3_a8ls1")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf23h"]
+atlas = ExtResource("3_a8ls1")
+region = Rect2(320, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_f1ej7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qfm1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l71n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke2ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujl30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31cv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf23h")
 }],
 "loop": true,
 "name": &"playerswim",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
@@ -192,7 +227,7 @@ material = SubResource("ShaderMaterial_f1ej7")
 position = Vector2(-2.7083676, -1.0000004)
 sprite_frames = SubResource("SpriteFrames_f1ej7")
 animation = &"playerswim"
-frame_progress = 0.7786909
+frame_progress = 0.690536
 
 [node name="diver_arm" type="Sprite2D" parent="."]
 z_index = 1
