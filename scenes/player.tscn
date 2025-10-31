@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=55 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://brsvr27fldspt" path="res://audios/harpoon_shot.mp3" id="3_fjrip"]
 [ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="4_dqkch"]
 [ext_resource type="AudioStream" uid="uid://d1vksb0j38bdm" path="res://audios/high-score.mp3" id="4_fjrip"]
+[ext_resource type="Texture2D" uid="uid://dbtcebqjaibkx" path="res://sprites/DiverSwim-Sheet.png" id="4_qfm1y"]
 [ext_resource type="AudioStream" uid="uid://siwj4cyrbeap" path="res://audios/player_damage_taken.wav" id="4_ur7pv"]
 [ext_resource type="Script" uid="uid://dv243u1e5267j" path="res://scripts/camera_2d.gd" id="5_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://yij8e242uy0q" path="res://sprites/diver_arm.png" id="6_a8ls1"]
@@ -49,6 +50,30 @@ region = Rect2(256, 0, 64, 64)
 atlas = ExtResource("3_a8ls1")
 region = Rect2(320, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
+atlas = ExtResource("4_qfm1y")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
+atlas = ExtResource("4_qfm1y")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnwbv"]
+atlas = ExtResource("4_qfm1y")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
+atlas = ExtResource("4_qfm1y")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_487ah"]
+atlas = ExtResource("4_qfm1y")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
+atlas = ExtResource("4_qfm1y")
+region = Rect2(400, 0, 80, 80)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_f1ej7"]
 animations = [{
 "frames": [{
@@ -69,6 +94,29 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pf23h")
+}],
+"loop": true,
+"name": &"playeridle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt7fs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnwbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl8cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_487ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md1ol")
 }],
 "loop": true,
 "name": &"playerswim",
@@ -227,7 +275,6 @@ material = SubResource("ShaderMaterial_f1ej7")
 position = Vector2(-2.7083676, -1.0000004)
 sprite_frames = SubResource("SpriteFrames_f1ej7")
 animation = &"playerswim"
-frame_progress = 0.690536
 
 [node name="diver_arm" type="Sprite2D" parent="."]
 z_index = 1

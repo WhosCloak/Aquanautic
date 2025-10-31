@@ -118,18 +118,17 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("fire") and cooldowntimer.is_stopped():
 		fire()
 
-	# --- Animation ---
+# --- Animation ---
 	var move_input := Input.get_vector("left", "right", "up", "down")
 	var is_moving := move_input.length() > 0.0
 	if is_moving:
-		# While moving, keep the same idle swim if that’s your only loop,
-		# or change this to a run/swim-fast clip if you add one later.
 		if diver_anim.animation != "playerswim" or diver_anim.is_playing() == false:
 			diver_anim.play("playerswim")
+			diver_anim.position = Vector2(-16.0, -12.0)  # offset for swim position
 	else:
-		# No WASD input: keep the looping idle playing even when only aiming with mouse.
-		if diver_anim.animation != "playerswim" or diver_anim.is_playing() == false:
-			diver_anim.play("playerswim")
+		if diver_anim.animation != "playeridle" or diver_anim.is_playing() == false:
+			diver_anim.play("playeridle")
+			diver_anim.position = Vector2(-2.0, 0)  # offset for idle position
 
 	# --- Bubble Trail ---
 	_update_bubble_trail()
