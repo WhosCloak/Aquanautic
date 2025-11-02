@@ -276,6 +276,11 @@ func _do_charge_then_lunge() -> void:
 		if "Charge" in anim.sprite_frames.get_animation_names():
 			anim.play("Charge")
 			await anim.animation_finished
+
+	# Play lunge indicator sound
+	if has_node("LungeIndicatorPlayer"):
+		$LungeIndicatorPlayer.play()
+
 	# Start lunge towards player
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:
@@ -286,10 +291,10 @@ func _do_charge_then_lunge() -> void:
 	update_facing(_lunge_dir)
 	if anim and "Lunge" in anim.sprite_frames.get_animation_names():
 		anim.play("Lunge")
+
 	# Wait until lunge timer ends
 	while _is_lunging:
 		await get_tree().physics_frame
-
 
 func start_lunge() -> void:
 	if _action_lock or _state != BossState.ATTACK:

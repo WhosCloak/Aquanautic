@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://csbk22jxdbkmw"]
+[gd_scene load_steps=9 format=3 uid="uid://csbk22jxdbkmw"]
 
 [ext_resource type="Script" uid="uid://c16xkkcn3gixx" path="res://scripts/SharkBite.gd" id="1_k0yhn"]
 [ext_resource type="Texture2D" uid="uid://b1irhwd47e54c" path="res://sprites/SharkBoss/SharkBiteAnim-Sheet.png" id="2_k0yhn"]
+[ext_resource type="AudioStream" uid="uid://b0gvo7052shpv" path="res://audios/shark_bite_1_atk.mp3" id="3_eamow"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eamow"]
 atlas = ExtResource("2_k0yhn")
@@ -52,3 +53,8 @@ collision_mask = 26
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-3, -10)
 shape = SubResource("CircleShape2D_k0yhn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_eamow")
+autoplay = true
+bus = &"SFX"
