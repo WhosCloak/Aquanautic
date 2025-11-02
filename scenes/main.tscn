@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cpy4624ry8da6" path="res://scenes/Enemies/enemyspawner.tscn" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bjparc66wtwdg" path="res://scenes/powerupspawner.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bya814s12oehq" path="res://scenes/pause.tscn" id="4_tipki"]
-[ext_resource type="PackedScene" uid="uid://c1k5hxmsflwka" path="res://scenes/colorblind_shaderscreen.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://c1k5hxmsflwka" path="res://scenes/options menu/colorblind_shaderscreen.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b2ajbr5o683kg" path="res://scenes/maxhealth.tscn" id="7_o6xl0"]
 
 [node name="main" type="Node2D"]

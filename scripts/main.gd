@@ -6,6 +6,8 @@ extends Node2D
 
 var boss_1_scene := "res://scenes/BossLevels/Level_1_Boss.tscn"
 var boss_2_scene := "res://scenes/BossLevels/Level_2_Boss.tscn"
+var boss_3_scene := "res://scenes/BossLevels/level_3_boss.tscn"
+var boss_4_scene := "res://scenes/BossLevels/Level_4_Boss.tscn"
 var gate_scene := preload("res://scenes/WhirlpoolGate.tscn")
 
 var in_boss := false
@@ -47,6 +49,10 @@ func check_next_level() -> void:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
+	elif level_reached == 4 and Global.player_score >= 8 and not gate_spawned:
+		_spawn_boss_gate_near_player()
+		gate_spawned = true
+
 
 # ===============================
 # 🔹 BOSS GATE HANDLING
@@ -71,7 +77,8 @@ func _on_gate_entered() -> void:
 	in_boss = true
 	_stop_all_spawners_in_tree()
 	_purge_enemies()
-
+	call_deferred("_stop_all_spawners_in_tree")
+	call_deferred("_purge_enemies")
 	if is_instance_valid(gate_instance):
 		gate_instance.queue_free()
 
@@ -84,6 +91,8 @@ func _on_gate_entered() -> void:
 		_go_to_boss_for_level(2)
 	elif level_reached == 3:
 		_go_to_boss_for_level(3)
+	elif level_reached == 4:
+		_go_to_boss_for_level(4)
 
 
 
@@ -99,7 +108,9 @@ func _go_to_boss_for_level(idx: int) -> void:
 		2:
 			boss_scene_path = boss_2_scene
 		3:
-			boss_scene_path = "res://scenes/BossLevels/Level_3_Boss.tscn"
+			boss_scene_path = boss_3_scene
+		4:
+			boss_scene_path = boss_4_scene
 
 	load_level(boss_scene_path)
 	_stop_all_spawners_in_tree()
@@ -118,6 +129,8 @@ func _go_to_boss_for_level(idx: int) -> void:
 		boss = current_level.find_child("WhaleBoss", true, false)
 	if not boss:
 		boss = current_level.find_child("CrabBoss", true, false)
+	if not boss:
+		boss = current_level.find_child("Leviathan", true, false)
 
 	if boss:
 		var pname := "Boss"
@@ -142,8 +155,12 @@ func _on_boss_died() -> void:
 	Fade.transition()
 	await Fade.on_transition_finished
 
-	# Ensure camera resets between boss and regular level
-	call_deferred("_reset_camera_for_regular_level")
+	# safely reset camera if player still exists
+	if is_instance_valid(player):
+		var cam = player.get_node_or_null("Camera2D")
+		if cam:
+			cam.zoom = Vector2(3.3, 3.3)
+			cam.limit_enabled = false
 
 	if level_reached == 1:
 		level_reached = 2
@@ -155,7 +172,25 @@ func _on_boss_died() -> void:
 		in_boss = false
 		gate_spawned = false
 		go_to_level_3()
+	elif level_reached == 3:
+		level_reached = 4
+		in_boss = false
+		gate_spawned = false
+		go_to_level_4()
+	elif level_reached == 4:
+		# final boss defeated
+		_show_credits_scene()
 
+func _show_credits_scene() -> void:
+	print("[Main] Final boss defeated, showing credits")
+	Fade.transition()
+	await Fade.on_transition_finished
+
+	var credits_scene = load("res://scenes/CreditsPlayer.tscn")
+	if credits_scene:
+		var instance = credits_scene.instantiate()
+		get_tree().root.add_child(instance)
+		queue_free()  # remove the old main node so credits take over
 
 
 # ===============================
@@ -185,12 +220,17 @@ func _start_all_spawners_in_tree() -> void:
 
 
 func _stop_all_spawners_in_tree() -> void:
+	if get_tree() == null:
+		return
 	var list := get_tree().get_nodes_in_group("enemy_spawner")
 	for s in list:
-		s.set_process(false)
+		if is_instance_valid(s):
+			s.set_process(false)
 
 
 func _purge_enemies() -> void:
+	if get_tree() == null:
+		return
 	var list := get_tree().get_nodes_in_group("enemy")
 	for e in list:
 		if is_instance_valid(e):
@@ -237,3 +277,7 @@ func go_to_level_3() -> void:
 func go_to_level_4() -> void:
 	load_level("res://scenes/levels/level_4.tscn")
 	_start_all_spawners_in_tree()
+
+func go_to_main_menu() -> void:
+	load_level("res://scenes/mainmenu/main_menu.tscn")
+	_reset_camera_for_regular_level()

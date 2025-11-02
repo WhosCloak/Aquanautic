@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://buud2aore3wsj"]
+[gd_scene load_steps=8 format=3 uid="uid://nfe47g481dy5"]
 
-[ext_resource type="Script" uid="uid://dpipd3abo1rka" path="res://scripts/level_2_boss.gd" id="1_egdbn"]
-[ext_resource type="Texture2D" uid="uid://ctha52834swvu" path="res://sprites/SharkBoss/SharkBossLevel.png" id="2_egdbn"]
-[ext_resource type="PackedScene" uid="uid://ctv5qv4lf6ang" path="res://scenes/BossLevels/SharkBoss.tscn" id="3_egdbn"]
-[ext_resource type="AudioStream" uid="uid://dvrxjwujokmgx" path="res://audios/Whale Boss's Decent.mp3" id="4_7im6m"]
+[ext_resource type="Script" uid="uid://i04godhl0834" path="res://scripts/level_4_boss.gd" id="1_i8vwv"]
+[ext_resource type="Texture2D" uid="uid://cnfyw8qrmsode" path="res://sprites/LeviathanBossLevel.png" id="1_x8cad"]
+[ext_resource type="PackedScene" uid="uid://bqs06e1aqnpy0" path="res://scenes/BossLevels/Leviathan.tscn" id="2_i8vwv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
 size = Vector2(1154, 20)
@@ -17,12 +16,12 @@ size = Vector2(20, 672)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_41ab6"]
 size = Vector2(20, 666)
 
-[node name="Level_2_Boss" type="Node2D"]
-script = ExtResource("1_egdbn")
+[node name="Level_4_Boss" type="Node2D"]
+script = ExtResource("1_i8vwv")
 
 [node name="Background" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("2_egdbn")
+texture = ExtResource("1_x8cad")
 
 [node name="ArenaWalls" type="StaticBody2D" parent="." groups=["ground"]]
 collision_mask = 3
@@ -44,23 +43,23 @@ position = Vector2(565, 7)
 shape = SubResource("RectangleShape2D_41ab6")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(0, 105)
+position = Vector2(0, 241)
 
 [node name="BossSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -42)
+position = Vector2(0, -106.999985)
+scale = Vector2(1.7, 1.7)
 
-[node name="SharkBoss" parent="BossSpawn" instance=ExtResource("3_egdbn")]
+[node name="Leviathan" parent="BossSpawn" instance=ExtResource("2_i8vwv")]
+scale = Vector2(1.4, 1.4)
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
-max_hp = 10
 
 [node name="PathA" type="Marker2D" parent="."]
-position = Vector2(-278, -42)
+position = Vector2(-421, -97)
 
 [node name="PathB" type="Marker2D" parent="."]
-position = Vector2(272, -42)
+position = Vector2(433, -97)
 
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_7im6m")
 volume_db = -14.136
 bus = &"Music"

@@ -6,14 +6,18 @@ var can_interact = true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and can_interact:
-		if current_interactions:
-			can_interact = false
-			interact_label.hide()
-			
-			await current_interactions[0].interact.call()
-			
-			can_interact = true
-	
+		if current_interactions.size() > 0:
+			var target = current_interactions[0]
+			if target and "interact" in target:
+				can_interact = false
+				interact_label.hide()
+
+				# Wrap in a safe try block to avoid silent skips
+				if target.is_inside_tree():
+					await target.interact.call()
+				
+				can_interact = true
+
 
 func _process(_delta: float) -> void: #new
 	if current_interactions and can_interact:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=59 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
@@ -11,11 +11,13 @@
 [ext_resource type="AudioStream" uid="uid://siwj4cyrbeap" path="res://audios/player_damage_taken.wav" id="4_ur7pv"]
 [ext_resource type="Script" uid="uid://dv243u1e5267j" path="res://scripts/camera_2d.gd" id="5_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://yij8e242uy0q" path="res://sprites/diver_arm.png" id="6_a8ls1"]
-[ext_resource type="Texture2D" uid="uid://5yvtfbt0kq4a" path="res://sprites/oxygen_tank.png" id="6_smehm"]
 [ext_resource type="FontFile" uid="uid://b3e5yxxru3oif" path="res://font/FartBubble-1De.ttf" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://dwblficic883j" path="res://sprites/Bubbles.png" id="8_smehm"]
 [ext_resource type="PackedScene" uid="uid://6r6a02a2t45h" path="res://scenes/interaction_agent.tscn" id="11_d2wvv"]
+[ext_resource type="Theme" uid="uid://crx8176safmy0" path="res://sprites/default.tres" id="13_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://km57bjdep1e8" path="res://sprites/heart.png" id="14_fulsm"]
 [ext_resource type="Texture2D" uid="uid://l35jp1yonild" path="res://sprites/progressbar.png" id="15_a8ls1"]
+[ext_resource type="Texture2D" uid="uid://cv1npwcm8xdfa" path="res://sprites/HealthIcon-Sheet.png" id="15_fulsm"]
 [ext_resource type="Script" uid="uid://dlkfjxfkiiahh" path="res://scripts/cooldown_visual.gd" id="16_qfm1y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
@@ -179,19 +181,34 @@ scale_max = 0.8
 scale_curve = SubResource("CurveTexture_3v2ag")
 color_ramp = SubResource("GradientTexture1D_y4r1p")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smehm"]
-bg_color = Color(0, 1, 1, 0.39215687)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj30b"]
+atlas = ExtResource("15_fulsm")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur7pv"]
-bg_color = Color(0.8039216, 0.49803922, 0.19607843, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc3p3"]
+atlas = ExtResource("15_fulsm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hax0n"]
+atlas = ExtResource("15_fulsm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t4otl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj30b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jc3p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hax0n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y4r1p"]
 bg_color = Color(0.92941177, 0.8627451, 0.36862746, 1)
@@ -334,23 +351,28 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="Panel" parent="CanvasLayer/Score"]
 z_index = -180
 layout_mode = 0
-offset_right = 245.0
-offset_bottom = 71.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 247.0
+offset_bottom = 97.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_smehm")
+theme = ExtResource("13_4r5pv")
 
 [node name="Label" type="Label" parent="CanvasLayer/Score"]
 z_index = 165
 texture_filter = 1
 layout_mode = 1
+offset_top = 13.0
 offset_right = 245.0
-offset_bottom = 71.0
+offset_bottom = 84.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_dqkch")
@@ -364,39 +386,34 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -64.0
-offset_right = -1.0
-offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Heart1" type="TextureRect" parent="CanvasLayer/Hearts"]
-layout_mode = 0
-offset_left = 44.0
-offset_top = 1007.701
-offset_right = 203.0
-offset_bottom = 1166.7012
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_smehm")
+[node name="TextureRect" type="Sprite2D" parent="CanvasLayer/Hearts"]
+position = Vector2(76, 1008.0001)
+scale = Vector2(9.4, 9.4)
+texture = ExtResource("14_fulsm")
 
-[node name="Heart2" type="TextureRect" parent="CanvasLayer/Hearts"]
-layout_mode = 0
-offset_left = 135.94223
-offset_top = 1007.7009
-offset_right = 294.94226
-offset_bottom = 1166.7009
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_smehm")
+[node name="Heart1" type="AnimatedSprite2D" parent="CanvasLayer/Hearts"]
+position = Vector2(202, 1012.0001)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_t4otl")
+autoplay = "default"
+frame_progress = 0.6680226
 
-[node name="Heart3" type="TextureRect" parent="CanvasLayer/Hearts"]
-layout_mode = 0
-offset_left = 222.987
-offset_top = 1007.701
-offset_right = 381.98697
-offset_bottom = 1166.7008
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_smehm")
+[node name="Heart2" type="AnimatedSprite2D" parent="CanvasLayer/Hearts"]
+position = Vector2(281.00003, 1021.0001)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_t4otl")
+autoplay = "default"
+frame_progress = 0.49384898
+
+[node name="Heart3" type="AnimatedSprite2D" parent="CanvasLayer/Hearts"]
+position = Vector2(365.00003, 1028)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_t4otl")
+autoplay = "default"
+frame_progress = 0.36911774
 
 [node name="Label" type="Label" parent="CanvasLayer/Hearts"]
 visible = false
@@ -417,19 +434,6 @@ theme_override_font_sizes/font_size = 115
 text = "Health Restored"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ColorRect" type="Panel" parent="CanvasLayer/Hearts"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -85.0
-offset_right = 355.0
-offset_bottom = 13.0
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ur7pv")
 
 [node name="BossHUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -466,6 +470,7 @@ light_mask = 0
 visibility_layer = 512
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/outline_size = -3
 theme_override_fonts/font = ExtResource("6_tuyoq")
 theme_override_font_sizes/font_size = 23
@@ -475,6 +480,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_d2wvv")
 [node name="cooldown" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
+offset_top = 88.0
+offset_bottom = 88.0
+metadata/_edit_use_anchors_ = true
 
 [node name="cooldownbar" type="ProgressBar" parent="CanvasLayer/cooldown"]
 visible = false
@@ -498,14 +506,14 @@ show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/cooldown"]
 position = Vector2(1873, 883)
-scale = Vector2(5, 8)
+scale = Vector2(4, 5.8)
 texture = ExtResource("15_a8ls1")
 region_enabled = true
 region_rect = Rect2(3, 8, 10.9409075, 32)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/cooldown"]
 position = Vector2(1873, 881)
-scale = Vector2(5, 8)
+scale = Vector2(3.75, 5.8)
 sprite_frames = SubResource("SpriteFrames_l71n6")
 autoplay = "default"
 frame_progress = 0.9424803
