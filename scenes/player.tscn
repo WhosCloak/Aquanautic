@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=60 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://l35jp1yonild" path="res://sprites/progressbar.png" id="15_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://cv1npwcm8xdfa" path="res://sprites/HealthIcon-Sheet.png" id="15_fulsm"]
 [ext_resource type="Script" uid="uid://dlkfjxfkiiahh" path="res://scripts/cooldown_visual.gd" id="16_qfm1y"]
+[ext_resource type="Texture2D" uid="uid://ctk2afrhsxsrm" path="res://sprites/Bar.png" id="19_60mlk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 22.0
@@ -210,15 +211,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y4r1p"]
-bg_color = Color(0.92941177, 0.8627451, 0.36862746, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
+bg_color = Color(0.827451, 0.28235295, 0.20784314, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wvv"]
-bg_color = Color(0.92941177, 0.1254902, 0.18039216, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60mlk"]
+bg_color = Color(0.23529412, 0.5058824, 0.25882354, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1ej7"]
 bg_color = Color(1.347661e-06, 0.6689988, 0.7969179, 1)
@@ -226,42 +231,33 @@ bg_color = Color(1.347661e-06, 0.6689988, 0.7969179, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oprun"]
 bg_color = Color(1, 0.33528557, 0.3390485, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
-atlas = ExtResource("15_a8ls1")
-region = Rect2(112, 0, 16, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
-atlas = ExtResource("15_a8ls1")
-region = Rect2(96, 0, 16, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
-atlas = ExtResource("15_a8ls1")
-region = Rect2(80, 0, 16, 48)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
-atlas = ExtResource("15_a8ls1")
-region = Rect2(64, 0, 16, 48)
+atlas = ExtResource("19_60mlk")
+region = Rect2(0, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
-atlas = ExtResource("15_a8ls1")
-region = Rect2(48, 0, 16, 48)
+atlas = ExtResource("19_60mlk")
+region = Rect2(16, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
-atlas = ExtResource("15_a8ls1")
+atlas = ExtResource("19_60mlk")
 region = Rect2(32, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4otl"]
+atlas = ExtResource("19_60mlk")
+region = Rect2(48, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
+atlas = ExtResource("19_60mlk")
+region = Rect2(64, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs1tg"]
+atlas = ExtResource("19_60mlk")
+region = Rect2(80, 0, 16, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l71n6"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fulsm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4r5pv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_60mlk")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i4ail")
 }, {
@@ -270,6 +266,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4otl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2b1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cs1tg")
 }],
 "loop": true,
 "name": &"default",
@@ -440,8 +445,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 2.0
 offset_right = 2.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BossHUD"]
@@ -465,7 +470,7 @@ theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("6_tuyoq")
 theme_override_font_sizes/font_size = 40
 
-[node name="BossBar" type="ProgressBar" parent="CanvasLayer/BossHUD/HBoxContainer" groups=["boss_bar"]]
+[node name="BossBar" type="ProgressBar" parent="CanvasLayer/BossHUD/HBoxContainer"]
 light_mask = 0
 visibility_layer = 512
 custom_minimum_size = Vector2(400, 50)
@@ -474,8 +479,8 @@ size_flags_vertical = 4
 theme_override_constants/outline_size = -3
 theme_override_fonts/font = ExtResource("6_tuyoq")
 theme_override_font_sizes/font_size = 23
-theme_override_styles/background = SubResource("StyleBoxFlat_y4r1p")
-theme_override_styles/fill = SubResource("StyleBoxFlat_d2wvv")
+theme_override_styles/background = SubResource("StyleBoxFlat_4r5pv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_60mlk")
 
 [node name="cooldown" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -505,20 +510,32 @@ fill_mode = 2
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/cooldown"]
-position = Vector2(1873, 883)
-scale = Vector2(4, 5.8)
+position = Vector2(1871.4999, 835.5)
+scale = Vector2(4.3333454, 5.612245)
 texture = ExtResource("15_a8ls1")
 region_enabled = true
-region_rect = Rect2(3, 8, 10.9409075, 32)
+region_rect = Rect2(-1, -1, 21, 49)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/cooldown"]
-position = Vector2(1873, 881)
-scale = Vector2(3.75, 5.8)
+position = Vector2(1866.375, 881)
+scale = Vector2(4.7500005, 5.8)
 sprite_frames = SubResource("SpriteFrames_l71n6")
 autoplay = "default"
-frame_progress = 0.9424803
+frame_progress = 0.033565193
 offset = Vector2(-0.5, 0)
 script = ExtResource("16_qfm1y")
+
+[node name="Label" type="Label" parent="CanvasLayer/cooldown"]
+layout_mode = 0
+offset_left = 1810.0
+offset_top = 959.0
+offset_right = 1949.0
+offset_bottom = 983.0
+rotation = -1.5707964
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("4_dqkch")
+theme_override_font_sizes/font_size = 18
+text = "Harpoon Reload"
 
 [node name="cooldowntimer" type="Timer" parent="."]
 one_shot = true
