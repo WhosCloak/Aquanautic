@@ -20,6 +20,11 @@ var flash_duration := 0.1
 var flip_threshold: float = 1.0
 
 
+# ===== ARM SOCKET ANIMATION =====
+var idle_arm_position: Vector2 = Vector2.ZERO
+var swim_arm_position: Vector2 = Vector2(10, 0)  # Adjust these values to match your sprite
+
+
 # ===== AUDIO =====
 var harpoonsound = preload("res://audios/harpoon_shot.mp3")
 var highscore = preload("res://audios/high-score.mp3")
@@ -39,7 +44,8 @@ var _current_boss: Node = null
 
 # ===== NODE REFERENCES =====
 @onready var diver_anim: AnimatedSprite2D = $diver_anim
-@onready var diver_arm: Sprite2D = $diver_arm
+@onready var diver_arm: Sprite2D = $diver_anim/arm_socket/diver_arm
+@onready var arm_socket: Node2D = $diver_anim/arm_socket
 @onready var boss_hud: Control = $CanvasLayer/BossHUD
 @onready var boss_name: Label = $CanvasLayer/BossHUD/HBoxContainer/BossName
 @onready var boss_bar: Range = $CanvasLayer/BossHUD/HBoxContainer/BossBar
@@ -68,7 +74,12 @@ func _ready():
 		boss_hud.visible = false
 	cooldownbar.max_value = cooldowntimer.wait_time
 	cooldownbar.value = cooldowntimer.wait_time
-	_ensure_idle_loop()
+	
+	# Store initial arm socket positions
+	if arm_socket:
+		idle_arm_position = arm_socket.position  # Store whatever position you set in editor for idle
+		# Manually set swim position (adjust these values to match your sprite)
+		swim_arm_position = Vector2(10, 0)  # Adjust X and Y based on where arm should be when swimming
 
 
 func _enter_tree() -> void:
@@ -91,16 +102,6 @@ func _enter_tree() -> void:
 # ==============================================
 # ==== PHYSICS AND MOVEMENT ====
 # ==============================================
-
-func _ensure_idle_loop() -> void:
-	# Make sure the idle animation is set to loop (safety in case SpriteFrames isn’t configured)
-	if diver_anim and diver_anim.sprite_frames:
-		var frames := diver_anim.sprite_frames
-		if frames.has_animation("playerswim"):
-			frames.set_animation_loop("playerswim", true)
-
-
-
 func _physics_process(_delta):
 	if _is_stunned:
 		return
@@ -109,7 +110,6 @@ func _physics_process(_delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	velocity = input_vector.normalized() * speed
 	move_and_slide()
-	model_facing()
 
 	# --- Aiming ---
 	diver_arm.look_at(get_global_mouse_position())
@@ -118,43 +118,60 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("fire") and cooldowntimer.is_stopped():
 		fire()
 
-# --- Animation ---
+	# --- Animation ---
 	var move_input := Input.get_vector("left", "right", "up", "down")
 	var is_moving := move_input.length() > 0.0
+	
 	if is_moving:
 		if diver_anim.animation != "playerswim" or diver_anim.is_playing() == false:
 			diver_anim.play("playerswim")
-			diver_anim.position = Vector2(-16.0, -12.0)  # offset for swim position
+		
+		# Move arm socket to swimming position with optional bobbing
+		if arm_socket:
+			var swim_progress = diver_anim.frame / float(diver_anim.sprite_frames.get_frame_count("playerswim"))
+			var bob_offset = sin(swim_progress * PI * 2) * 2.0  # Small bob amount (adjust or remove)
+			arm_socket.position = swim_arm_position + Vector2(0, bob_offset)
 	else:
 		if diver_anim.animation != "playeridle" or diver_anim.is_playing() == false:
 			diver_anim.play("playeridle")
-			diver_anim.position = Vector2(-2.0, 0)  # offset for idle position
-
+		
+		# Move arm socket back to idle position
+		if arm_socket:
+			arm_socket.position = idle_arm_position
+	
+	# --- Model Facing (AFTER animation sets position) ---
+	model_facing()
+	
 	# --- Bubble Trail ---
 	_update_bubble_trail()
 	
-	# --- Cooldown Progess Bar ---
+	# --- Cooldown Progress Bar ---
 	if cooldowntimer.time_left > 0:
 		cooldownbar.value = cooldowntimer.time_left
 	else:
 		cooldownbar.value = 100
 
+
 func model_facing() -> void:
 	if diver_anim == null:
 		return
-
-	if abs(velocity.x) > flip_threshold:
-		diver_anim.flip_h = velocity.x < 0.0
-
+	
 	var mouse_pos = get_global_mouse_position()
 	var player_pos = global_position
-
-	if mouse_pos.x < player_pos.x:
-		diver_anim.flip_h = true
+	
+	if mouse_pos.x < player_pos.x: 
+		diver_anim.flip_h = true 
 		diver_arm.flip_v = true
-	elif mouse_pos.x > player_pos.x:
-		diver_anim.flip_h = false
+		# Mirror the arm socket X position when facing left
+		if arm_socket:
+			arm_socket.position.x = -abs(arm_socket.position.x)
+	elif mouse_pos.x > player_pos.x: 
+		diver_anim.flip_h = false 
 		diver_arm.flip_v = false
+		# Keep arm socket at positive X when facing right
+		if arm_socket:
+			arm_socket.position.x = abs(arm_socket.position.x)
+
 
 # ==============================================
 # ==== BUBBLE TRAIL LOGIC ====
@@ -234,7 +251,6 @@ func take_damage(amount: int):
 		if score > Global.high_score:
 			Global.high_score = score
 		die()
-
 
 
 func heal(amount: int = 3):

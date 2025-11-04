@@ -100,7 +100,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"playeridle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -123,7 +123,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"playerswim",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
@@ -296,11 +296,14 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_f1ej7")
 position = Vector2(-2.7083676, -1.0000004)
 sprite_frames = SubResource("SpriteFrames_f1ej7")
-animation = &"playerswim"
+animation = &"playeridle"
+autoplay = "playeridle"
 
-[node name="diver_arm" type="Sprite2D" parent="."]
+[node name="arm_socket" type="Marker2D" parent="diver_anim"]
+position = Vector2(3.7083673, -11)
+
+[node name="diver_arm" type="Sprite2D" parent="diver_anim/arm_socket"]
 z_index = 1
-position = Vector2(-4, -13)
 texture = ExtResource("6_a8ls1")
 offset = Vector2(14.515152, -1)
 
