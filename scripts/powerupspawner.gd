@@ -9,7 +9,7 @@ var spawn_distance := 400
 var spawn_interval := 2
 var timer := 0.0
 var player: Node2D
-var powerup_spawn_chance := 0.5 # 50% chance per interval
+var powerup_spawn_chance := 0.5
 
 func _ready():
 	add_to_group("powerup_spawner")

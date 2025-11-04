@@ -10,8 +10,8 @@ var velocity: Vector2
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
-	add_to_group("enemy_projectile") #helps detect it later if needed
-	$AnimatedSprite2D.play("spin") # make sure your animation is named "spin"
+	add_to_group("enemy_projectile") 
+	$AnimatedSprite2D.play("spin")
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 
@@ -39,6 +39,5 @@ func _on_body_entered(body):
 		_spawn_sparkle()
 		queue_free()
 	elif body.is_in_group("terrain") or body.is_in_group("wall"):
-		# bounce off or disappear when hitting walls if you want
 		_spawn_sparkle()
 		queue_free()

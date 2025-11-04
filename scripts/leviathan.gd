@@ -87,19 +87,19 @@ func _die():
 
 	died.emit()
 
-	# Disable processing and hide
+
 	visible = false
 	set_process(false)
 	set_physics_process(false)
 
-	# Make sure we are still in the tree before fading
+
 	if not is_inside_tree():
 		return
 
-	# Start fade transition
+
 	Fade.transition()
 	await Fade.on_transition_finished
 
-	# Check again before changing scene
+
 	if is_inside_tree() and get_tree() != null:
 		get_tree().change_scene_to_file("res://scenes/CreditsPlayer.tscn")

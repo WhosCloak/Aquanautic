@@ -7,10 +7,10 @@ extends CharacterBody2D
 
 
 # ===== MOVEMENT & STATS =====
-var speed := 250                      # Move speed in pixels per second
-var projectilespeed := 500            # Harpoon speed
-var projectile = load("res://scenes/harpoon.tscn") # Packed harpoon scene
-var score = Global.player_score       # Local mirror of global score
+var speed := 250                     
+var projectilespeed := 500        
+var projectile = load("res://scenes/harpoon.tscn") 
+var score = Global.player_score     
 var max_health := 3
 var health := max_health
 var multi_shot := false
@@ -19,16 +19,14 @@ var _is_stunned: bool = false
 var flash_duration := 0.1
 var flip_threshold: float = 1.0
 
-
 # ===== ARM SOCKET ANIMATION =====
 var idle_arm_position: Vector2 = Vector2.ZERO
 var swim_arm_position: Vector2 = Vector2(10, 0)
 
-
 # ===== AUDIO =====
-var harpoonsound = preload("res://audios/harpoon_shot.mp3")
-var highscore = preload("res://audios/high-score.mp3")
-var hittaken = preload("res://audios/player_damage_taken.wav")
+@onready var harpoon: AudioStreamPlayer2D = $Harpoon
+@onready var damage_taken: AudioStreamPlayer2D = $DamageTaken
+@onready var high_score: AudioStreamPlayer2D = $HighScore
 
 
 # ===== BUBBLE TRAIL CONFIG =====
@@ -37,10 +35,8 @@ var emit_speed := 10.0
 var base_amount := 80
 var max_amount := 180
 
-
 # ===== INTERNAL REFERENCES =====
 var _current_boss: Node = null
-
 
 # ===== NODE REFERENCES =====
 @onready var diver_anim: AnimatedSprite2D = $diver_anim
@@ -59,17 +55,13 @@ var _current_boss: Node = null
 	$CanvasLayer/Hearts/Heart2,
 	$CanvasLayer/Hearts/Heart3
 ]
-
-
 # ==============================================
 # ==== LIFECYCLE & INITIALIZATION ====
 # ==============================================
-
 func _ready():
 	cam.zoom = Vector2(3.5, 3.5)
 	update_hearts()
 	cam.set_process(true)
-	_duplicate_materials_recursive(self)
 	if boss_hud:
 		boss_hud.visible = false
 	cooldownbar.max_value = cooldowntimer.wait_time
@@ -78,32 +70,29 @@ func _ready():
 	if arm_socket:
 		idle_arm_position = arm_socket.position
 		swim_arm_position = Vector2(10, 0)
-
-
-func _enter_tree() -> void:
-	# Prepare the bubble trail material and settings
-	if bubbles == null:
-		return 
-	if bubbles.process_material and bubbles.process_material is ParticleProcessMaterial:
-		bubble_mat = bubbles.process_material
-	else:
-		bubble_mat = ParticleProcessMaterial.new()
-		bubbles.process_material = bubble_mat
-
-	bubbles.emitting = false
-	bubbles.local_coords = false
-	bubbles.preprocess = 0.0
-	bubble_mat.gravity = Vector3(0, -40, 0)
-	bubble_mat.direction = Vector3(0, -1, 0)
-
-
+	
+	if bubbles:
+		if bubbles.process_material and bubbles.process_material is ParticleProcessMaterial:
+			bubble_mat = bubbles.process_material
+		else:
+			bubble_mat = ParticleProcessMaterial.new()
+			bubbles.process_material = bubble_mat
+		
+		bubbles.emitting = false
+		bubbles.local_coords = false
+		bubbles.amount = base_amount
+		bubble_mat.gravity = Vector3(0, -40, 0)
+		bubble_mat.direction = Vector3(0, -1, 0)
+		bubble_mat.spread = 45.0
+		bubble_mat.initial_velocity_min = 20.0
+		bubble_mat.initial_velocity_max = 40.0
 # ==============================================
 # ==== PHYSICS AND MOVEMENT ====
 # ==============================================
 func _physics_process(_delta):
 	if _is_stunned:
 		return
-
+		
 	# --- Movement ---
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	velocity = input_vector.normalized() * speed
@@ -146,7 +135,6 @@ func _physics_process(_delta):
 	else:
 		cooldownbar.value = 100
 
-
 func model_facing() -> void:
 	if diver_anim == null:
 		return
@@ -164,41 +152,36 @@ func model_facing() -> void:
 		diver_arm.flip_v = false
 		if arm_socket:
 			arm_socket.position.x = abs(arm_socket.position.x)
-
-
 # ==============================================
 # ==== BUBBLE TRAIL LOGIC ====
 # ==============================================
-
 func _update_bubble_trail():
 	if bubbles == null or bubble_mat == null:
 		return
 
-	var input_len := Input.get_vector("left", "right", "up", "down").length()
-	var spd := velocity.length()
-	var moving := spd > emit_speed and input_len > 0.0
-
-	if not moving:
+	var input_vector = Input.get_vector("left", "right", "up", "down")
+	var is_moving = input_vector.length() > 0.1
+	
+	if not is_moving:
 		bubbles.emitting = false
-		bubbles.amount = 0
 		return
-
+	
 	bubbles.emitting = true
-	var dir := Vector2.ZERO
-	if spd > 0.0:
-		dir = -velocity.normalized()
-
-	bubble_mat.direction = Vector3(dir.x, dir.y, 0.0)
-	bubble_mat.initial_velocity_min = 20.0 + spd * 0.02
-	bubble_mat.initial_velocity_max = 40.0 + spd * 0.05
-	bubbles.amount = int(clamp(base_amount + spd * 0.6, base_amount, max_amount))
-
-
+	
+	var move_direction = -input_vector.normalized()
+	bubble_mat.direction = Vector3(move_direction.x, move_direction.y, 0.0)
+	var current_speed = velocity.length()
+	
+	bubble_mat.initial_velocity_min = 20.0 + current_speed * 0.02
+	bubble_mat.initial_velocity_max = 40.0 + current_speed * 0.05
+	
+	var bubble_count = int(clamp(base_amount + current_speed * 0.6, base_amount, max_amount))
+	bubbles.amount = bubble_count
 # ==============================================
 # ==== COMBAT: FIRING & MULTISHOT ====
 # ==============================================
 func fire():
-	$Harpoon.play()
+	harpoon.play()
 	cooldowntimer.start()
 	var fire_pos = diver_arm.global_position
 	var direction = (get_global_mouse_position() - fire_pos).normalized()
@@ -224,12 +207,9 @@ func fire():
 		projectile_instance.linear_velocity = direction * projectilespeed
 		projectile_instance.add_to_group("projectile")
 		get_tree().current_scene.add_child(projectile_instance)
-
-
 # ==============================================
 # ==== PLAYER DAMAGE, HEALING & FLASH ====
 # ==============================================
-
 func take_damage(amount: int):
 	await flash_hit()
 	await get_tree().create_timer(flash_duration).timeout
@@ -237,7 +217,7 @@ func take_damage(amount: int):
 
 	health -= amount
 	update_hearts()
-	$DamageTaken.play()
+	damage_taken.play()
 
 	if health <= 0:
 		if score > Global.high_score:
@@ -246,35 +226,25 @@ func take_damage(amount: int):
 
 
 func heal(amount: int = 3):
-	print("Healed for", amount, " | Current:", health, "/", max_health)
 	health = min(health + amount, max_health)
 	update_hearts()
 
 func flash_hit() -> void:
-	var affected_nodes = _get_flashable_nodes(self)
-	for node in affected_nodes:
-		var mat: ShaderMaterial = node.material
-		if mat and mat is ShaderMaterial:
-			mat.set_shader_parameter("flash_strength", 1.0)
-
-	await get_tree().create_timer(0.1).timeout
-
-	for node in affected_nodes:
-		var mat: ShaderMaterial = node.material
-		if mat and mat is ShaderMaterial:
-			mat.set_shader_parameter("flash_strength", 0.0)
-
-
+	var original_modulate = diver_anim.modulate
+	
+	diver_anim.modulate = Color(10, 10, 10, 1)
+	
+	await get_tree().create_timer(flash_duration).timeout
+	
+	diver_anim.modulate = original_modulate
 # ==============================================
 # ==== PLAYER STATUS & STUN ====
 # ==============================================
-
 func stun(duration: float) -> void:
 	if _is_stunned:
 		return
 	_is_stunned = true
 	velocity = Vector2.ZERO
-	print("Player stunned!")
 
 	if $StunEffect:
 		$StunEffect.visible = true
@@ -285,21 +255,16 @@ func stun(duration: float) -> void:
 	if $StunEffect:
 		$StunEffect.visible = false
 		$StunEffect.stop()
-
 	_is_stunned = false
-	print("Player recovered")
 
-	if $AnimatedSprite2D:
+	if diver_anim:
 		if Input.get_vector("left", "right", "up", "down").length() > 0:
-			$AnimatedSprite2D.play("playerswim")
+			diver_anim.play("playerswim")
 		else:
-			$AnimatedSprite2D.pause()
-
-
+			diver_anim.pause()
 # ==============================================
 # ==== SCORE SYSTEM ====
 # ==============================================
-
 func add_score(amount: int = 1) -> void:
 	score += amount
 	Global.player_score = score
@@ -310,18 +275,14 @@ func add_score(amount: int = 1) -> void:
 		$CanvasLayer/Hearts/Label.visible = true
 		await get_tree().create_timer(2).timeout
 		$CanvasLayer/Hearts/Label.visible = false
-		$HighScore.play()
-
-
+		high_score.play()
 # ==============================================
 # ==== DEATH & GAMEOVER ====
 # ==============================================
-
 func die() -> void:
 	score = 0
 	Global.player_score = 0
 	call_deferred("_gameover")
-
 
 func _gameover():
 	var tree := get_tree()
@@ -331,40 +292,16 @@ func _gameover():
 	Fade.transition()
 	await Fade.on_transition_finished
 	tree.change_scene_to_file("res://scenes/gameover.tscn")
-
-
 # ==============================================
 # ==== HEARTS & MATERIAL UTILITIES ====
 # ==============================================
-
 func update_hearts():
 	for i in range(max_health):
 		hearts[i].visible = (i < health)
-
-
-func _get_flashable_nodes(root: Node) -> Array:
-	var nodes := []
-	for child in root.get_children():
-		if child is CanvasItem and child.material and child.material is ShaderMaterial:
-			nodes.append(child)
-		nodes += _get_flashable_nodes(child)
-	return nodes
-
-
-func _duplicate_materials_recursive(root: Node) -> void:
-	for child in root.get_children():
-		if child is CanvasItem and child.material and child.material is ShaderMaterial:
-			child.material = child.material.duplicate()
-		_duplicate_materials_recursive(child)
-
-
 # ==============================================
 # ==== BOSS UI ====
 # ==============================================
-
 func boss_ui_show(boss: Node, display_name: String) -> void:
-	print("[Player] boss_ui_show, name:", display_name)
-
 	if _current_boss and is_instance_valid(_current_boss):
 		if _current_boss.has_signal("hp_changed"):
 			_current_boss.hp_changed.disconnect(_on_boss_hp_changed)
@@ -393,16 +330,10 @@ func boss_ui_hide() -> void:
 			_current_boss.died.disconnect(_on_boss_died_hide)
 	_current_boss = null
 
-
 func _on_boss_hp_changed(cur: int, mx: int) -> void:
 	if boss_bar:
 		boss_bar.max_value = mx
 		boss_bar.value = cur
 
-
 func _on_boss_died_hide() -> void:
 	boss_ui_hide()
-	
-func _on_power_up() -> void:
-	if multi_shot == true:
-		pass

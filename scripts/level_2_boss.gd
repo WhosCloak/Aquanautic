@@ -21,9 +21,6 @@ func _ready() -> void:
 	await get_tree().create_timer(5.0).timeout
 
 
-
-
-
 func _exit_tree() -> void:
 	if boss_theme and boss_theme.playing:
 		boss_theme.stop()

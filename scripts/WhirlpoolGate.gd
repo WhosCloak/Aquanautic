@@ -3,7 +3,7 @@ signal entered
 @onready var anim: AnimatedSprite2D = $Icon
 
 func _ready() -> void:
-	add_to_group("active_goal")  # ← Make sure this is here
+	add_to_group("active_goal")
 	
 	if anim:
 		anim.play("loop")
@@ -14,4 +14,4 @@ func _ready() -> void:
 	)
 
 func _exit_tree() -> void:
-	remove_from_group("active_goal")  # ← And this too
+	remove_from_group("active_goal")

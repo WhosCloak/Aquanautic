@@ -105,7 +105,6 @@ func _on_hurt_area_entered(b: Node) -> void:
 		
 func apply_damage(amount: int) -> void:
 	if _is_blocking:
-		print("Crab blocked all damage!")
 		return  # takes no damage
 
 	hp = max(0, hp - amount)
@@ -125,7 +124,6 @@ func apply_damage(amount: int) -> void:
 
 func _enter_phase2() -> void:
 	_in_phase2 = true
-	print("Crab has entered Phase 2!")
 	
 	if gold_spriteframes and anim:
 		anim.sprite_frames = gold_spriteframes
@@ -261,8 +259,6 @@ func _spawn_rocks():
 	add_child(fall_audio)
 	fall_audio.play()
 	
-	
-
 
 	for marker in rock_drop_root.get_children():
 		if marker is Marker2D:

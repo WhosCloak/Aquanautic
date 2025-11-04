@@ -8,12 +8,12 @@ signal bite_finished
 func _ready():
 	sprite.frame_changed.connect(_on_frame_changed)
 	if hitbox:
-		hitbox.monitoring = false  # Start disabled!
+		hitbox.monitoring = false 
 		if not hitbox.is_connected("body_entered", Callable(self, "_on_hitbox_body_entered")):
 			hitbox.body_entered.connect(_on_hitbox_body_entered)
 
 	sprite.animation = "Bite"
-	sprite.speed_scale = 0.85 #Bite Speed
+	sprite.speed_scale = 0.85 
 	sprite.play("Bite")
 
 	await sprite.animation_finished
@@ -21,7 +21,6 @@ func _ready():
 	queue_free()
 
 func _on_frame_changed():
-	# Enable hitbox only for last frame of Bite
 	if sprite.frame == sprite.sprite_frames.get_frame_count("Bite") - 1:
 		if hitbox:
 			hitbox.monitoring = true

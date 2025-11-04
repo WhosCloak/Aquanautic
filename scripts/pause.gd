@@ -6,10 +6,10 @@ extends Control
 func _ready() -> void:
 	hide()
 	$AnimationPlayer.play("RESET")
-	options_menu.hide() # start hidden
+	options_menu.hide() 
 	options_button.pressed.connect(_on_options_pressed)
 	
-	# connect the exit signal from options menu
+
 	if options_menu.has_signal("exit_options_menu"):
 		options_menu.exit_options_menu.connect(_on_exit_options_menu)
 

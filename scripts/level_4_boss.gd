@@ -19,7 +19,6 @@ func _ready() -> void:
 			cam.zoom = Vector2(2.0, 2.0)
 
 func _exit_tree() -> void:
-	# Stop the theme when leaving
 	if boss_theme and boss_theme.playing:
 		boss_theme.stop()
 

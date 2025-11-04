@@ -1,7 +1,7 @@
 extends Node
 
 @onready var video: VideoStreamPlayer = $Video
-@onready var fade = get_node("/root/Fade") # assuming fade.gd is an autoload
+@onready var fade = get_node("/root/Fade")
 
 func _ready():
 	fade.transition()
@@ -12,7 +12,7 @@ func _ready():
 	set_process_input(true)
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"): # Esc key by default
+	if event.is_action_pressed("ui_cancel"):
 		_end_credits()
 
 func _on_video_finished():

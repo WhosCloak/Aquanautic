@@ -9,6 +9,5 @@ func _ready():
 	add_child(sfx)
 	sfx.play()
 	
-	# Automatically remove after animation
 	await animation_finished
 	queue_free()

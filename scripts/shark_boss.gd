@@ -28,7 +28,7 @@ signal hp_changed(current_hp: int, max_hp: int)
 
 enum BossState { SWIM, ATTACK, COOLDOWN }
 var _state: BossState = BossState.SWIM
-var _action_lock := false  # true while performing any attack or transition
+var _action_lock := false 
 var _swim_timer: Timer
 var _rng := RandomNumberGenerator.new()
 var hp: int
@@ -136,20 +136,18 @@ func _physics_process(delta: float) -> void:
 	if not _target_marker:
 		return
 
-	# Lunge movement still handled here while lunging
 	if _is_lunging:
 		global_position += _lunge_dir * lunge_speed * delta
 		update_facing(_lunge_dir)
 		_lunge_timer -= delta
 		if _lunge_timer <= 0.0:
 			_is_lunging = false
-			# ---- Add this to reset the animation after lunge ----
+
 			if anim and "Swim" in anim.sprite_frames.get_animation_names():
 				anim.play("Swim")
 		return
 
 
-	# Only swim-pathing during SWIM state and when not diving/lunging
 	if _state == BossState.SWIM and not _is_diving and not _action_lock:
 		var to_target = _target - global_position
 		if to_target.length() > arrive_dist:
@@ -183,7 +181,6 @@ func _run_state_loop() -> void:
 		# COOLDOWN PHASE: brief settle to avoid immediate overlaps
 		_state = BossState.COOLDOWN
 		await get_tree().create_timer(0.4).timeout
-
 
 
 # -------------------------------
@@ -220,7 +217,6 @@ func start_dive_attack() -> void:
 	if _is_diving:
 		return
 	_is_diving = true
-	print("SharkBoss begins dive attack!")
 
 	var dir = (_target - global_position).normalized()
 	update_facing(dir)
@@ -243,7 +239,6 @@ func start_dive_attack() -> void:
 	reappear()
 
 func reappear() -> void:
-	print("SharkBoss returns to battle!")
 	visible = true
 	anim.modulate = Color(1, 1, 1)
 	_is_diving = false
@@ -264,7 +259,6 @@ func summon_shark_bite() -> void:
 	var bite = shark_bite_scene.instantiate()
 	bite.global_position = player.global_position
 	get_parent().add_child(bite)
-	print("Summoned Shark Bite attack at player position!")
 
 # -------------------------------
 # LUNGE ATTACK
@@ -307,8 +301,7 @@ func start_lunge() -> void:
 	_is_lunging = true
 	_lunge_timer = lunge_duration
 	_lunge_dir = (player.global_position - global_position).normalized()
-	update_facing(_lunge_dir) # fix flip before lunging
-
+	update_facing(_lunge_dir)
 	if anim:
 		if "Charge" in anim.sprite_frames.get_animation_names():
 			anim.play("Charge")

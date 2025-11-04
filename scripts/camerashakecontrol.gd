@@ -3,7 +3,6 @@ extends Control
 @onready var shake_slider: HSlider = $HBoxContainer/shake_slider
 @onready var strength_label: Label = $HBoxContainer/strength_label
 
-
 func _ready() -> void:
 	_on_shake_slider_value_changed(shake_slider.value)
 

@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var shakefade: float = 5
+var shakefade: float = 5
 var random = RandomNumberGenerator.new()
 var shake_strength: float = 0
 var player = Node2D
