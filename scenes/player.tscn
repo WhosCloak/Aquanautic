@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cv1npwcm8xdfa" path="res://sprites/HealthIcon-Sheet.png" id="15_fulsm"]
 [ext_resource type="Script" uid="uid://dlkfjxfkiiahh" path="res://scripts/cooldown_visual.gd" id="16_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://ctk2afrhsxsrm" path="res://sprites/Bar.png" id="19_60mlk"]
-[ext_resource type="Texture2D" uid="uid://5yvtfbt0kq4a" path="res://sprites/oxygen_tank.png" id="21_a38lo"]
+[ext_resource type="Texture2D" uid="uid://drpd31igury8e" path="res://sprites/goal_arrow.png" id="21_a38lo"]
 [ext_resource type="Script" uid="uid://ds27sjhvuknog" path="res://scripts/arrow.gd" id="22_a38lo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
@@ -309,6 +309,11 @@ z_index = 1
 texture = ExtResource("6_a8ls1")
 offset = Vector2(14.515152, -1)
 
+[node name="goal_arrow" type="Sprite2D" parent="."]
+position = Vector2(60, 0)
+texture = ExtResource("21_a38lo")
+script = ExtResource("22_a38lo")
+
 [node name="StunEffect" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(1, -1.9073486e-06)
@@ -544,8 +549,3 @@ text = "Harpoon Reload"
 
 [node name="cooldowntimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="goal_arrow" type="Sprite2D" parent="."]
-position = Vector2(36, 0)
-texture = ExtResource("21_a38lo")
-script = ExtResource("22_a38lo")
