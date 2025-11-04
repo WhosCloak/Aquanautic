@@ -22,7 +22,7 @@ var flip_threshold: float = 1.0
 
 # ===== ARM SOCKET ANIMATION =====
 var idle_arm_position: Vector2 = Vector2.ZERO
-var swim_arm_position: Vector2 = Vector2(10, 0)  # Adjust these values to match your sprite
+var swim_arm_position: Vector2 = Vector2(10, 0)
 
 
 # ===== AUDIO =====
@@ -75,11 +75,9 @@ func _ready():
 	cooldownbar.max_value = cooldowntimer.wait_time
 	cooldownbar.value = cooldowntimer.wait_time
 	
-	# Store initial arm socket positions
 	if arm_socket:
-		idle_arm_position = arm_socket.position  # Store whatever position you set in editor for idle
-		# Manually set swim position (adjust these values to match your sprite)
-		swim_arm_position = Vector2(10, 0)  # Adjust X and Y based on where arm should be when swimming
+		idle_arm_position = arm_socket.position
+		swim_arm_position = Vector2(10, 0)
 
 
 func _enter_tree() -> void:
@@ -126,20 +124,17 @@ func _physics_process(_delta):
 		if diver_anim.animation != "playerswim" or diver_anim.is_playing() == false:
 			diver_anim.play("playerswim")
 		
-		# Move arm socket to swimming position with optional bobbing
 		if arm_socket:
 			var swim_progress = diver_anim.frame / float(diver_anim.sprite_frames.get_frame_count("playerswim"))
-			var bob_offset = sin(swim_progress * PI * 2) * 2.0  # Small bob amount (adjust or remove)
+			var bob_offset = sin(swim_progress * PI * 2) * 2.0
 			arm_socket.position = swim_arm_position + Vector2(0, bob_offset)
 	else:
 		if diver_anim.animation != "playeridle" or diver_anim.is_playing() == false:
 			diver_anim.play("playeridle")
 		
-		# Move arm socket back to idle position
 		if arm_socket:
 			arm_socket.position = idle_arm_position
 	
-	# --- Model Facing (AFTER animation sets position) ---
 	model_facing()
 	
 	# --- Bubble Trail ---
@@ -162,13 +157,11 @@ func model_facing() -> void:
 	if mouse_pos.x < player_pos.x: 
 		diver_anim.flip_h = true 
 		diver_arm.flip_v = true
-		# Mirror the arm socket X position when facing left
 		if arm_socket:
 			arm_socket.position.x = -abs(arm_socket.position.x)
 	elif mouse_pos.x > player_pos.x: 
 		diver_anim.flip_h = false 
 		diver_arm.flip_v = false
-		# Keep arm socket at positive X when facing right
 		if arm_socket:
 			arm_socket.position.x = abs(arm_socket.position.x)
 
@@ -204,7 +197,6 @@ func _update_bubble_trail():
 # ==============================================
 # ==== COMBAT: FIRING & MULTISHOT ====
 # ==============================================
-
 func fire():
 	$Harpoon.play()
 	cooldowntimer.start()

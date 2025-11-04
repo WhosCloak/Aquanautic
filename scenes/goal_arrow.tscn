@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfo0a23q88l42"]
+
+[ext_resource type="Texture2D" uid="uid://cthpvmc63dewv" path="res://sprites/Harpoon_Projectile.png" id="1_fgo1q"]
+[ext_resource type="Script" uid="uid://ds27sjhvuknog" path="res://scripts/arrow.gd" id="2_qbjbi"]
+
+[node name="goal_arrow" type="Node2D"]
+
+[node name="arrow" type="Sprite2D" parent="."]
+texture = ExtResource("1_fgo1q")
+script = ExtResource("2_qbjbi")
