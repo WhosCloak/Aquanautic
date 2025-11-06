@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://6vi3v32hrkmw"]
+[gd_scene load_steps=18 format=3 uid="uid://6vi3v32hrkmw"]
 
 [ext_resource type="Texture2D" uid="uid://dy515m51fs5ul" path="res://sprites/level3extended-Sheet-export.png" id="1_fmg3e"]
 [ext_resource type="Texture2D" uid="uid://c3bvp0rl3ms27" path="res://sprites/Level_3-Sheet.png" id="2_fmg3e"]
 [ext_resource type="Texture2D" uid="uid://bpsx7vof2il7g" path="res://sprites/RockFloor3.png" id="3_fmg3e"]
-[ext_resource type="PackedScene" uid="uid://bnoqmjgby1h15" path="res://scenes/WhirlpoolGate.tscn" id="4_0qepi"]
 [ext_resource type="AudioStream" uid="uid://53qdgri02fkb" path="res://audios/press on.mp3" id="5_fmg3e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6eey"]
@@ -133,9 +132,6 @@ centered = false
 position = Vector2(23, 794)
 scale = Vector2(10000, 50)
 shape = SubResource("RectangleShape2D_u0ts7")
-
-[node name="WhirlpoolGate" parent="." instance=ExtResource("4_0qepi")]
-visible = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_fmg3e")
