@@ -1,0 +1,132 @@
+[gd_scene load_steps=19 format=3 uid="uid://cl1suhm2ejm7c"]
+
+[ext_resource type="Script" uid="uid://bisunc0bqvvnt" path="res://scripts/lightning_bolt.gd" id="1_1qp21"]
+[ext_resource type="Texture2D" uid="uid://cqbjkdj2txr7b" path="res://sprites/LightningBreath-Sheet-export.png" id="2_1qp21"]
+[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://scenes/BossLevels/harpoon_shot2.0.wav" id="3_87n7n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7dhc"]
+size = Vector2(102, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bc4o"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(0, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87n7n"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(104, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rtjg"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(208, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ffw1"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(312, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00c6r"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(416, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a617"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(520, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5ow2"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(624, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrc5q"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(728, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2ola"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(832, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t46wl"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(936, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j3sj"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(1040, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwax5"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(1144, 0, 104, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3y3t"]
+atlas = ExtResource("2_1qp21")
+region = Rect2(1248, 0, 104, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spjy1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bc4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87n7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rtjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ffw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00c6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a617")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5ow2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrc5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2ola")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t46wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j3sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwax5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3y3t")
+}],
+"loop": true,
+"name": &"strike",
+"speed": 10.0
+}]
+
+[node name="LightningBreath" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 2
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_1qp21")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_a7dhc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -2)
+sprite_frames = SubResource("SpriteFrames_spjy1")
+animation = &"strike"
+autoplay = "strike"
+frame_progress = 0.61943257
+
+[node name="Strike" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_87n7n")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,7 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqs06e1aqnpy0"]
+[gd_scene load_steps=14 format=3 uid="uid://bqs06e1aqnpy0"]
 
 [ext_resource type="Texture2D" uid="uid://b5a3lfgn6nlba" path="res://sprites/leviathan_swim.png" id="1_1ea7h"]
 [ext_resource type="Script" uid="uid://b4ckb8qv7exih" path="res://scripts/leviathan.gd" id="1_oklb4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sphwc"]
+atlas = ExtResource("1_1ea7h")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3x3m"]
+atlas = ExtResource("1_1ea7h")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l21t"]
+atlas = ExtResource("1_1ea7h")
+region = Rect2(2000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4rbw"]
+atlas = ExtResource("1_1ea7h")
+region = Rect2(3000, 0, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oklb4"]
 atlas = ExtResource("1_1ea7h")
@@ -21,6 +37,23 @@ region = Rect2(3000, 0, 1000, 1000)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4rt2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sphwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3x3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l21t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4rbw")
+}],
+"loop": true,
+"name": &"charge",
+"speed": 17.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oklb4")
@@ -43,7 +76,9 @@ animations = [{
 radius = 12.0
 height = 66.0
 
-[node name="Leviathan" type="Node2D" groups=["boss"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_oklb4"]
+
+[node name="Leviathan" type="CharacterBody2D" groups=["boss"]]
 scale = Vector2(3, 3)
 script = ExtResource("1_oklb4")
 max_hp = 10
@@ -52,8 +87,8 @@ max_hp = 10
 position = Vector2(21, -40.666668)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_g4rt2")
-animation = &"swim"
-frame_progress = 0.8340906
+animation = &"charge"
+frame_progress = 0.5299036
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 255
@@ -61,6 +96,23 @@ collision_mask = 255
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(2, -4)
+position = Vector2(16.666668, -5.3333335)
 rotation = -1.5707964
+scale = Vector2(1, 3.2266672)
 shape = SubResource("CapsuleShape2D_51lx6")
+
+[node name="LightningMuzzle" type="Marker2D" parent="."]
+position = Vector2(-46.33333, 2.0000017)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="ChargeTimer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_oklb4")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_charge_timer_timeout"]
