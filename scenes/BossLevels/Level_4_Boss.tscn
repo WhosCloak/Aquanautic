@@ -51,13 +51,8 @@ scale = Vector2(1.7, 1.7)
 
 [node name="Leviathan" parent="BossSpawn" instance=ExtResource("2_i8vwv")]
 scale = Vector2(1.4, 1.4)
-contact_damage = 1
-swim_speed = 70.0
-arrive_dist = 10.0
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
-faces_right_default = false
-display_name = "The Leviathan"
 
 [node name="PathA" type="Marker2D" parent="."]
 position = Vector2(-421, -83)
@@ -68,11 +63,3 @@ position = Vector2(433, -83)
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
 volume_db = -14.136
 bus = &"Music"
-
-[node name="ChargePoints" type="Node2D" parent="."]
-
-[node name="TopSpawn" type="Marker2D" parent="ChargePoints"]
-
-[node name="MidSpawn" type="Marker2D" parent="ChargePoints"]
-
-[node name="BottomSpawn" type="Marker2D" parent="ChargePoints"]

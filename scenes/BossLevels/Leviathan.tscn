@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqs06e1aqnpy0"]
+[gd_scene load_steps=19 format=3 uid="uid://bqs06e1aqnpy0"]
 
 [ext_resource type="Texture2D" uid="uid://b5a3lfgn6nlba" path="res://sprites/leviathan_swim.png" id="1_1ea7h"]
 [ext_resource type="Script" uid="uid://b4ckb8qv7exih" path="res://scripts/leviathan.gd" id="1_oklb4"]
+[ext_resource type="Texture2D" uid="uid://c3f4ol47x30d2" path="res://sprites/StunEffect.png" id="3_jf3or"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sphwc"]
 atlas = ExtResource("1_1ea7h")
@@ -77,6 +78,36 @@ radius = 12.0
 height = 66.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oklb4"]
+radius = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yijp"]
+atlas = ExtResource("3_jf3or")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08l6y"]
+atlas = ExtResource("3_jf3or")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xawm"]
+atlas = ExtResource("3_jf3or")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x63kv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yijp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08l6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xawm")
+}],
+"loop": true,
+"name": &"shield_activate",
+"speed": 5.0
+}]
 
 [node name="Leviathan" type="CharacterBody2D" groups=["boss"]]
 scale = Vector2(3, 3)
@@ -108,11 +139,16 @@ position = Vector2(-46.33333, 2.0000017)
 wait_time = 2.0
 autostart = true
 
-[node name="ChargeTimer" type="Timer" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_oklb4")
 
+[node name="Shield" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(34.00004, -8.66667)
+scale = Vector2(3.8333335, 1.8750002)
+sprite_frames = SubResource("SpriteFrames_x63kv")
+animation = &"shield_activate"
+frame_progress = 0.5723732
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="ChargeTimer" to="." method="_on_charge_timer_timeout"]
