@@ -30,19 +30,19 @@ func _process(_delta: float) -> void:
 # 🔹 LEVEL PROGRESSION LOGIC
 # ===============================
 func check_next_level() -> void:
-	if level_reached == 1 and Global.player_score >= 2 and not gate_spawned:
+	if level_reached == 1 and Global.player_score >= 20 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	elif level_reached == 2 and Global.player_score >= 4 and not gate_spawned:
+	elif level_reached == 2 and Global.player_score >= 40 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	elif level_reached == 3 and Global.player_score >= 6 and not gate_spawned:
+	elif level_reached == 3 and Global.player_score >= 60 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	elif level_reached == 4 and Global.player_score >= 8 and not gate_spawned:
+	elif level_reached == 4 and Global.player_score >= 80 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 

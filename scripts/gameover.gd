@@ -22,5 +22,5 @@ func _on_button_pressed() -> void:
 
 #Press ESC to quit
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("escape"):
 		get_tree().quit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=63 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://6r6a02a2t45h" path="res://scenes/interaction_agent.tscn" id="11_d2wvv"]
 [ext_resource type="Theme" uid="uid://crx8176safmy0" path="res://sprites/default.tres" id="13_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://km57bjdep1e8" path="res://sprites/heart.png" id="14_fulsm"]
+[ext_resource type="PackedScene" uid="uid://b7lxmam5yeo2j" path="res://scenes/controller_manager.tscn" id="15_4ni07"]
 [ext_resource type="Texture2D" uid="uid://l35jp1yonild" path="res://sprites/progressbar.png" id="15_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://cv1npwcm8xdfa" path="res://sprites/HealthIcon-Sheet.png" id="15_fulsm"]
 [ext_resource type="Script" uid="uid://dlkfjxfkiiahh" path="res://scripts/cooldown_visual.gd" id="16_qfm1y"]
@@ -360,6 +361,11 @@ bus = &"SFX"
 
 [node name="InteractionAgent" parent="." instance=ExtResource("11_d2wvv")]
 
+[node name="Controller_manager" parent="." instance=ExtResource("15_4ni07")]
+
+[node name="cooldowntimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Score" type="Control" parent="CanvasLayer"]
@@ -547,6 +553,3 @@ scale = Vector2(1.2, 1.2)
 theme_override_fonts/font = ExtResource("4_dqkch")
 theme_override_font_sizes/font_size = 18
 text = "Harpoon Reload"
-
-[node name="cooldowntimer" type="Timer" parent="."]
-one_shot = true

@@ -50,6 +50,7 @@ var _current_boss: Node = null
 @onready var bubbles: GPUParticles2D = $BubbleTrail
 @onready var cooldowntimer: Timer = $cooldowntimer
 @onready var cooldownbar: ProgressBar = $CanvasLayer/cooldown/cooldownbar
+@onready var controller_manager: Node = $Controller_manager
 @onready var hearts := [
 	$CanvasLayer/Hearts/Heart1,
 	$CanvasLayer/Hearts/Heart2,
@@ -98,8 +99,11 @@ func _physics_process(_delta):
 	velocity = input_vector.normalized() * speed
 	move_and_slide()
 
-	# --- Aiming ---
-	diver_arm.look_at(get_global_mouse_position())
+	# --- Aiming (now handled by controller_manager) ---
+	if controller_manager:
+		diver_arm.look_at(controller_manager.get_aim_position())
+	else:
+		diver_arm.look_at(get_global_mouse_position())
 
 	# --- Shooting ---
 	if Input.is_action_just_pressed("fire") and cooldowntimer.is_stopped():
@@ -139,7 +143,11 @@ func model_facing() -> void:
 	if diver_anim == null:
 		return
 	
+	# Get aim position from controller handler
 	var mouse_pos = get_global_mouse_position()
+	if controller_manager:
+		mouse_pos = controller_manager.get_aim_position()
+	
 	var player_pos = global_position
 	
 	if mouse_pos.x < player_pos.x: 
@@ -184,7 +192,13 @@ func fire():
 	harpoon.play()
 	cooldowntimer.start()
 	var fire_pos = diver_arm.global_position
-	var direction = (get_global_mouse_position() - fire_pos).normalized()
+	
+	# Get aim position from controller handler
+	var target_pos = get_global_mouse_position()
+	if controller_manager:
+		target_pos = controller_manager.get_aim_position()
+	
+	var direction = (target_pos - fire_pos).normalized()
 	
 	if not firerate:
 		cooldowntimer.start()

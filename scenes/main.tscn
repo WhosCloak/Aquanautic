@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3grfsvfta7fk"]
+[gd_scene load_steps=7 format=3 uid="uid://7bheqelt25dm"]
 
 [ext_resource type="Script" uid="uid://djjpqu61fnnfn" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cp3kf82ssstnc" path="res://scenes/player.tscn" id="2_tefeu"]
@@ -18,8 +18,8 @@ script = ExtResource("1_tbgi4")
 
 [node name="Powerupspawner" parent="." instance=ExtResource("4_tbgi4")]
 
+[node name="ColorBlindCanvas" parent="." instance=ExtResource("6_tefeu")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="pause" parent="CanvasLayer" instance=ExtResource("4_tipki")]
-
-[node name="ColorBlindCanvas" parent="." instance=ExtResource("6_tefeu")]

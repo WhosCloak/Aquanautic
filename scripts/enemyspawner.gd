@@ -1,58 +1,69 @@
 extends Node2D
 
-var enemy_scene_1 = preload("res://scenes/Enemies/enemy1.tscn")
-var enemy_scene_2 = preload("res://scenes/Enemies/enemy2.tscn")
-var enemy_scene_3 = preload("res://scenes/Enemies/enemy3.tscn")
-var enemy_scene_4 = preload("res://scenes/Enemies/enemy4.tscn")
-var enemy_scene_5 = preload("res://scenes/Enemies/enemy5.tscn")
-var enemy_scene_6 = preload("res://scenes/Enemies/enemy6.tscn")
-var enemy_scene_7 = preload("res://scenes/Enemies/enemy7.tscn")
-var enemy_scene_8 = preload("res://scenes/Enemies/enemy8.tscn")
-var enemy_scene_9 = preload("res://scenes/Enemies/enemy9.tscn")
-var enemy_scene_10 = preload("res://scenes/Enemies/enemy10.tscn")
+# --- Preload all enemy scenes ---
+var enemy_scenes = [
+	preload("res://scenes/Enemies/enemy1.tscn"),
+	preload("res://scenes/Enemies/enemy2.tscn"),
+	preload("res://scenes/Enemies/enemy3.tscn"),
+	preload("res://scenes/Enemies/enemy4.tscn"),
+	preload("res://scenes/Enemies/enemy5.tscn"),
+	preload("res://scenes/Enemies/enemy6.tscn"),
+	preload("res://scenes/Enemies/enemy7.tscn"),
+	preload("res://scenes/Enemies/enemy8.tscn"),
+	preload("res://scenes/Enemies/enemy9.tscn"),
+	preload("res://scenes/Enemies/enemy10.tscn")
+]
 
-var spawn_distance = 500 
-var spawn_interval = 1
+# --- Level-based enemy groups ---
+var enemies_by_level = {
+	1: [0, 1],          # Level 1 (0–20)
+	2: [2, 3, 4],       # Level 2 (21–40)
+	3: [5, 6, 7],       # Level 3 (41–60)
+	4: [8, 9]           # Level 4 (61–80)
+}
+
+# --- Settings ---
+var spawn_distance := 500.0
+var spawn_interval := 1.0
 var timer := 0.0
-var player: Node2D 
+var player: Node2D
 
+# --- Called when node is ready ---
 func _ready():
 	add_to_group("enemy_spawner")
-	player = get_tree().get_first_node_in_group("player") 
+	player = get_tree().get_first_node_in_group("player")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	timer += delta
 	if timer >= spawn_interval:
-		timer = 0
+		timer = 0.0
 		spawn_enemy()
 
-func spawn_enemy():
+# --- Determine level based on score ---
+func get_player_level(score: int) -> int:
+	if score < 20:
+		return 1
+	elif score < 40:
+		return 2
+	elif score < 60:
+		return 3
+	else:
+		return 4
+
+# --- Spawn an enemy based on player's score ---
+func spawn_enemy() -> void:
 	if not player:
 		return
-	
+
 	var direction = Vector2(randf() * 2 - 1, randf() * 2 - 1).normalized()
 	var spawn_pos = player.global_position + direction * spawn_distance
-	var enemy_scene = enemy_scene_1
-	
-	if player.score >= 10:  #Adjust numbers for score goal
-		enemy_scene = enemy_scene_2
-	if player.score >= 15:
-		enemy_scene = enemy_scene_3
-	if player.score >= 20:
-		enemy_scene = enemy_scene_4
-	if player.score >= 25:
-		enemy_scene = enemy_scene_5
-	if player.score >= 30:
-		enemy_scene = enemy_scene_6
-	if player.score >= 35:
-		enemy_scene = enemy_scene_7
-	if player.score >= 40:
-		enemy_scene = enemy_scene_8
-	if player.score >= 45:
-		enemy_scene = enemy_scene_9
-	if player.score >= 50:
-		enemy_scene = enemy_scene_10
 
+	var level = get_player_level(player.score)
+	var available_indices = enemies_by_level[level]
+	var enemy_index = available_indices[randi() % available_indices.size()]
+
+	var enemy_scene = enemy_scenes[enemy_index]
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = spawn_pos
-	get_parent().add_child(enemy) 
+
+	get_parent().add_child(enemy)

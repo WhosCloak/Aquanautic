@@ -16,3 +16,7 @@ func _ready():
 func on_exit_pressed() -> void:
 	exit_options_menu.emit()
 	set_process(false)
+
+
+func _on_credits_button_button_down() -> void:
+	get_tree().change_scene_to_file("res://scenes/CreditsPlayer.tscn")

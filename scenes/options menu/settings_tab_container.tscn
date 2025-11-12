@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckpyg5xibxjx1"]
+[gd_scene load_steps=11 format=3 uid="uid://ckpyg5xibxjx1"]
 
 [ext_resource type="PackedScene" uid="uid://bd4fu5hhab36n" path="res://scenes/options menu/hotkey_rebind_button.tscn" id="1_0v3h5"]
 [ext_resource type="PackedScene" uid="uid://dlnvepr7j8mxg" path="res://scenes/options menu/window_mode_button.tscn" id="1_8fdhs"]
@@ -8,6 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://b0uvg626gkymd" path="res://scenes/options menu/color_blind_toggle_button.tscn" id="5_qldpk"]
 [ext_resource type="PackedScene" uid="uid://csolis2asqc4t" path="res://scenes/options menu/camerashakecontrol.tscn" id="7_1mdlc"]
 [ext_resource type="PackedScene" uid="uid://bfk77kanw32tx" path="res://scenes/options menu/brightnesscontrol.tscn" id="8_r5sbi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r5sbi"]
+font = ExtResource("1_eggv2")
+font_size = 32
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2h3lt"]
+font = ExtResource("1_eggv2")
+font_size = 32
 
 [node name="Settings_Tab_Container" type="Control"]
 layout_mode = 3
@@ -31,9 +41,10 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 theme_override_font_sizes/font_size = 24
 tab_alignment = 1
-current_tab = 0
+current_tab = 3
 
 [node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 0
@@ -165,8 +176,21 @@ action_name = "interact"
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="Controller Actions" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controller Actions"
+label_settings = SubResource("LabelSettings_r5sbi")
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Left Stick  | Move
+Right Stick | Look
+Square | Interact
+R1 | Shoot"
+label_settings = SubResource("LabelSettings_2h3lt")
+
 [node name="Accesibility" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 3
