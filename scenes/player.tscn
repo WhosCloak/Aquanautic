@@ -24,9 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://drpd31igury8e" path="res://sprites/goal_arrow.png" id="21_a38lo"]
 [ext_resource type="Script" uid="uid://ds27sjhvuknog" path="res://scripts/arrow.gd" id="22_a38lo"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
-radius = 22.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f1ej7"]
 shader = ExtResource("2_jej6c")
 shader_parameter/flash_strength = 0.0
@@ -128,6 +125,10 @@ animations = [{
 "name": &"playerswim",
 "speed": 10.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ni07"]
+radius = 9.0
+height = 56.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
 atlas = ExtResource("3_3v2ag")
@@ -291,9 +292,6 @@ collision_layer = 2
 collision_mask = 27
 script = ExtResource("1_g2els")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_tuyoq")
-
 [node name="diver_anim" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_f1ej7")
@@ -301,14 +299,19 @@ position = Vector2(-2.7083676, -1.0000004)
 sprite_frames = SubResource("SpriteFrames_f1ej7")
 animation = &"playeridle"
 autoplay = "playeridle"
+speed_scale = 0.5
 
 [node name="arm_socket" type="Marker2D" parent="diver_anim"]
+show_behind_parent = true
 position = Vector2(3.7083673, -11)
 
 [node name="diver_arm" type="Sprite2D" parent="diver_anim/arm_socket"]
-z_index = 1
 texture = ExtResource("6_a8ls1")
 offset = Vector2(14.515152, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -3)
+shape = SubResource("CapsuleShape2D_4ni07")
 
 [node name="goal_arrow" type="Sprite2D" parent="."]
 position = Vector2(60, 0)

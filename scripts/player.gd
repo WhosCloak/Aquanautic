@@ -63,6 +63,7 @@ func _ready():
 	cam.zoom = Vector2(3.5, 3.5)
 	update_hearts()
 	cam.set_process(true)
+	_duplicate_materials_recursive(self)
 	if boss_hud:
 		boss_hud.visible = false
 	cooldownbar.max_value = cooldowntimer.wait_time
@@ -226,7 +227,6 @@ func fire():
 # ==============================================
 func take_damage(amount: int):
 	await flash_hit()
-	await get_tree().create_timer(flash_duration).timeout
 	cam.apply_shake()
 
 	health -= amount
@@ -244,13 +244,32 @@ func heal(amount: int = 3):
 	update_hearts()
 
 func flash_hit() -> void:
-	var original_modulate = diver_anim.modulate
-	
-	diver_anim.modulate = Color(10, 10, 10, 1)
-	
-	await get_tree().create_timer(flash_duration).timeout
-	
-	diver_anim.modulate = original_modulate
+	var affected_nodes = _get_flashable_nodes(self)
+	for node in affected_nodes:
+		var mat: ShaderMaterial =  node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 1.0)
+
+	await get_tree().create_timer(0.1).timeout
+
+	for node in affected_nodes:
+		var mat: ShaderMaterial =  node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 0.0)
+
+func _get_flashable_nodes(root: Node) -> Array:
+	var nodes := []
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			nodes.append(child)
+		nodes += _get_flashable_nodes(child) # recursive
+	return nodes
+
+func _duplicate_materials_recursive(root: Node) -> void:
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			child.material = child.material.duplicate()
+		_duplicate_materials_recursive(child)
 # ==============================================
 # ==== PLAYER STATUS & STUN ====
 # ==============================================
