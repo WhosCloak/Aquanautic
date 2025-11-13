@@ -24,6 +24,10 @@ signal hp_changed(current: int, maximum: int)
 @onready var path_b: Marker2D = get_node_or_null(path_b_path)
 @onready var spawn_timer: Timer = Timer.new()
 
+# Audio players
+@onready var boss_theme_player: AudioStreamPlayer2D = $boss_theme_player
+@onready var roar_player: AudioStreamPlayer2D = $roar_player
+@onready var lightning_player: AudioStreamPlayer2D = $lightning_player
 
 var enemy7_scene = preload("res://scenes/Enemies/enemy7.tscn")
 var shield_active = false
@@ -32,7 +36,6 @@ var hp := 0
 var _hit_lock := false
 var _target_marker: Marker2D = null
 var _target: Vector2
-
 
 func _ready() -> void:
 	if not attack_timer.timeout.is_connected(_on_attack_timer_timeout):
@@ -45,11 +48,9 @@ func _ready() -> void:
 	shield_timer.timeout.connect(_on_shield_timeout)
 
 	add_child(spawn_timer)
-	spawn_timer.wait_time = 10.0  # cooldown before Leviathan can spawn again
+	spawn_timer.wait_time = 10.0
 	spawn_timer.one_shot = true
 	spawn_timer.timeout.connect(_on_spawn_timeout)
-
-
 
 	add_to_group("boss")
 	hp = max_hp
@@ -57,6 +58,9 @@ func _ready() -> void:
 
 	if anim:
 		anim.play("swim")
+
+	if boss_theme_player:
+		boss_theme_player.play()
 
 	if hurtbox:
 		hurtbox.monitoring = true
@@ -74,7 +78,7 @@ func _ready() -> void:
 
 func shoot_lightning(target_pos: Vector2):
 	if anim:
-		anim.play("swim")  # optional animation
+		anim.play("swim")
 	var bolt = lightning_bolt_scene.instantiate()
 	bolt.global_position = lightning_muzzle.global_position
 	var dir = (target_pos - bolt.global_position).normalized()
@@ -82,53 +86,53 @@ func shoot_lightning(target_pos: Vector2):
 	bolt.linear_velocity = dir * 300
 	get_tree().current_scene.add_child(bolt)
 
+	if lightning_player:
+		lightning_player.play()
 
 func activate_shield():
 	shield_active = true
 	shield.visible = true
 	shield.play("shield_activate", true)
-	hurtbox.monitoring = false  # Prevent damage while shielded
+	hurtbox.monitoring = false
 	shield_timer.start()
+
+	if roar_player:
+		roar_player.play()
 
 func _on_shield_timeout():
 	shield_active = false
 	shield.visible = false
 	hurtbox.monitoring = true
 
-
 func spawn_enemy7():
 	var enemy = enemy7_scene.instantiate()
 	var offset = Vector2(randf_range(-200, 200), randf_range(-200, 200))
 	enemy.global_position = global_position + offset
 	get_tree().current_scene.add_child(enemy)
-	
-	spawn_timer.start()  # start cooldown
+
+	spawn_timer.start()
 	despawn_enemy_later(enemy)
 
 func despawn_enemy_later(enemy: Node):
-	await get_tree().create_timer(20.0).timeout  # enemy lasts for 4 seconds
+	await get_tree().create_timer(20.0).timeout
 	if enemy and enemy.is_inside_tree():
 		enemy.queue_free()
 
 func _on_spawn_timeout():
-	pass  # can stay empty, used only for cooldown timing
-
+	pass
 
 func _on_attack_timer_timeout():
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		shoot_lightning(player.global_position)
 
-	# 25% chance to activate shield each attack
 	if not shield_active and randf() < 0.25:
 		activate_shield()
 
-	# 10% chance to summon an enemy, only if not cooling down
 	if not spawn_timer.is_stopped():
 		return
 	if randf() < 0.5:
 		spawn_enemy7()
-
 
 func _physics_process(delta: float) -> void:
 	if _hit_lock:
@@ -141,23 +145,18 @@ func _physics_process(delta: float) -> void:
 		step = to_t.normalized() * swim_speed * delta
 		global_position += step
 
-	# handle animation flip and muzzle mirroring using `step`
 	if anim:
 		var moving_left = step.x < 0.0
 		var new_flip = moving_left if faces_right_default else not moving_left
 
-		# Only flip when direction changes
 		if anim.flip_h != new_flip:
 			anim.flip_h = new_flip
-			# Mirror the muzzle relative to the Leviathan
 			lightning_muzzle.position.x = -lightning_muzzle.position.x
 
-	# when we arrive, swap patrol target
 	if to_t.length() <= arrive_dist:
 		if path_a and path_b and _target_marker != null:
 			_target_marker = path_a if _target_marker == path_b else path_b
 			_target = _target_marker.global_position
-
 
 func _on_hurt_area_entered(b: Node) -> void:
 	if _hit_lock:
@@ -187,6 +186,9 @@ func _die():
 	visible = false
 	set_process(false)
 	set_physics_process(false)
+
+	if boss_theme_player:
+		boss_theme_player.stop()
 
 	if not is_inside_tree():
 		return
