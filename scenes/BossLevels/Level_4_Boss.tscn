@@ -51,6 +51,7 @@ scale = Vector2(1.7, 1.7)
 
 [node name="Leviathan" parent="BossSpawn" instance=ExtResource("2_i8vwv")]
 scale = Vector2(1.4, 1.4)
+max_hp = 200
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 

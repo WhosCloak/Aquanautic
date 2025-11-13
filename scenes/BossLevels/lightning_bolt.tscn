@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://cl1suhm2ejm7c"]
 
-[ext_resource type="Script" uid="uid://bisunc0bqvvnt" path="res://scripts/lightning_bolt.gd" id="1_1qp21"]
+[ext_resource type="Script" path="res://scripts/lightning_bolt.gd" id="1_1qp21"]
 [ext_resource type="Texture2D" uid="uid://cqbjkdj2txr7b" path="res://sprites/LightningBreath-Sheet-export.png" id="2_1qp21"]
-[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://scenes/BossLevels/harpoon_shot2.0.wav" id="3_87n7n"]
+[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://audios/harpoon_shot2.0.wav" id="3_87n7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7dhc"]
 size = Vector2(102, 22)

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2m5ejvyumo6e"]
+
+[ext_resource type="Script" uid="uid://os5r12neccgi" path="res://scripts/vhs_toggle.gd" id="1_6s6eo"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="2_2jdx2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2jdx2"]
+font = ExtResource("2_2jdx2")
+font_size = 32
+
+[node name="VHSToggle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6s6eo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 494.0
+offset_bottom = 50.0
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "VHS Toggle"
+label_settings = SubResource("LabelSettings_2jdx2")
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 330
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[connection signal="toggled" from="HBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]

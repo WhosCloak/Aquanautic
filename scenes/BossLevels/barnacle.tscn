@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bghackk5717ui" path="res://sprites/barnacle.png" id="1_kxuct"]
 [ext_resource type="Texture2D" uid="uid://dl8wvkqmigxvr" path="res://sprites/barnacle_explosion.png" id="1_wjhr6"]
 [ext_resource type="Script" uid="uid://mbs6djey3fud" path="res://scripts/barnacle.gd" id="1_ws4va"]
-[ext_resource type="AudioStream" uid="uid://bgsc1ltdoiyg8" path="res://scenes/BossLevels/whale_barnacle_drop_1.mp3" id="4_wntc5"]
+[ext_resource type="AudioStream" uid="uid://bgsc1ltdoiyg8" path="res://audios/whale_barnacle_drop_1.mp3" id="4_wntc5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ws4va"]
 atlas = ExtResource("1_wjhr6")

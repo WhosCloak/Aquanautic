@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckpyg5xibxjx1"]
+[gd_scene load_steps=12 format=3 uid="uid://ckpyg5xibxjx1"]
 
 [ext_resource type="PackedScene" uid="uid://bd4fu5hhab36n" path="res://scenes/options menu/hotkey_rebind_button.tscn" id="1_0v3h5"]
 [ext_resource type="PackedScene" uid="uid://dlnvepr7j8mxg" path="res://scenes/options menu/window_mode_button.tscn" id="1_8fdhs"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b0uvg626gkymd" path="res://scenes/options menu/color_blind_toggle_button.tscn" id="5_qldpk"]
 [ext_resource type="PackedScene" uid="uid://csolis2asqc4t" path="res://scenes/options menu/camerashakecontrol.tscn" id="7_1mdlc"]
 [ext_resource type="PackedScene" uid="uid://bfk77kanw32tx" path="res://scenes/options menu/brightnesscontrol.tscn" id="8_r5sbi"]
+[ext_resource type="PackedScene" uid="uid://b2m5ejvyumo6e" path="res://scenes/vhs_toggle.tscn" id="9_2h3lt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r5sbi"]
 font = ExtResource("1_eggv2")
@@ -41,7 +42,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 theme_override_font_sizes/font_size = 24
 tab_alignment = 1
-current_tab = 3
+current_tab = 1
 
 [node name="Sound" type="TabBar" parent="TabContainer"]
 visible = false
@@ -85,7 +86,6 @@ layout_mode = 2
 bus_name = "SFX"
 
 [node name="Graphics" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 1
@@ -118,6 +118,9 @@ theme_override_constants/separation = 120
 layout_mode = 2
 
 [node name="Resolution_Mode_Button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_uoiki")]
+layout_mode = 2
+
+[node name="VHSToggle" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("9_2h3lt")]
 layout_mode = 2
 
 [node name="Controls" type="TabBar" parent="TabContainer"]
@@ -191,6 +194,7 @@ R1 | Shoot"
 label_settings = SubResource("LabelSettings_2h3lt")
 
 [node name="Accesibility" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_eggv2")
 metadata/_tab_index = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7bheqelt25dm"]
+[gd_scene load_steps=9 format=3 uid="uid://7bheqelt25dm"]
 
 [ext_resource type="Script" uid="uid://djjpqu61fnnfn" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cp3kf82ssstnc" path="res://scenes/player.tscn" id="2_tefeu"]
@@ -6,6 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://bjparc66wtwdg" path="res://scenes/powerupspawner.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bya814s12oehq" path="res://scenes/pause.tscn" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://c1k5hxmsflwka" path="res://scenes/options menu/colorblind_shaderscreen.tscn" id="6_tefeu"]
+[ext_resource type="Shader" uid="uid://bjljrl0dclmyq" path="res://shaders/VHSFilter.gdshader" id="7_o6xl0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+shader = ExtResource("7_o6xl0")
+shader_parameter/scanline_strength = 0.1
+shader_parameter/noise_strength = 0.05
+shader_parameter/distortion_strength = 0.02
+shader_parameter/chroma_offset = 1.5
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_tbgi4")
@@ -21,5 +29,13 @@ script = ExtResource("1_tbgi4")
 [node name="ColorBlindCanvas" parent="." instance=ExtResource("6_tefeu")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" groups=["vhs_filter"]]
+material = SubResource("ShaderMaterial_tipki")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="pause" parent="CanvasLayer" instance=ExtResource("4_tipki")]

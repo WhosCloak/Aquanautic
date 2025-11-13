@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ctix65hoppb1p"
-path="res://.godot/imported/harpoon_shot2.0.wav-da58f8875d6e56c22987982b674445e7.sample"
+path="res://.godot/imported/harpoon_shot2.0.wav-44a0a30dfd3fab269970c95aaad46ca1.sample"
 
 [deps]
 
-source_file="res://scenes/BossLevels/harpoon_shot2.0.wav"
-dest_files=["res://.godot/imported/harpoon_shot2.0.wav-da58f8875d6e56c22987982b674445e7.sample"]
+source_file="res://audios/harpoon_shot2.0.wav"
+dest_files=["res://.godot/imported/harpoon_shot2.0.wav-44a0a30dfd3fab269970c95aaad46ca1.sample"]
 
 [params]
 

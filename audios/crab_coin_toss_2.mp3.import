@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://buwu42xlp73nr"
-path="res://.godot/imported/crab_coin_toss_2.mp3-c9e2d5f177e00a90180e7c7e2927d1a8.mp3str"
+uid="uid://dylijrrbms8st"
+path="res://.godot/imported/crab_coin_toss_2.mp3-74f8a446f8e82ad24622fc0c8e683f1b.mp3str"
 
 [deps]
 
-source_file="res://audios/crab_coin_toss_2.mp3"
-dest_files=["res://.godot/imported/crab_coin_toss_2.mp3-c9e2d5f177e00a90180e7c7e2927d1a8.mp3str"]
+source_file="res://scenes/BossLevels/crab_coin_toss_2.mp3"
+dest_files=["res://.godot/imported/crab_coin_toss_2.mp3-74f8a446f8e82ad24622fc0c8e683f1b.mp3str"]
 
 [params]
 

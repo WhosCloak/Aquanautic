@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bmbm6t8rmbfii" path="res://scripts/WhaleBoss.gd" id="1_51lx6"]
 [ext_resource type="Texture2D" uid="uid://b674auv3hw23p" path="res://sprites/spit.png" id="2_632wf"]
 [ext_resource type="Texture2D" uid="uid://c4xyr7iawslr1" path="res://sprites/swiiming.png" id="3_k3gwo"]
-[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://scenes/BossLevels/harpoon_shot2.0.wav" id="4_wolvp"]
-[ext_resource type="AudioStream" uid="uid://bgsc1ltdoiyg8" path="res://scenes/BossLevels/whale_barnacle_drop_1.mp3" id="5_yvb8i"]
+[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://audios/harpoon_shot2.0.wav" id="4_wolvp"]
+[ext_resource type="AudioStream" uid="uid://bgsc1ltdoiyg8" path="res://audios/whale_barnacle_drop_1.mp3" id="5_yvb8i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gea0a"]
 atlas = ExtResource("2_632wf")

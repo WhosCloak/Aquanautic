@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://oare372lvcw3" path="res://scripts/boss_harpoon.gd" id="1_nfq6j"]
 [ext_resource type="Texture2D" uid="uid://byierjxv6llim" path="res://sprites/Bloody_Rusty_Harpoon.png" id="2_nfq6j"]
-[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://scenes/BossLevels/harpoon_shot2.0.wav" id="3_rokdb"]
+[ext_resource type="AudioStream" uid="uid://ctix65hoppb1p" path="res://audios/harpoon_shot2.0.wav" id="3_rokdb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7dhc"]
 size = Vector2(16, 6)

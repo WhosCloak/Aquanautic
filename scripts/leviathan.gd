@@ -25,9 +25,9 @@ signal hp_changed(current: int, maximum: int)
 @onready var spawn_timer: Timer = Timer.new()
 
 # Audio players
-@onready var boss_theme_player: AudioStreamPlayer2D = $boss_theme_player
-@onready var roar_player: AudioStreamPlayer2D = $roar_player
-@onready var lightning_player: AudioStreamPlayer2D = $lightning_player
+@onready var boss_theme_player: AudioStreamPlayer = $boss_theme_player
+@onready var roar_player: AudioStreamPlayer = $roar_player
+@onready var lightning_player: AudioStreamPlayer = $lightning_player
 
 var enemy7_scene = preload("res://scenes/Enemies/enemy7.tscn")
 var shield_active = false

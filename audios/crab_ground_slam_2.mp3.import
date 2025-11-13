@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://8yg280lo6mtb"
-path="res://.godot/imported/crab_ground_slam_2.mp3-64c9949f82499e28100b8294e53cd9cc.mp3str"
+uid="uid://c0m4uou401wdc"
+path="res://.godot/imported/crab_ground_slam_2.mp3-fe1110d4d0936fd46a357fb1eee7f4c3.mp3str"
 
 [deps]
 
-source_file="res://audios/crab_ground_slam_2.mp3"
-dest_files=["res://.godot/imported/crab_ground_slam_2.mp3-64c9949f82499e28100b8294e53cd9cc.mp3str"]
+source_file="res://scenes/BossLevels/crab_ground_slam_2.mp3"
+dest_files=["res://.godot/imported/crab_ground_slam_2.mp3-fe1110d4d0936fd46a357fb1eee7f4c3.mp3str"]
 
 [params]
 
