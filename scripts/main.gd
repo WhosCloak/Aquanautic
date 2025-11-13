@@ -2,10 +2,10 @@ extends Node2D
 # ===============================
 # 🔹 LEVEL MANAGEMENT VARIABLES
 # ===============================
-var boss_1_scene := "res://scenes/BossLevels/Level_1_Boss.tscn"
-var boss_2_scene := "res://scenes/BossLevels/Level_2_Boss.tscn"
+var boss_1_scene := "res://scenes/BossLevels/level_1_Boss.tscn"
+var boss_2_scene := "res://scenes/BossLevels/level_2_Boss.tscn"
 var boss_3_scene := "res://scenes/BossLevels/level_3_boss.tscn"
-var boss_4_scene := "res://scenes/BossLevels/Level_4_Boss.tscn"
+var boss_4_scene := "res://scenes/BossLevels/level_4_Boss.tscn"
 var gate_scene := preload("res://scenes/WhirlpoolGate.tscn")
 
 var in_boss := false
@@ -20,7 +20,7 @@ var level_reached := 1
 # 🔹 READY & PROCESS
 # ===============================
 func _ready() -> void:
-	load_level("res://scenes/levels/Level_1.tscn")
+	load_level("res://scenes/levels/level_1.tscn")
 
 func _process(_delta: float) -> void:
 	if not in_boss:
@@ -235,12 +235,12 @@ func _reset_camera_for_regular_level():
 			cam.limit_enabled = false
 
 func go_to_level_2() -> void:
-	load_level("res://scenes/levels/Level_2.tscn")
+	load_level("res://scenes/levels/level_2.tscn")
 	_start_all_spawners_in_tree()
 	call_deferred("_reset_camera_for_regular_level")
 
 func go_to_level_3() -> void:
-	load_level("res://scenes/levels/Level_3.tscn")
+	load_level("res://scenes/levels/level_3.tscn")
 	_start_all_spawners_in_tree()
 	call_deferred("_reset_camera_for_regular_level")
 
