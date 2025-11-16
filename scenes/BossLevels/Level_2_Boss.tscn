@@ -52,7 +52,7 @@ position = Vector2(0, -42)
 [node name="SharkBoss" parent="BossSpawn" instance=ExtResource("3_egdbn")]
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
-max_hp = 100
+max_hp = 10
 
 [node name="PathA" type="Marker2D" parent="."]
 position = Vector2(-278, -42)

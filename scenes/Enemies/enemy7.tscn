@@ -9,4 +9,5 @@ speed = 20.0
 position = Vector2(-0.6, 0.20000002)
 scale = Vector2(0.16, 0.16)
 animation = &"enemy7"
-frame_progress = 0.0
+autoplay = "enemy7"
+frame_progress = 0.85674095

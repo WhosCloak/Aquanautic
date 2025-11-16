@@ -1,11 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://bqs06e1aqnpy0"]
+[gd_scene load_steps=24 format=3 uid="uid://bqs06e1aqnpy0"]
 
 [ext_resource type="Texture2D" uid="uid://b5a3lfgn6nlba" path="res://sprites/leviathan_swim.png" id="1_1ea7h"]
 [ext_resource type="Script" uid="uid://b4ckb8qv7exih" path="res://scripts/leviathan.gd" id="1_oklb4"]
+[ext_resource type="Shader" uid="uid://wv08im4h25hu" path="res://shaders/enemyhitflash.gdshader" id="2_a3x3m"]
 [ext_resource type="Texture2D" uid="uid://c3f4ol47x30d2" path="res://sprites/StunEffect.png" id="3_jf3or"]
 [ext_resource type="AudioStream" uid="uid://dc1ju3rfr3ust" path="res://audios/lightning_attack.mp3" id="4_sphwc"]
 [ext_resource type="AudioStream" uid="uid://xjqfpvffvhxg" path="res://audios/levythan_roar.mp3" id="5_a3x3m"]
 [ext_resource type="AudioStream" uid="uid://deqvhvsr1qvbx" path="res://audios/levythan_boss_theme.mp3" id="6_0l21t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0l21t"]
+shader = ExtResource("2_a3x3m")
+shader_parameter/flash_strength = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sphwc"]
 atlas = ExtResource("1_1ea7h")
@@ -118,6 +124,7 @@ script = ExtResource("1_oklb4")
 max_hp = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_0l21t")
 position = Vector2(21, -40.666668)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_g4rt2")

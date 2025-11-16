@@ -14,7 +14,7 @@ signal hp_changed(current_hp: int, max_hp: int)
 @export var path_b_path: NodePath
 @export var faces_right_default := false
 @export var max_hp: int = 20
-@export var display_name := "Terror of the Abyss"
+@export var display_name := "The Terror"
 @export var lunge_speed := 400.0
 @export var lunge_duration := 0.8
 @export var lunge_cooldown := 4.0
@@ -39,11 +39,13 @@ var _lunge_timer := 0.0
 var _lunge_dir := Vector2.ZERO
 var _hit_lock := false
 var _is_diving := false
+var flash_duration := 0.1
 
 # -------------------------------
 # INITIAL SETUP
 # -------------------------------
 func _ready() -> void:
+	_duplicate_materials_recursive(self)
 	add_to_group("boss")
 	hp = max_hp
 	if anim:
@@ -91,6 +93,7 @@ func update_facing(dir: Vector2) -> void:
 # DAMAGE + DEATH
 # -------------------------------
 func take_damage(amount: int) -> void:
+	await flash_hit()
 	if _hit_lock:
 		return
 	hp = max(0, hp - amount)
@@ -129,6 +132,40 @@ func _on_hurt_body_entered(body: Node) -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(contact_damage)
 
+# ===== FLASH EFFECT WHEN HIT =====
+func flash_hit() -> void:
+	var affected_nodes = _get_flashable_nodes(self)
+	
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 1.0)
+
+	await get_tree().create_timer(0.1).timeout
+
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 0.0)
+
+# ===== RECURSIVE SEARCH FOR FLASHABLE MATERIALS =====
+func _get_flashable_nodes(root: Node) -> Array:
+	var nodes := []
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			nodes.append(child)
+		
+		# Check children recursively
+		nodes += _get_flashable_nodes(child)
+	return nodes
+
+# ===== DUPLICATE MATERIALS RECURSIVELY =====
+func _duplicate_materials_recursive(root: Node) -> void:
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			child.material = child.material.duplicate()
+		_duplicate_materials_recursive(child)
+
 # -------------------------------
 # MOVEMENT + ATTACKS
 # -------------------------------
@@ -164,7 +201,7 @@ func _run_state_loop() -> void:
 		# SWIM PHASE: 15–25 seconds patrolling A<->B, no attacks can start
 		_state = BossState.SWIM
 		_action_lock = false
-		var swim_dur := _rng.randi_range(15, 25)
+		var swim_dur := _rng.randi_range(6, 10)
 		_swim_timer.start(float(swim_dur))
 		while _swim_timer.time_left > 0.0 and hp > 0:
 			await get_tree().process_frame

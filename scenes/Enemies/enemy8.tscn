@@ -7,4 +7,5 @@ speed = 55.0
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 animation = &"enemy8"
+autoplay = "enemy8"
 frame_progress = 0.0

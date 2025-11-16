@@ -1,11 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://ctv5qv4lf6ang"]
+[gd_scene load_steps=25 format=3 uid="uid://ctv5qv4lf6ang"]
 
 [ext_resource type="Script" uid="uid://cjtd130hekoid" path="res://scripts/shark_boss.gd" id="1_mvosi"]
 [ext_resource type="PackedScene" uid="uid://csbk22jxdbkmw" path="res://scenes/BossLevels/SharkBite.tscn" id="2_2ecf7"]
 [ext_resource type="Texture2D" uid="uid://bhn7qo6l2fc7k" path="res://sprites/SharkBoss/GoblinSharkCHARGE-Sheet.png" id="2_j8521"]
 [ext_resource type="Texture2D" uid="uid://ct5fc1gt8pttl" path="res://sprites/SharkBoss/GoblinSharkBoss-Sheet.png" id="2_mvosi"]
 [ext_resource type="Texture2D" uid="uid://c3pieudd75csg" path="res://sprites/SharkBoss/GoblinSharkLUNGE-Sheet.png" id="3_2ecf7"]
+[ext_resource type="Shader" uid="uid://wv08im4h25hu" path="res://shaders/enemyhitflash.gdshader" id="3_f6jdl"]
 [ext_resource type="AudioStream" uid="uid://cw2f03xd6c0lv" path="res://audios/shark_lunge_atk_1.mp3" id="6_0i2v0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l0mrj"]
+shader = ExtResource("3_f6jdl")
+shader_parameter/flash_strength = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6jdl"]
 atlas = ExtResource("2_j8521")
@@ -133,6 +139,7 @@ script = ExtResource("1_mvosi")
 shark_bite_scene = ExtResource("2_2ecf7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_l0mrj")
 sprite_frames = SubResource("SpriteFrames_g4rt2")
 animation = &"Swim"
 
@@ -148,5 +155,3 @@ shape = SubResource("CapsuleShape2D_51lx6")
 [node name="LungeIndicatorPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_0i2v0")
 bus = &"SFX"
-
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

@@ -7,11 +7,12 @@ var boss_2_scene := "res://scenes/BossLevels/level_2_Boss.tscn"
 var boss_3_scene := "res://scenes/BossLevels/level_3_boss.tscn"
 var boss_4_scene := "res://scenes/BossLevels/level_4_Boss.tscn"
 var gate_scene := preload("res://scenes/WhirlpoolGate.tscn")
-
+var virtual_mouse_pos: Vector2
 var in_boss := false
 var gate_spawned := false
 var gate_instance: Area2D
 
+@export var cursor_speed: float = 800.0
 @onready var level_root = $LevelRoot
 var current_level: Node = null
 var level_reached := 1
@@ -19,12 +20,29 @@ var level_reached := 1
 # ===============================
 # 🔹 READY & PROCESS
 # ===============================
-func _ready() -> void:
-	load_level("res://scenes/levels/level_1.tscn")
 
-func _process(_delta: float) -> void:
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	virtual_mouse_pos = get_viewport().get_mouse_position()
+	load_level("res://scenes/levels/level_1.tscn")
+	$HowToPlayPopup.visible = true
+
+
+func _process(delta: float) -> void:
 	if not in_boss:
 		check_next_level()
+
+	# --- right‑stick cursor ---
+	var axis_x := Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left")
+	var axis_y := Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
+	var axis := Vector2(axis_x, axis_y)
+
+	if axis.length() > 0.1:
+		virtual_mouse_pos += axis * cursor_speed * delta
+		var rect := get_viewport().get_visible_rect()
+		virtual_mouse_pos = virtual_mouse_pos.clamp(rect.position, rect.position + rect.size)
+		get_viewport().warp_mouse(virtual_mouse_pos)
+
 
 # ===============================
 # 🔹 LEVEL PROGRESSION LOGIC

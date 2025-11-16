@@ -76,6 +76,7 @@ layout_mode = 2
 [node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Options_Button")
 theme_override_fonts/font = ExtResource("4_116ea")
 theme_override_font_sizes/font_size = 34
 theme_override_icons/icon = ExtResource("5_l3hwl")
@@ -85,6 +86,8 @@ expand_icon = true
 [node name="Options_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Start_Button")
+focus_neighbor_bottom = NodePath("../Exit_Button")
 theme_override_fonts/font = ExtResource("4_116ea")
 theme_override_font_sizes/font_size = 34
 theme_override_icons/icon = ExtResource("5_l3hwl")
@@ -94,6 +97,7 @@ expand_icon = true
 [node name="Exit_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Options_Button")
 theme_override_fonts/font = ExtResource("4_116ea")
 theme_override_font_sizes/font_size = 34
 theme_override_icons/icon = ExtResource("5_l3hwl")

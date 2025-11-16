@@ -31,6 +31,7 @@ var _target: Vector2
 var _is_attacking := false
 var _is_blocking := false
 var _in_phase2 := false
+var flash_duration := 0.1
 
 # Preloads
 var coin_scene := preload("res://scenes/CrabBossNormal/GoldCoinProjectile.tscn")
@@ -53,6 +54,7 @@ var rock_scene := preload("res://scenes/CrabBossNormal/rock_boulder.tscn")
 
 
 func _ready() -> void:
+	_duplicate_materials_recursive(self)
 	add_to_group("boss")
 	hp = max_hp
 	emit_signal("hp_changed", hp, max_hp)
@@ -104,6 +106,7 @@ func _on_hurt_area_entered(b: Node) -> void:
 		apply_damage(contact_damage)
 		
 func apply_damage(amount: int) -> void:
+	await flash_hit()
 	if _is_blocking:
 		return  # takes no damage
 
@@ -121,6 +124,40 @@ func apply_damage(amount: int) -> void:
 		await get_tree().create_timer(0.05).timeout
 		_hit_lock = false
 		
+
+# ===== FLASH EFFECT WHEN HIT =====
+func flash_hit() -> void:
+	var affected_nodes = _get_flashable_nodes(self)
+	
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 1.0)
+
+	await get_tree().create_timer(0.1).timeout
+
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 0.0)
+
+# ===== RECURSIVE SEARCH FOR FLASHABLE MATERIALS =====
+func _get_flashable_nodes(root: Node) -> Array:
+	var nodes := []
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			nodes.append(child)
+		
+		# Check children recursively
+		nodes += _get_flashable_nodes(child)
+	return nodes
+
+# ===== DUPLICATE MATERIALS RECURSIVELY =====
+func _duplicate_materials_recursive(root: Node) -> void:
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			child.material = child.material.duplicate()
+		_duplicate_materials_recursive(child)
 
 func _enter_phase2() -> void:
 	_in_phase2 = true

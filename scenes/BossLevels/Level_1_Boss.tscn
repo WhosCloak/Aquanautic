@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwqlcg2c06x7"]
+[gd_scene load_steps=11 format=3 uid="uid://dwqlcg2c06x7"]
 
 [ext_resource type="Texture2D" uid="uid://b5trt3i877woh" path="res://sprites/WhaleLevel.png" id="1_gn26o"]
 [ext_resource type="Script" uid="uid://br78hmutlmdb0" path="res://scripts/Level_1_Boss.gd" id="1_obacn"]
 [ext_resource type="PackedScene" uid="uid://droi5otfpdguu" path="res://scenes/BossLevels/WhaleBoss.tscn" id="2_rppgv"]
+[ext_resource type="Shader" uid="uid://wv08im4h25hu" path="res://shaders/enemyhitflash.gdshader" id="4_ctkfa"]
 [ext_resource type="AudioStream" uid="uid://dvrxjwujokmgx" path="res://audios/Whale Boss's Decent.mp3" id="5_41ab6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
@@ -16,6 +17,11 @@ size = Vector2(20, 672)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_41ab6"]
 size = Vector2(20, 666)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qgspk"]
+shader = ExtResource("4_ctkfa")
+shader_parameter/flash_strength = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [node name="Level_1_Boss" type="Node2D"]
 script = ExtResource("1_obacn")
@@ -51,6 +57,8 @@ position = Vector2(0, -87)
 scale = Vector2(1.7, 1.7)
 
 [node name="WhaleBoss" parent="BossSpawn" instance=ExtResource("2_rppgv")]
+material = SubResource("ShaderMaterial_qgspk")
+max_hp = 10
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 

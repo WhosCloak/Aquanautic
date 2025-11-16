@@ -52,6 +52,7 @@ scale = Vector2(1.5, 1.5)
 
 [node name="CrabBoss" parent="CrabSpawn" instance=ExtResource("3_1m6vk")]
 position = Vector2(0, -30)
+max_hp = 10
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 rock_drop_markers_path = NodePath("../../RockDropRoot")

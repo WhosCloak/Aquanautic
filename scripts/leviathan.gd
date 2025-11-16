@@ -36,8 +36,10 @@ var hp := 0
 var _hit_lock := false
 var _target_marker: Marker2D = null
 var _target: Vector2
+var flash_duration := 0.1
 
 func _ready() -> void:
+	_duplicate_materials_recursive(self)
 	if not attack_timer.timeout.is_connected(_on_attack_timer_timeout):
 		attack_timer.timeout.connect(_on_attack_timer_timeout)
 	attack_timer.start()
@@ -166,6 +168,7 @@ func _on_hurt_area_entered(b: Node) -> void:
 		apply_damage(contact_damage)
 
 func apply_damage(amount: int) -> void:
+	await flash_hit()
 	hp = max(0, hp - amount)
 	emit_signal("hp_changed", hp, max_hp)
 
@@ -175,6 +178,42 @@ func apply_damage(amount: int) -> void:
 		_hit_lock = true
 		await get_tree().create_timer(0.05).timeout
 		_hit_lock = false
+
+
+# ===== FLASH EFFECT WHEN HIT =====
+func flash_hit() -> void:
+	var affected_nodes = _get_flashable_nodes(self)
+	
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 1.0)
+
+	await get_tree().create_timer(0.1).timeout
+
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 0.0)
+
+# ===== RECURSIVE SEARCH FOR FLASHABLE MATERIALS =====
+func _get_flashable_nodes(root: Node) -> Array:
+	var nodes := []
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			nodes.append(child)
+		
+		# Check children recursively
+		nodes += _get_flashable_nodes(child)
+	return nodes
+
+# ===== DUPLICATE MATERIALS RECURSIVELY =====
+func _duplicate_materials_recursive(root: Node) -> void:
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			child.material = child.material.duplicate()
+		_duplicate_materials_recursive(child)
+
 
 func _die():
 	if dying:

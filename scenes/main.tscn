@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://7bheqelt25dm"]
+[gd_scene load_steps=12 format=3 uid="uid://7bheqelt25dm"]
 
 [ext_resource type="Script" uid="uid://djjpqu61fnnfn" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cp3kf82ssstnc" path="res://scenes/player.tscn" id="2_tefeu"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bya814s12oehq" path="res://scenes/pause.tscn" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://c1k5hxmsflwka" path="res://scenes/options menu/colorblind_shaderscreen.tscn" id="6_tefeu"]
 [ext_resource type="Shader" uid="uid://bjljrl0dclmyq" path="res://shaders/VHSFilter.gdshader" id="7_o6xl0"]
+[ext_resource type="Script" uid="uid://bfpbn2jpca8ih" path="res://scripts/how_to_play_popup.gd" id="8_choun"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="8_tipki"]
+[ext_resource type="Theme" uid="uid://crx8176safmy0" path="res://sprites/default.tres" id="9_ya4ey"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
 shader = ExtResource("7_o6xl0")
@@ -39,3 +42,65 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="pause" parent="CanvasLayer" instance=ExtResource("4_tipki")]
+
+[node name="HowToPlayPopup" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("8_choun")
+
+[node name="Panel" type="Panel" parent="HowToPlayPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 348.0
+offset_top = 157.0
+offset_right = -319.0
+offset_bottom = -149.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("9_ya4ey")
+
+[node name="Label" type="Label" parent="HowToPlayPopup/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -392.0
+offset_right = -2.0
+offset_bottom = 385.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 26
+text = "How to Play
+
+Move your Diver with W A S D or the left stick. Aim with your mouse or the right stick.
+Press Left Mouse Button or Right Shoulder to fire your weapon.
+Press E or the Y button to interact with objects.
+
+Defeat enemies to earn score. When your score reaches the required amount a whirlpool will appear. Enter it to travel to the boss fight.
+
+Survive, defeat the Leviathan, and complete your mission.
+
+Press the button below to begin."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="HowToPlayPopup/Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = -68.0
+offset_right = -26.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "EXIT"
+
+[connection signal="pressed" from="HowToPlayPopup/Panel/Button" to="HowToPlayPopup" method="_on_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cp3kf82ssstnc"]
+[gd_scene load_steps=65 format=3 uid="uid://cp3kf82ssstnc"]
 
 [ext_resource type="Script" uid="uid://ddkaihgteyl1s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Shader" uid="uid://dwlyigg3xi18p" path="res://shaders/playerhitflash.gdshader" id="2_jej6c"]
@@ -23,6 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://ctk2afrhsxsrm" path="res://sprites/Bar.png" id="19_60mlk"]
 [ext_resource type="Texture2D" uid="uid://drpd31igury8e" path="res://sprites/goal_arrow.png" id="21_a38lo"]
 [ext_resource type="Script" uid="uid://ds27sjhvuknog" path="res://scripts/arrow.gd" id="22_a38lo"]
+[ext_resource type="Texture2D" uid="uid://yb84nwlwpv4i" path="res://sprites/cursor.png" id="24_ke2ow"]
+[ext_resource type="Script" uid="uid://cx0wyuf0hog5n" path="res://scripts/cursor_aim.gd" id="25_ujl30"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f1ej7"]
 shader = ExtResource("2_jej6c")
@@ -556,3 +558,11 @@ scale = Vector2(1.2, 1.2)
 theme_override_fonts/font = ExtResource("4_dqkch")
 theme_override_font_sizes/font_size = 18
 text = "Harpoon Reload"
+
+[node name="CursorSprite" type="Sprite2D" parent="."]
+position = Vector2(73.99999, 28.000002)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("24_ke2ow")
+offset = Vector2(0, 5)
+script = ExtResource("25_ujl30")
+cursor_distance = 110.0

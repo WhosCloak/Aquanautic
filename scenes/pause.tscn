@@ -115,6 +115,7 @@ theme_override_constants/separation = 17
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Reset")
 theme_override_fonts/font = ExtResource("3_m0klm")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_m0klm")
@@ -126,6 +127,8 @@ text = "Resume"
 
 [node name="Reset" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Resume")
+focus_neighbor_bottom = NodePath("../Options")
 theme_override_fonts/font = ExtResource("3_m0klm")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_m0klm")
@@ -136,6 +139,8 @@ text = "Reset"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Reset")
+focus_neighbor_bottom = NodePath("../Quit_Game")
 theme_override_fonts/font = ExtResource("3_m0klm")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_m0klm")
@@ -146,6 +151,7 @@ text = "Options"
 
 [node name="Quit_Game" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Options")
 theme_override_fonts/font = ExtResource("3_m0klm")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_m0klm")

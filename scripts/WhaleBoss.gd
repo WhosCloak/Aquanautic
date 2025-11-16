@@ -19,6 +19,7 @@ signal hp_changed(current: int, maximum: int)
 # Internal state
 var hp := 0    
 var _hit_lock := false 
+var flash_duration := 0.1
 #barnacle preload scene 
 var barnacle_scene = preload("res://scenes/BossLevels/barnacle.tscn")
 @onready var barnacle_drop = $BarnacleDrop
@@ -38,6 +39,7 @@ var _target_marker: Marker2D = null
 var _target: Vector2   
 
 func _ready() -> void:
+	_duplicate_materials_recursive(self)
 	add_to_group("boss")  
 	hp = max_hp    
 	
@@ -63,10 +65,48 @@ func _ready() -> void:
 		_target_marker = null
 		_target = global_position + Vector2(200, 0)
 	emit_signal("hp_changed", hp, max_hp)
+	
 
 func _on_anim_finished():
 	if anim.animation == "spit":
 		anim.play("swim")
+
+
+# ===== FLASH EFFECT WHEN HIT =====
+func flash_hit() -> void:
+	var affected_nodes = _get_flashable_nodes(self)
+	
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 1.0)
+
+	await get_tree().create_timer(0.1).timeout
+
+	for node in affected_nodes:
+		var mat: ShaderMaterial = node.material
+		if mat and mat is ShaderMaterial:
+			mat.set_shader_parameter("flash_strength", 0.0)
+
+# ===== RECURSIVE SEARCH FOR FLASHABLE MATERIALS =====
+func _get_flashable_nodes(root: Node) -> Array:
+	var nodes := []
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			nodes.append(child)
+		
+		# Check children recursively
+		nodes += _get_flashable_nodes(child)
+	return nodes
+
+# ===== DUPLICATE MATERIALS RECURSIVELY =====
+func _duplicate_materials_recursive(root: Node) -> void:
+	for child in root.get_children():
+		if child is CanvasItem and child.material and child.material is ShaderMaterial:
+			child.material = child.material.duplicate()
+		_duplicate_materials_recursive(child)
+
+
 
 func _physics_process(delta: float) -> void:
 	if _hit_lock:
@@ -97,13 +137,16 @@ func _on_hurt_area_entered(b: Node) -> void:
 func apply_damage(amount: int) -> void:
 	hp = max(0, hp - amount)
 	emit_signal("hp_changed", hp, max_hp)
-	
+
+	flash_hit()  
+
 	if hp == 0:
 		_die()
 	else:
 		_hit_lock = true
 		await get_tree().create_timer(0.05).timeout
 		_hit_lock = false
+
 		
 func shoot_harpoon(target_pos: Vector2):
 	if anim:
