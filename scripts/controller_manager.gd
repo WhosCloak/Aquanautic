@@ -26,6 +26,11 @@ func _process(_delta: float) -> void:
 	update_aim()
 
 func update_aim() -> void:
+	# Track mouse movement
+	var current_mouse_pos = get_viewport().get_mouse_position()
+	var mouse_moved = (current_mouse_pos - _last_mouse_position).length() > 1.0
+	_last_mouse_position = current_mouse_pos
+	
 	# Get right stick input
 	var right_stick = Vector2(
 		Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"),
@@ -33,28 +38,28 @@ func update_aim() -> void:
 	)
 	
 	# Check if right stick is being used (beyond deadzone)
-	if right_stick.length() > controller_deadzone:
+	var stick_active = right_stick.length() > controller_deadzone
+	
+	if stick_active:
+		# Controller is active - switch to controller mode
 		if not use_controller_aim:
 			use_controller_aim = true
 			aim_mode_changed.emit(true)
 			# Hide cursor and move to corner when switching to controller
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 			get_viewport().warp_mouse(Vector2.ZERO)
+			_last_mouse_position = Vector2.ZERO  # Reset tracking after warp
 		
 		# Update controller aim position relative to player
 		controller_aim_position = _player_ref.global_position + (right_stick.normalized() * 100)
 		aim_position_updated.emit(controller_aim_position)
-	else:
-		# Check for mouse movement to switch back
-		var current_mouse_pos = get_viewport().get_mouse_position()
-		var mouse_velocity = current_mouse_pos - _last_mouse_position
-		_last_mouse_position = current_mouse_pos
 		
-		if mouse_velocity.length() > 0.1 and use_controller_aim:
-			use_controller_aim = false
-			aim_mode_changed.emit(false)
-			# Show cursor again when switching back to mouse
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif use_controller_aim and mouse_moved:
+		# Only switch back to mouse if mouse actually moved while in controller mode
+		use_controller_aim = false
+		aim_mode_changed.emit(false)
+		# Show cursor again when switching back to mouse
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func get_aim_position() -> Vector2:
 	if use_controller_aim:
