@@ -32,6 +32,7 @@ func _ready() -> void:
 	virtual_mouse_pos = get_viewport().get_mouse_position()
 	load_level("res://scenes/levels/level_1.tscn")
 	$HowToPlayPopup.visible = true
+	$CanvasLayer/VHS_filter.hide()
 
 
 func _process(delta: float) -> void:

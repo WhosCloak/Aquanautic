@@ -32,7 +32,7 @@ script = ExtResource("1_tbgi4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" groups=["vhs_filter"]]
+[node name="VHS_filter" type="ColorRect" parent="CanvasLayer" groups=["vhs_filter"]]
 material = SubResource("ShaderMaterial_tipki")
 anchors_preset = 15
 anchor_right = 1.0
