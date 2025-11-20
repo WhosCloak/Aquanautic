@@ -299,7 +299,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_f1ej7")
 position = Vector2(-2.7083676, -1.0000004)
 sprite_frames = SubResource("SpriteFrames_f1ej7")
-animation = &"playeridle"
+animation = &"playerswim"
 autoplay = "playeridle"
 speed_scale = 0.5
 
