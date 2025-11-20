@@ -370,6 +370,7 @@ bus = &"SFX"
 [node name="Controller_manager" parent="." instance=ExtResource("15_4ni07")]
 
 [node name="cooldowntimer" type="Timer" parent="."]
+wait_time = 0.7
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
