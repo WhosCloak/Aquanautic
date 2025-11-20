@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://o8kxautcqhyw"
+path="res://.godot/imported/Electric Tides (Level 4).mp3-7d2f1e3d014bbf66b5662b57b33785f5.mp3str"
+
+[deps]
+
+source_file="res://audios/Electric Tides (Level 4).mp3"
+dest_files=["res://.godot/imported/Electric Tides (Level 4).mp3-7d2f1e3d014bbf66b5662b57b33785f5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dy515m51fs5ul" path="res://sprites/level3extended-Sheet-export.png" id="1_fmg3e"]
 [ext_resource type="Texture2D" uid="uid://c3bvp0rl3ms27" path="res://sprites/Level_3-Sheet.png" id="2_fmg3e"]
 [ext_resource type="Texture2D" uid="uid://bpsx7vof2il7g" path="res://sprites/RockFloor3.png" id="3_fmg3e"]
-[ext_resource type="AudioStream" uid="uid://53qdgri02fkb" path="res://audios/press on.mp3" id="5_fmg3e"]
+[ext_resource type="AudioStream" uid="uid://53qdgri02fkb" path="res://audios/press on (Level 3).mp3" id="5_fmg3e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6eey"]
 atlas = ExtResource("1_fmg3e")

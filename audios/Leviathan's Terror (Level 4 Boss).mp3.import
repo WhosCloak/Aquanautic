@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://deqvhvsr1qvbx"
+path="res://.godot/imported/Leviathan's Terror (Level 4 Boss).mp3-082216b964ea222e426559fd832dd10c.mp3str"
+
+[deps]
+
+source_file="res://audios/Leviathan's Terror (Level 4 Boss).mp3"
+dest_files=["res://.godot/imported/Leviathan's Terror (Level 4 Boss).mp3-082216b964ea222e426559fd832dd10c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

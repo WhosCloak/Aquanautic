@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dpipd3abo1rka" path="res://scripts/level_2_boss.gd" id="1_egdbn"]
 [ext_resource type="Texture2D" uid="uid://ctha52834swvu" path="res://sprites/SharkBoss/SharkBossLevel.png" id="2_egdbn"]
 [ext_resource type="PackedScene" uid="uid://ctv5qv4lf6ang" path="res://scenes/BossLevels/SharkBoss.tscn" id="3_egdbn"]
-[ext_resource type="AudioStream" uid="uid://dvrxjwujokmgx" path="res://audios/Whale Boss's Decent.mp3" id="4_7im6m"]
+[ext_resource type="AudioStream" uid="uid://dvrxjwujokmgx" path="res://audios/Whale Boss's Decent (Level 1 Boss).mp3" id="4_7im6m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
 size = Vector2(1154, 20)

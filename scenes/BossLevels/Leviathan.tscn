@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c3f4ol47x30d2" path="res://sprites/StunEffect.png" id="3_jf3or"]
 [ext_resource type="AudioStream" uid="uid://dc1ju3rfr3ust" path="res://audios/lightning_attack.mp3" id="4_sphwc"]
 [ext_resource type="AudioStream" uid="uid://xjqfpvffvhxg" path="res://audios/levythan_roar.mp3" id="5_a3x3m"]
-[ext_resource type="AudioStream" uid="uid://deqvhvsr1qvbx" path="res://audios/levythan_boss_theme.mp3" id="6_0l21t"]
+[ext_resource type="AudioStream" uid="uid://deqvhvsr1qvbx" path="res://audios/Leviathan's Terror (Level 4 Boss).mp3" id="6_0l21t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0l21t"]
 shader = ExtResource("2_a3x3m")

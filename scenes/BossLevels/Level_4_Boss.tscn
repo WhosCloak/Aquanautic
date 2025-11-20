@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://nfe47g481dy5"]
+[gd_scene load_steps=9 format=3 uid="uid://nfe47g481dy5"]
 
 [ext_resource type="Script" uid="uid://i04godhl0834" path="res://scripts/level_4_boss.gd" id="1_i8vwv"]
 [ext_resource type="Texture2D" uid="uid://cnfyw8qrmsode" path="res://sprites/LeviathanBossLevel.png" id="1_x8cad"]
 [ext_resource type="PackedScene" uid="uid://bqs06e1aqnpy0" path="res://scenes/BossLevels/Leviathan.tscn" id="2_i8vwv"]
+[ext_resource type="AudioStream" uid="uid://deqvhvsr1qvbx" path="res://audios/Leviathan's Terror (Level 4 Boss).mp3" id="4_otjvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rppgv"]
 size = Vector2(1154, 20)
@@ -62,5 +63,6 @@ position = Vector2(-421, -83)
 position = Vector2(433, -83)
 
 [node name="BossTheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_otjvf")
 volume_db = -14.136
 bus = &"Music"
