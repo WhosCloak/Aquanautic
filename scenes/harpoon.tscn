@@ -1,10 +1,103 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmvqix4hmvbvs"]
+[gd_scene load_steps=18 format=3 uid="uid://bmvqix4hmvbvs"]
 
 [ext_resource type="Script" uid="uid://bv333nlqrnrml" path="res://scripts/harpoon.gd" id="1_wbtou"]
 [ext_resource type="Texture2D" uid="uid://cthpvmc63dewv" path="res://sprites/Harpoon_Projectile.png" id="2_bq6s4"]
+[ext_resource type="Texture2D" uid="uid://da4nvfcq72cw0" path="res://sprites/harpoon_trail.png" id="3_bq6s4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7dhc"]
 size = Vector2(16, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u6t4"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwf8u"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wai8r"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vitq7"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd0qq"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 64, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obbh4"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 80, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulsqp"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 96, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itxog"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 112, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2k1x"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 128, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw44d"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 144, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u14b"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 160, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stq50"]
+atlas = ExtResource("3_bq6s4")
+region = Rect2(0, 176, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_webqq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u6t4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwf8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wai8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vitq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd0qq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obbh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulsqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itxog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2k1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw44d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u14b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stq50")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="harpoon" type="RigidBody2D"]
 collision_layer = 4
@@ -23,5 +116,14 @@ texture_filter = 1
 rotation = 0.785398
 scale = Vector2(0.51, 0.51)
 texture = ExtResource("2_bq6s4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+position = Vector2(-30.502651, 33.27561)
+rotation = -0.7853982
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_webqq")
+autoplay = "default"
+frame = 11
+frame_progress = 1.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
