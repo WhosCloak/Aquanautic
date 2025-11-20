@@ -15,7 +15,6 @@
 shader = ExtResource("7_o6xl0")
 shader_parameter/scanline_strength = 0.1
 shader_parameter/noise_strength = 0.05
-shader_parameter/distortion_strength = 0.02
 shader_parameter/chroma_offset = 1.5
 
 [node name="main" type="Node2D"]
@@ -77,8 +76,8 @@ theme_override_font_sizes/font_size = 26
 text = "How to Play
 
 Move your Diver with W A S D or the left stick. Aim with your mouse or the right stick.
-Press Left Mouse Button or Right Shoulder to fire your weapon.
-Press E or the Y button to interact with objects.
+Press Left Mouse Button or Right Shoulder to fire your harpoon.
+Press E or the X/Square button to interact with objects.
 
 Defeat enemies to earn score. When your score reaches the required amount a whirlpool will appear. Enter it to travel to the boss fight.
 
@@ -101,6 +100,8 @@ offset_right = -26.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "EXIT"
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 19
+text = "Begin"
 
 [connection signal="pressed" from="HowToPlayPopup/Panel/Button" to="HowToPlayPopup" method="_on_button_pressed"]

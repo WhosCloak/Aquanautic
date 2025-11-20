@@ -58,7 +58,6 @@ scale = Vector2(1.7, 1.7)
 
 [node name="WhaleBoss" parent="BossSpawn" instance=ExtResource("2_rppgv")]
 material = SubResource("ShaderMaterial_qgspk")
-max_hp = 10
 path_a_path = NodePath("../../PathA")
 path_b_path = NodePath("../../PathB")
 

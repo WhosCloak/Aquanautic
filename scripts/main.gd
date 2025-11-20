@@ -11,6 +11,12 @@ var virtual_mouse_pos: Vector2
 var in_boss := false
 var gate_spawned := false
 var gate_instance: Area2D
+var req1 = 2 if Global.testing_mode else 20
+var req2 = 4 if Global.testing_mode else 40
+var req3 = 6 if Global.testing_mode else 60
+var req4 = 8 if Global.testing_mode else 80
+
+
 
 @export var cursor_speed: float = 800.0
 @onready var level_root = $LevelRoot
@@ -43,24 +49,23 @@ func _process(delta: float) -> void:
 		virtual_mouse_pos = virtual_mouse_pos.clamp(rect.position, rect.position + rect.size)
 		get_viewport().warp_mouse(virtual_mouse_pos)
 
-
 # ===============================
 # 🔹 LEVEL PROGRESSION LOGIC
 # ===============================
-func check_next_level() -> void:
-	if level_reached == 1 and Global.player_score >= 2 and not gate_spawned:
+func check_next_level():
+	if level_reached == 1 and Global.player_score >= req1 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	elif level_reached == 2 and Global.player_score >= 4 and not gate_spawned:
+	elif level_reached == 2 and Global.player_score >= req2 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	elif level_reached == 3 and Global.player_score >= 6 and not gate_spawned:
+	elif level_reached == 3 and Global.player_score >= req3 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 
-	elif level_reached == 4 and Global.player_score >= 8 and not gate_spawned:
+	elif level_reached == 4 and Global.player_score >= req4 and not gate_spawned:
 		_spawn_boss_gate_near_player()
 		gate_spawned = true
 

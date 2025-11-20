@@ -39,6 +39,8 @@ var _target: Vector2
 var flash_duration := 0.1
 
 func _ready() -> void:
+	if Global.testing_mode:
+		max_hp = 10
 	_duplicate_materials_recursive(self)
 	if not attack_timer.timeout.is_connected(_on_attack_timer_timeout):
 		attack_timer.timeout.connect(_on_attack_timer_timeout)

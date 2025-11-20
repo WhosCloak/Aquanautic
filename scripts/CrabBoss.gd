@@ -54,6 +54,8 @@ var rock_scene := preload("res://scenes/CrabBossNormal/rock_boulder.tscn")
 
 
 func _ready() -> void:
+	if Global.testing_mode:
+		max_hp = 10
 	_duplicate_materials_recursive(self)
 	add_to_group("boss")
 	hp = max_hp

@@ -4,7 +4,7 @@ signal died
 signal hp_changed(current: int, maximum: int)
 
 
-@export var max_hp := 90 
+@export var max_hp := 100
 @export var contact_damage := 1 
 @export var swim_speed := 60.0 
 @export var arrive_dist := 8.0 
@@ -39,6 +39,8 @@ var _target_marker: Marker2D = null
 var _target: Vector2   
 
 func _ready() -> void:
+	if Global.testing_mode:
+		max_hp = 10
 	_duplicate_materials_recursive(self)
 	add_to_group("boss")  
 	hp = max_hp    

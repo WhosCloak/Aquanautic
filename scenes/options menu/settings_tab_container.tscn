@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckpyg5xibxjx1"]
+[gd_scene load_steps=14 format=3 uid="uid://ckpyg5xibxjx1"]
 
 [ext_resource type="PackedScene" uid="uid://bd4fu5hhab36n" path="res://scenes/options menu/hotkey_rebind_button.tscn" id="1_0v3h5"]
 [ext_resource type="PackedScene" uid="uid://dlnvepr7j8mxg" path="res://scenes/options menu/window_mode_button.tscn" id="1_8fdhs"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://csolis2asqc4t" path="res://scenes/options menu/camerashakecontrol.tscn" id="7_1mdlc"]
 [ext_resource type="PackedScene" uid="uid://bfk77kanw32tx" path="res://scenes/options menu/brightnesscontrol.tscn" id="8_r5sbi"]
 [ext_resource type="PackedScene" uid="uid://b2m5ejvyumo6e" path="res://scenes/vhs_toggle.tscn" id="9_2h3lt"]
+[ext_resource type="PackedScene" uid="uid://bb1uow353x8d" path="res://scenes/TestingModeButton.tscn" id="11_2jg8r"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r5sbi"]
 font = ExtResource("1_eggv2")
@@ -232,4 +233,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="brightnesscontrol" parent="TabContainer/Accesibility/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("8_r5sbi")]
+layout_mode = 2
+
+[node name="TestingMode_CheckBox" parent="TabContainer/Accesibility/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("11_2jg8r")]
 layout_mode = 2

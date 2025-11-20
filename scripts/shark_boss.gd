@@ -45,6 +45,8 @@ var flash_duration := 0.1
 # INITIAL SETUP
 # -------------------------------
 func _ready() -> void:
+	if Global.testing_mode:
+		max_hp = 10
 	_duplicate_materials_recursive(self)
 	add_to_group("boss")
 	hp = max_hp

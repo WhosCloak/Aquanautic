@@ -308,6 +308,7 @@ show_behind_parent = true
 position = Vector2(3.7083673, -11)
 
 [node name="diver_arm" type="Sprite2D" parent="diver_anim/arm_socket"]
+z_index = 1
 texture = ExtResource("6_a8ls1")
 offset = Vector2(14.515152, -1)
 

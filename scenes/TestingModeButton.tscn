@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb1uow353x8d"]
+
+[ext_resource type="Script" uid="uid://ceywtqgui0hu7" path="res://scenes/options menu/TestingMode_CheckBox.gd" id="1_3awdd"]
+[ext_resource type="FontFile" uid="uid://dbyrp1xpwysxa" path="res://font/Tektur-VariableFont_wdth,wght.ttf" id="1_pqxr8"]
+
+[node name="TestingMode_CheckBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 343.0
+offset_right = 277.0
+offset_bottom = 383.0
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_pqxr8")
+theme_override_font_sizes/font_size = 30
+text = "TestingModeButton"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_constants/icon_max_width = 206
+script = ExtResource("1_3awdd")
+
+[node name="StatusLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_pqxr8")
+theme_override_font_sizes/font_size = 25
