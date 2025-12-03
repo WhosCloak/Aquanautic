@@ -16,6 +16,8 @@ var flash_duration := 0.1
 @onready var art: AnimatedSprite2D = $AnimatedSprite2D        
 @onready var _hurtbox: Area2D = $Area2D                 
 @onready var death_sound: AudioStreamPlayer2D = $Death
+@onready var fish_art: AnimatedSprite2D = $AnimatedSprite2D
+@onready var water_trail: AnimatedSprite2D = $AnimatedSprite2D/AnimatedSprite2D2
 
 
 # ===== READY FUNCTION =====
@@ -33,14 +35,17 @@ func _physics_process(_delta: float) -> void:
 		_update_art_facing()
 
 # ===== SPRITE FACING HANDLER =====
-func _update_art_facing() -> void:
-	if not art:
-		return
-	
+func _update_art_facing():
 	if abs(velocity.x) > flip_threshold:
-		art.flip_h = velocity.x > 0.0
-	
-	art.rotation = 0.0
+		var facing_right = velocity.x > 0.0
+
+		fish_art.flip_h = facing_right
+		water_trail.flip_h = facing_right
+
+		water_trail.position.x = -58 if facing_right else 58
+
+	fish_art.rotation = 0
+	water_trail.rotation = 0
 
 # ===== DAMAGE & DEATH HANDLING =====
 func take_damage(_amount: int = 1) -> void:

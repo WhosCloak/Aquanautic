@@ -226,6 +226,9 @@ func fire():
 # ==== PLAYER DAMAGE, HEALING & FLASH ====
 # ==============================================
 func take_damage(amount: int):
+	if Global.testing_mode:
+		return
+
 	await flash_hit()
 	cam.apply_shake()
 
@@ -237,7 +240,6 @@ func take_damage(amount: int):
 		if score > Global.high_score:
 			Global.high_score = score
 		die()
-
 
 func heal(amount: int = 3):
 	health = min(health + amount, max_health)
