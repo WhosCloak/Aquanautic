@@ -2,10 +2,10 @@ extends Node2D
 # ===============================
 # 🔹 LEVEL MANAGEMENT VARIABLES
 # ===============================
-var boss_1_scene := "res://scenes/BossLevels/level_1_Boss.tscn"
-var boss_2_scene := "res://scenes/BossLevels/level_2_Boss.tscn"
+var boss_1_scene := "res://scenes/BossLevels/Level_1_Boss.tscn"
+var boss_2_scene := "res://scenes/BossLevels/Level_2_Boss.tscn"
 var boss_3_scene := "res://scenes/BossLevels/level_3_boss.tscn"
-var boss_4_scene := "res://scenes/BossLevels/level_4_Boss.tscn"
+var boss_4_scene := "res://scenes/BossLevels/Level_4_Boss.tscn"
 var gate_scene := preload("res://scenes/WhirlpoolGate.tscn")
 var virtual_mouse_pos: Vector2
 var in_boss := false

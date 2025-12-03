@@ -1,10 +1,15 @@
 extends Node2D
 
+const WHALE_BOSS = preload("res://scenes/BossLevels/WhaleBoss.tscn")
 @onready var boss_theme: AudioStreamPlayer2D = $BossTheme
 
 func _ready() -> void:
 	if boss_theme:
 		boss_theme.play()
+		
+	var boss = get_node_or_null("BossSpawn/WhaleBoss")
+	if not boss:
+		push_error("WhaleBoss not found!")
 		
 	# Set boss arena camera limits
 	var player = get_tree().get_first_node_in_group("player")
